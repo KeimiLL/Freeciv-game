@@ -1,15 +1,24 @@
-package com.mobilne.civ2077
+package com.mobilne.civ2077.ui
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Text
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var app: BaseApplication
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         setContent {
@@ -17,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         setFullScreen()
+
+        Log.d(ContentValues.TAG, "onCreate: $app")
     }
 
     override fun onResume() {
