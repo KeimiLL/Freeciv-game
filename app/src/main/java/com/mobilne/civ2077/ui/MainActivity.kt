@@ -8,6 +8,9 @@ import android.view.WindowInsetsController
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Text
+import com.mobilne.civ2077.R
+import com.mobilne.civ2077.ui.nation_choice.NationCard
+import com.mobilne.civ2077.ui.nation_choice.NationChoice
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Text("echo działa")
+            NationChoice()
         }
 
         setFullScreen()
