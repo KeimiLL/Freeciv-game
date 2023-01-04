@@ -1,21 +1,20 @@
 package com.mobilne.civ2077.di
 
-import android.content.Context
-import com.mobilne.civ2077.ui.BaseApplication
+import com.google.firebase.auth.FirebaseAuth
+import com.mobilne.civ2077.data.AuthRepository
+import com.mobilne.civ2077.data.AuthRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
-@Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+@Module
+class AppModule {
 
-    @Singleton
     @Provides
-    fun provideApplication(@ApplicationContext app: Context): BaseApplication {
-        return app as BaseApplication
-    }
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
 }

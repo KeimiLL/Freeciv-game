@@ -1,7 +1,7 @@
-package com.mobilne.civ2077.ui
+package com.mobilne.civ2077
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class BaseApplication : Application()
+class FirebaseAuth: Application()
