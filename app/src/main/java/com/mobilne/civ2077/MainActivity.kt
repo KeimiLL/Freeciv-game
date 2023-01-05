@@ -1,33 +1,31 @@
-package com.mobilne.civ2077.ui
+package com.mobilne.civ2077
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Text
+import com.mobilne.civ2077.navigation.AppNavHost
+import com.mobilne.civ2077.ui.auth.AuthViewModel
+import com.mobilne.civ2077.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var app: BaseApplication
+    private val authViewModel by viewModels<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         setContent {
-            Text("echo działa")
+            AppTheme {
+                AppNavHost(viewModel = authViewModel)
+            }
         }
 
         setFullScreen()
-
-        Log.d(ContentValues.TAG, "onCreate: $app")
     }
 
     override fun onResume() {
