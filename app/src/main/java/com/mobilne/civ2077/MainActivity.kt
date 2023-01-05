@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mobilne.civ2077.navigation.AppNavHost
 import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val authViewModel by viewModels<AuthViewModel>()
