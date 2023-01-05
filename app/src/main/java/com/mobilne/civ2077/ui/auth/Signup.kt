@@ -50,7 +50,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
         Box(
             modifier = Modifier
                 .constrainAs(refHeader) {
-                    top.linkTo(parent.top, spacing.small)
+                    top.linkTo(parent.top, spacing.extraLarge)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
@@ -69,7 +69,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 Text(text = stringResource(id = R.string.name))
             },
             modifier = Modifier.constrainAs(refName) {
-                top.linkTo(refHeader.bottom, spacing.medium)
+                top.linkTo(refHeader.bottom, spacing.extraLarge)
                 start.linkTo(parent.start, spacing.large)
                 end.linkTo(parent.end, spacing.large)
                 width = Dimension.fillToConstraints
@@ -133,8 +133,8 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             },
             modifier = Modifier.constrainAs(refButtonSignup) {
                 top.linkTo(refPassword.bottom, spacing.large)
-                start.linkTo(parent.start, spacing.medium)
-                end.linkTo(parent.end, spacing.medium)
+                start.linkTo(parent.start, spacing.extraLarge)
+                end.linkTo(parent.end, spacing.extraLarge)
                 width = Dimension.fillToConstraints
             }
         ) {
@@ -146,8 +146,8 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             modifier = Modifier
                 .constrainAs(refTextSignup) {
                     top.linkTo(refButtonSignup.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
+                    start.linkTo(parent.start, spacing.extraLarge)
+                    end.linkTo(parent.end, spacing.extraLarge)
                 }
                 .clickable {
                     navController.navigate(ROUTE_LOGIN) {

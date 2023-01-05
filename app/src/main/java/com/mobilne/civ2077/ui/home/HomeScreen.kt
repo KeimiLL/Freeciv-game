@@ -47,11 +47,11 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             color = MaterialTheme.colorScheme.onSurface
         )
 
-//        Image(
-//            painter = painterResource(id = R.drawable.ic_person),
-//            contentDescription = stringResource(id = R.string.empty),
-//            modifier = Modifier.size(128.dp)
-//        )
+        Image(
+            painter = painterResource(id = R.drawable.ic_person),
+            contentDescription = stringResource(id = R.string.empty),
+            modifier = Modifier.size(128.dp)
+        )
 
         Column(
             modifier = Modifier

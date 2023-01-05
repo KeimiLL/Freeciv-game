@@ -25,18 +25,18 @@ fun AuthHeader() {
     ) {
         val spacing = MaterialTheme.spacing
 
-//        Image(
-//            modifier = Modifier
-//                .size(128.dp, 128.dp),
-//            painter = painterResource(id = R.drawable.ic_app_logo),
-//            contentDescription = stringResource(id = R.string.app_name)
-//        )
+        Image(
+            modifier = Modifier
+                .size(128.dp, 128.dp),
+            painter = painterResource(id = R.drawable.ic_app_logo),
+            contentDescription = stringResource(id = R.string.app_name)
+        )
 
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(top = spacing.small),
+                .padding(top = spacing.medium),
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
