@@ -28,6 +28,7 @@ import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
 import com.mobilne.civ2077.ui.theme.AppTheme
+import com.mobilne.civ2077.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,11 +43,12 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
     ) {
 
         val (refHeader, refEmail, refPassword, refButtonLogin, refTextSignup, refLoader) = createRefs()
+        val spacing = MaterialTheme.spacing
 
         Box(
             modifier = Modifier
                 .constrainAs(refHeader) {
-                    top.linkTo(parent.top)
+                    top.linkTo(parent.top, spacing.small)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
@@ -66,9 +68,9 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
                 Text(text = stringResource(id = R.string.email))
             },
             modifier = Modifier.constrainAs(refEmail) {
-                top.linkTo(refHeader.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
+                top.linkTo(refHeader.bottom, spacing.medium)
+                start.linkTo(parent.start, spacing.large)
+                end.linkTo(parent.end, spacing.large)
                 width = Dimension.fillToConstraints
             },
             keyboardOptions = KeyboardOptions(
@@ -88,9 +90,9 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
                 Text(text = stringResource(id = R.string.password))
             },
             modifier = Modifier.constrainAs(refPassword) {
-                top.linkTo(refEmail.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
+                top.linkTo(refEmail.bottom, spacing.medium)
+                start.linkTo(parent.start, spacing.large)
+                end.linkTo(parent.end, spacing.large)
                 width = Dimension.fillToConstraints
             },
             keyboardOptions = KeyboardOptions(
@@ -106,13 +108,13 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
                 viewModel?.login(email, password)
             },
             modifier = Modifier.constrainAs(refButtonLogin) {
-                top.linkTo(refPassword.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
+                top.linkTo(refPassword.bottom, spacing.large)
+                start.linkTo(parent.start, spacing.medium)
+                end.linkTo(parent.end, spacing.medium)
                 width = Dimension.fillToConstraints
             }
         ) {
-            Text(text = stringResource(id = R.string.login))
+            Text(text = stringResource(id = R.string.login), style = MaterialTheme.typography.titleMedium)
         }
 
 
