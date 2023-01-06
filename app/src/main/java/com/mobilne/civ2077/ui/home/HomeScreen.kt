@@ -1,7 +1,6 @@
 package com.mobilne.civ2077.ui.home
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -9,18 +8,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.mobilne.civ2077.ui.theme.spacing
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.theme.AppTheme
+import com.mobilne.civ2077.ui.theme.spacing
 
 
 @Composable
@@ -45,12 +42,6 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             text = viewModel?.currentUser?.displayName ?: "",
             style = MaterialTheme.typography.displaySmall,
             color = MaterialTheme.colorScheme.onSurface
-        )
-
-        Image(
-            painter = painterResource(id = R.drawable.ic_person),
-            contentDescription = stringResource(id = R.string.empty),
-            modifier = Modifier.size(128.dp)
         )
 
         Column(
@@ -85,14 +76,14 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                     .wrapContentHeight()
             ) {
                 Text(
-                    text = viewModel?.currentUser?.email ?: "",
+                    text = stringResource(id = R.string.email),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.weight(0.3f),
                     color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Text(
-                    text = "probelalkhan@gmail.com",
+                    text = viewModel?.currentUser?.email ?: "",
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.weight(0.7f),
                     color = MaterialTheme.colorScheme.onSurface
