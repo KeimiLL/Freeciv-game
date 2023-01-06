@@ -50,7 +50,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
         Box(
             modifier = Modifier
                 .constrainAs(refHeader) {
-                    top.linkTo(parent.top, spacing.extraLarge)
+                    top.linkTo(parent.top, spacing.medium)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
@@ -69,7 +69,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 Text(text = stringResource(id = R.string.name))
             },
             modifier = Modifier.constrainAs(refName) {
-                top.linkTo(refHeader.bottom, spacing.extraLarge)
+                top.linkTo(refHeader.bottom, spacing.medium)
                 start.linkTo(parent.start, spacing.large)
                 end.linkTo(parent.end, spacing.large)
                 width = Dimension.fillToConstraints
