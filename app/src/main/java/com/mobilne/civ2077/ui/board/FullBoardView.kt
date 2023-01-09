@@ -120,18 +120,6 @@ fun ButtonXYItem(
     }
 }
 
-@Composable
-fun Map() {
-    Box(modifier = Modifier
-        .background(Color(0xFFfae6e9))
-        .fillMaxSize()
-    ) {
-        Text(text = "Miejsce na dodanie mapki")
-    }
-}
-
-
-
 @Preview
 @Composable
 fun PreviewFullBoardView() {
