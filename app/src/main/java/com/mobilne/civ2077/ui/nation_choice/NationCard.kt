@@ -14,10 +14,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
+import com.mobilne.civ2077.ui.theme.spacing
 import com.mobilne.civ2077.util.constants.Nations
 
 @Composable
-fun NationCard(nation: Nations, drawableId: Int) {
+fun NationCard(nation: Nations, drawableId: Int, perk: String) {
 
     Card(
         modifier = Modifier
@@ -48,10 +49,11 @@ fun NationCard(nation: Nations, drawableId: Int) {
                 style = MaterialTheme.typography.h5,
             )
             Text(
-                text = "Perks\nPerks\nPerks\nPerks",
+                modifier = Modifier.padding(8.dp),
+                text = perk,
                 style = MaterialTheme.typography.h6,
             )
-            Button(
+            Button (
                 modifier = Modifier.fillMaxWidth(0.7f),
                 onClick = { /*TODO*/ },
             ) {
@@ -69,5 +71,5 @@ fun NationCard(nation: Nations, drawableId: Int) {
 @Preview
 @Composable
 fun PreviewNationCard() {
-    NationCard(Nations.FRANCE, R.drawable.france)
+    NationCard(Nations.FRANCE, R.drawable.france, "Your army has five extra steps each turn")
 }
