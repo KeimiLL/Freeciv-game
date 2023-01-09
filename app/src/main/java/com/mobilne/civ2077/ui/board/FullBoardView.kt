@@ -18,8 +18,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun FullBoardView() {
     Box(modifier = Modifier
-        .background(Color(0xFFffc4a8))
+        .background(Color(0xFFc5ddf6))
         .fillMaxSize()
+        .padding(8.dp)
     ) {
         Row(
             modifier = Modifier
@@ -27,43 +28,47 @@ fun FullBoardView() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            LeftSide()
-            LeftSide()
-            LeftSide()
-//            ShowText("Ty")
-//            ShowText("jakis dluzszy napis")
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .padding(5.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                ButtonItem("Wyjście")
+                ButtonItem("Złoto")
+                ButtonXYItem("Zdj bazy", 55, 60)
+            }
+
+            Column(modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .weight(4f)
+                .padding(5.dp)) {
+                Map()
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .padding(5.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                ButtonItem("Tura")
+                ButtonItem("P rozwoju")
+                ButtonXYItem("Zdj wojska", 75, 85)
+            }
         }
     }
 }
 
-@Composable
-fun LeftSide(
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(200.dp)
-            .padding(8.dp),
-        verticalArrangement = Arrangement.SpaceBetween
-
-    ) {
-//        Text(
-//            text = "$txt",
-//            style = MaterialTheme.typography.h5
-//        )
-        ButtonItem("Wyjście")
-        ButtonItem("Złoto")
-        ButtonItem("Zdj bazy")
-    }
-}
 
 @Composable
 fun ButtonItem(
     txt: String = "Nazwa-przycisku"
 ) {
     Button(
-        modifier = Modifier.fillMaxWidth(0.7f)
-            .width(150.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
         onClick = { /*TODO*/ },
@@ -75,27 +80,57 @@ fun ButtonItem(
             color = Color(255,255,255)
         )
     }
-
 }
-
 
 @Composable
-fun RightSideBtns(
-    txt: String = "Kamil"
+fun ButtonXYItem(
+    txt: String = "btnXY",
+    x: Int = 0,
+    y: Int = 0
 ) {
-    Column(
-        modifier = Modifier
-            .padding(15.dp),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = "$txt",
-            style = MaterialTheme.typography.h5
-        )
-        ButtonItem("Wyjście")
-        ButtonItem("Złoto")
+    Column(modifier = Modifier,
+        verticalArrangement = Arrangement.Bottom) {
+        Row() {
+            Button(
+                shape = RectangleShape,
+                contentPadding = PaddingValues(16.dp),
+                onClick = { /*TODO*/ },
+            ) {
+                Text(
+                    text = "Przycisk $txt",
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center,
+                    color = Color(255,255,255)
+                )
+            }
+        }
+
+        Row(modifier = Modifier
+            .background(Color(0xff266330))
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "X: $x, Y: $y",
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
+                color = Color(255,255,255)
+            )
+        }
     }
 }
+
+@Composable
+fun Map() {
+    Box(modifier = Modifier
+        .background(Color(0xFFfae6e9))
+        .fillMaxSize()
+    ) {
+        Text(text = "Miejsce na dodanie mapki")
+    }
+}
+
+
 
 @Preview
 @Composable
