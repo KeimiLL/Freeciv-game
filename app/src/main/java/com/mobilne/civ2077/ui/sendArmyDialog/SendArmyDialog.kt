@@ -50,7 +50,7 @@ fun  BuyArmy(
         mutableStateOf("Units count")
     }
 ) {
-    Row(modifier.fillMaxWidth(0.7f),
+    Row(modifier.fillMaxWidth(0.9f),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround) {
         Column() {
@@ -93,7 +93,7 @@ fun Coordinates(
         mutableStateOf("")
     }
 ) {
-    Row(modifier.fillMaxWidth(0.7f),
+    Row(modifier.fillMaxWidth(0.9f),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround) {
         Column() {
