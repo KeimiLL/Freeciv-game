@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
 
 @Composable
 fun FullBoardView() {
@@ -47,8 +48,9 @@ fun FullBoardView() {
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-                Map()
+//                Map()
 //                Tree()
+                SendArmyDialog()
             }
 
             Column(

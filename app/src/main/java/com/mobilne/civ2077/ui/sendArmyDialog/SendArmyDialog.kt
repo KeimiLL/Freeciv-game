@@ -10,11 +10,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
@@ -23,17 +21,66 @@ fun SendArmyDialog(){
         modifier = Modifier.wrapContentSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(id = R.string.sendArmyDialogHeader),
-            style = MaterialTheme.typography.headlineMedium,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+
+        BuyArmyHeader()
+        BuyArmy()
         Divider()
+        SendArmyHeader()
         Coordinates()
         Divider()
-        Buttons()
+        ExitButtons()
     }
+}
+
+@Composable
+fun BuyArmyHeader(){
+    Text(
+        text = "Buy Units",
+        style = MaterialTheme.typography.headlineMedium,
+        textAlign = TextAlign.Center,
+        color = MaterialTheme.colorScheme.onSurface
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun  BuyArmy(
+    modifier: Modifier = Modifier,
+    units: MutableState<String> = remember {
+        mutableStateOf("Units count")
+    }
+) {
+    Row(modifier.fillMaxWidth(0.7f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround) {
+        Column() {
+            OutlinedTextField(
+                value = units.value,
+                onValueChange = { units.value = it },
+                label = { Text("") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                ),
+            )
+        }
+        Button(
+            onClick = {}
+        ) {
+            Text("Buy")
+        }
+    }
+
+}
+
+
+@Composable
+fun SendArmyHeader(){
+    Text(
+        text = "Move Army",
+        style = MaterialTheme.typography.headlineMedium,
+        textAlign = TextAlign.Center,
+        color = MaterialTheme.colorScheme.onSurface
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,35 +93,40 @@ fun Coordinates(
         mutableStateOf("")
     }
 ) {
-
-    Column(
-        modifier.fillMaxWidth(),
-    ) {
-        OutlinedTextField(
-            modifier= Modifier.fillMaxWidth(),
-            value = x.value,
-            onValueChange = { x.value = it },
-            label = { Text("X") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-            ),
-        )
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = y.value,
-            onValueChange = { y.value = it },
-            label = { Text("Y") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-            ),
-        )
+    Row(modifier.fillMaxWidth(0.7f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround) {
+        Column() {
+            OutlinedTextField(
+                value = x.value,
+                onValueChange = { x.value = it },
+                label = { Text("X") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                ),
+            )
+            OutlinedTextField(
+                value = y.value,
+                onValueChange = { y.value = it },
+                label = { Text("Y") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                ),
+            )
+        }
+        Button(onClick = {}) {
+            Text("Send")
+        }
     }
+
 }
 
 
 @Composable
-fun Buttons() {
-    Row{
+fun ExitButtons() {
+    Row(modifier = Modifier.fillMaxWidth(0.35f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround){
         Button(onClick = {}) {
             Text("Cancel")
         }
