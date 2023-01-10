@@ -11,6 +11,5 @@
     <string name="welcome_back">Welcome Back</string>
     <string name="empty" />
     <string name="logout">logout</string>
-    <string name="sendArmyDialogHeader">Type new Army Coordinates</string>
-    <!--  Auth ends  -->
+<!--  Auth ends  -->
 </resources>
