@@ -45,7 +45,8 @@ fun FullBoardView() {
                 .fillMaxWidth()
                 .weight(4f)
                 .padding(5.dp)) {
-                Map()
+//                Map()
+                Tree()
             }
 
             Column(
@@ -56,7 +57,7 @@ fun FullBoardView() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 ButtonItem("Tura")
-                ButtonItem("P rozwoju")
+                ButtonItem("Rozwoj")
                 ButtonXYItem("Zdj wojska", 75, 85)
             }
         }
@@ -69,12 +70,15 @@ fun ButtonItem(
     txt: String = "Nazwa-przycisku"
 ) {
     Button(
+        modifier = Modifier
+            .height(80.dp)
+            .width(110.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
         onClick = { /*TODO*/ },
     ) {
         Text(
-            text = "Przycisk $txt",
+            text = "$txt",
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
             color = Color(255,255,255)
@@ -92,12 +96,15 @@ fun ButtonXYItem(
         verticalArrangement = Arrangement.Bottom) {
         Row() {
             Button(
+                modifier = Modifier
+                    .height(80.dp)
+                    .width(110.dp),
                 shape = RectangleShape,
                 contentPadding = PaddingValues(16.dp),
                 onClick = { /*TODO*/ },
             ) {
                 Text(
-                    text = "Przycisk $txt",
+                    text = "$txt",
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
                     color = Color(255,255,255)
@@ -107,7 +114,7 @@ fun ButtonXYItem(
 
         Row(modifier = Modifier
             .background(Color(0xff266330))
-            .fillMaxWidth(),
+            .width(110.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically) {
             Text(
