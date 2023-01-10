@@ -27,10 +27,10 @@ fun NationChoice() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            NationCard(nation = Nations.FRANCE, drawableId = R.drawable.france)
-            NationCard(nation = Nations.SPAIN, drawableId = R.drawable.spain)
-            NationCard(nation = Nations.UNITED_KINGDOM, drawableId = R.drawable.uk)
-            NationCard(nation = Nations.UNITED_STATES, drawableId = R.drawable.usa)
+            NationCard(nation = Nations.FRANCE, drawableId = R.drawable.france, perk = "Your army has five extra steps each turn")
+            NationCard(nation = Nations.SPAIN, drawableId = R.drawable.spain, perk = "Every turn gain additional 100 gold")
+            NationCard(nation = Nations.UNITED_KINGDOM, drawableId = R.drawable.uk, perk= "Each perk costs 10% less")
+            NationCard(nation = Nations.UNITED_STATES, drawableId = R.drawable.usa, perk = "Your army deal 10% more damage")
         }
     }
 }
