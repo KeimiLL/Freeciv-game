@@ -1,6 +1,5 @@
 package com.mobilne.civ2077.ui.board
 
-import android.print.PrintAttributes.Margins
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -44,9 +43,12 @@ fun FullBoardView() {
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .weight(4f)
-                .padding(5.dp)) {
-//                Map()
-                Tree()
+                .padding(5.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+
+            ) {
+                Map()
+//                Tree()
             }
 
             Column(
@@ -94,7 +96,7 @@ fun ButtonXYItem(
 ) {
     Column(modifier = Modifier,
         verticalArrangement = Arrangement.Bottom) {
-        Row() {
+        Row {
             Button(
                 modifier = Modifier
                     .height(80.dp)
@@ -115,8 +117,8 @@ fun ButtonXYItem(
         Row(modifier = Modifier
             .background(Color(0xff266330))
             .width(110.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically) {
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = "X: $x, Y: $y",
                 style = MaterialTheme.typography.body2,
