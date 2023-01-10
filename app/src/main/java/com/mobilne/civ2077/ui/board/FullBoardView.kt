@@ -45,7 +45,8 @@ fun FullBoardView() {
                 .fillMaxWidth()
                 .weight(4f)
                 .padding(5.dp)) {
-                Map()
+//                Map()
+                Tree()
             }
 
             Column(
