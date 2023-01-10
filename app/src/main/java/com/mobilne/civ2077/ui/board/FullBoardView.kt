@@ -14,10 +14,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialog
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 
 @Composable
-fun FullBoardView() {
+fun FullBoardView(
+    viewModel: BoardViewModel = hiltViewModel()
+) {
     Box(modifier = Modifier
         .background(Color(0xFFc5ddf6))
         .fillMaxSize()
@@ -36,6 +40,8 @@ fun FullBoardView() {
                     .padding(5.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
+                // Firebase DB test:
+                ButtonItem(viewModel.game.value.waiting.toString())
                 ButtonItem("Wyjście")
                 ButtonItem("Złoto")
                 ButtonXYItem("Zdj bazy", 55, 60)
@@ -84,7 +90,7 @@ fun ButtonItem(
         onClick = { /*TODO*/ },
     ) {
         Text(
-            text = "$txt",
+            text = txt,
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
             color = Color(255,255,255)
@@ -110,7 +116,7 @@ fun ButtonXYItem(
                 onClick = { /*TODO*/ },
             ) {
                 Text(
-                    text = "$txt",
+                    text = txt,
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
                     color = Color(255,255,255)

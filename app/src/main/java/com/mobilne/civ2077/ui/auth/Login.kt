@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.data.Resource
-import com.mobilne.civ2077.navigation.ROUTE_HOME
+import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
 import com.mobilne.civ2077.ui.theme.AppTheme
@@ -150,7 +150,9 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
                 }
                 is Resource.Success -> {
                     LaunchedEffect(Unit) {
-                        navController.navigate(ROUTE_HOME) {
+                        // ROUTE_BOARD used to test the DB
+                        // TODO: add conditional navigation based on game state
+                        navController.navigate(ROUTE_BOARD) {
                             popUpTo(ROUTE_LOGIN) { inclusive = true }
                         }
                     }
