@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -23,24 +24,64 @@ import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
 fun BuyGoldDialog(){
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(modifier = Modifier
+        .background(Color(0xFFffffff))
+        .fillMaxSize()
     ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        BuyGoldHeader()
-        Image(
-            painter = painterResource(id = R.drawable.gold),
-            contentDescription = "Gold"
-        )
-        BuyGold()
-        Text(
-            text = "Total: €\u200E 1400",
-            style = MaterialTheme.typography.headlineSmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-        ExitButtons()
+            BuyGoldHeader()
+
+            BuyGold()
+            Text(
+                text = "Total: €\u200E 1400",
+                style = MaterialTheme.typography.headlineSmall,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Row(horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically) {
+                RadioButtonSample()
+                ExitButtons()
+            }
+
+        }
+    }
+}
+
+@Composable
+fun RadioButtonSample() {
+    val radioOptions = listOf("PayPal", "Bank transfer", "Credit card")
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1] ) }
+    Column {
+        Text(text = "Select a payment method:", Modifier.padding(horizontal = 10.dp), style = MaterialTheme.typography.bodyMedium)
+        radioOptions.forEach { text ->
+            Row(
+                Modifier
+                    .selectable(
+                        selected = (text == selectedOption),
+                        onClick = {
+                            onOptionSelected(text)
+                        }
+                    )
+                    .padding(horizontal = 10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = (text == selectedOption),
+                    onClick = { onOptionSelected(text) }
+                )
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+            }
+        }
     }
 }
 
@@ -65,6 +106,10 @@ fun  BuyGold(
     Row(modifier.fillMaxWidth(0.9f),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround) {
+        Image(
+            painter = painterResource(id = R.drawable.gold),
+            contentDescription = "Gold"
+        )
         Column() {
             OutlinedTextField(
                 value = gold.value,
@@ -95,9 +140,6 @@ fun ExitButtons() {
         horizontalArrangement = Arrangement.SpaceAround){
         Button(onClick = {}) {
             Text("Cancel")
-        }
-        Button(onClick = {}) {
-            Text("Ok")
         }
     }
 }
