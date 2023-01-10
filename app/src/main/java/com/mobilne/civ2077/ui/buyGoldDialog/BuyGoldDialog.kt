@@ -1,6 +1,8 @@
 package com.mobilne.civ2077.ui.buyGoldDialog
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -10,28 +12,42 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
 fun BuyGoldDialog(){
     Column(
-        modifier = Modifier.wrapContentSize(),
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        BuyArmyHeader()
-        BuyArmy()
+        BuyGoldHeader()
+        Image(
+            painter = painterResource(id = R.drawable.gold),
+            contentDescription = "Gold"
+        )
+        BuyGold()
+        Text(
+            text = "Total: €\u200E 1400",
+            style = MaterialTheme.typography.headlineSmall,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface
+        )
         ExitButtons()
     }
 }
 
 @Composable
-fun BuyArmyHeader(){
+fun BuyGoldHeader(){
     Text(
-        text = "Buy Units",
+        text = "Buy Gold",
         style = MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,
         color = MaterialTheme.colorScheme.onSurface
@@ -40,10 +56,10 @@ fun BuyArmyHeader(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  BuyArmy(
+fun  BuyGold(
     modifier: Modifier = Modifier,
-    units: MutableState<String> = remember {
-        mutableStateOf("Units count")
+    gold: MutableState<String> = remember {
+        mutableStateOf("999")
     }
 ) {
     Row(modifier.fillMaxWidth(0.9f),
@@ -51,13 +67,15 @@ fun  BuyArmy(
         horizontalArrangement = Arrangement.SpaceAround) {
         Column() {
             OutlinedTextField(
-                value = units.value,
-                onValueChange = { units.value = it },
+                value = gold.value,
+                onValueChange = { gold.value = it },
                 label = { Text("") },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                 ),
             )
+
+
         }
         Button(
             onClick = {}
@@ -72,7 +90,7 @@ fun  BuyArmy(
 
 @Composable
 fun ExitButtons() {
-    Row(modifier = Modifier.fillMaxWidth(0.35f),
+    Row(modifier = Modifier.fillMaxWidth(0.7f),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround){
         Button(onClick = {}) {
@@ -87,7 +105,7 @@ fun ExitButtons() {
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
-fun SendArmyDialogLight() {
+fun BuyGoldDialogPreview() {
     AppTheme {
         BuyGoldDialog()
     }
