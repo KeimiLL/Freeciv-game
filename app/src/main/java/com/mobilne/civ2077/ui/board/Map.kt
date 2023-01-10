@@ -15,10 +15,11 @@ import com.mobilne.civ2077.R
 
 @Composable
 fun Map() {
-    Box(modifier = Modifier
-        .background(Color(0xFFfae6e9))
-        .fillMaxHeight()
-        .wrapContentWidth()
+    Box(
+        modifier = Modifier
+            .background(Color(0xFFfae6e9))
+            .fillMaxHeight()
+            .wrapContentWidth()
     ) {
         Image(
             painter = painterResource(id = R.drawable.map),

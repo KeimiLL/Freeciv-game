@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun SendArmyDialog(){
+fun SendArmyDialog() {
     Column(
         modifier = Modifier.wrapContentSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -33,7 +33,7 @@ fun SendArmyDialog(){
 }
 
 @Composable
-fun BuyArmyHeader(){
+fun BuyArmyHeader() {
     Text(
         text = "Buy Units",
         style = MaterialTheme.typography.headlineMedium,
@@ -44,16 +44,18 @@ fun BuyArmyHeader(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  BuyArmy(
+fun BuyArmy(
     modifier: Modifier = Modifier,
     units: MutableState<String> = remember {
         mutableStateOf("Units count")
     }
 ) {
-    Row(modifier.fillMaxWidth(0.9f),
+    Row(
+        modifier.fillMaxWidth(0.9f),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround) {
-        Column() {
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        Column {
             OutlinedTextField(
                 value = units.value,
                 onValueChange = { units.value = it },
@@ -74,7 +76,7 @@ fun  BuyArmy(
 
 
 @Composable
-fun SendArmyHeader(){
+fun SendArmyHeader() {
     Text(
         text = "Move Army",
         style = MaterialTheme.typography.headlineMedium,
@@ -93,10 +95,12 @@ fun Coordinates(
         mutableStateOf("")
     }
 ) {
-    Row(modifier.fillMaxWidth(0.9f),
+    Row(
+        modifier.fillMaxWidth(0.9f),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround) {
-        Column() {
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        Column {
             OutlinedTextField(
                 value = x.value,
                 onValueChange = { x.value = it },
@@ -124,9 +128,11 @@ fun Coordinates(
 
 @Composable
 fun ExitButtons() {
-    Row(modifier = Modifier.fillMaxWidth(0.35f),
+    Row(
+        modifier = Modifier.fillMaxWidth(0.35f),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround){
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
         Button(onClick = {}) {
             Text("Cancel")
         }

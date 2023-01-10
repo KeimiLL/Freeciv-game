@@ -6,14 +6,17 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resumeWithException
 
 @OptIn(ExperimentalCoroutinesApi::class)
-suspend fun <T> Task<T>.await(): T{
-    return suspendCancellableCoroutine { cont -> addOnCompleteListener {
-        // if true we have exception
-        if (it.exception != null){ //fail
-            cont.resumeWithException(it.exception!!)
-        } else{ //success
-            cont.resume(it.result, null)
+suspend fun <T> Task<T>.await(): T {
+    return suspendCancellableCoroutine { cont ->
+        addOnCompleteListener {
+            // if true we have an exception
+            if (it.exception != null) {
+                // failure
+                cont.resumeWithException(it.exception!!)
+            } else {
+                // success
+                cont.resume(it.result, null)
+            }
         }
-    }
     }
 }

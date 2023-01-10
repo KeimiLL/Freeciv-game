@@ -22,10 +22,11 @@ import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 fun FullBoardView(
     viewModel: BoardViewModel = hiltViewModel()
 ) {
-    Box(modifier = Modifier
-        .background(Color(0xFFc5ddf6))
-        .fillMaxSize()
-        .padding(8.dp)
+    Box(
+        modifier = Modifier
+            .background(Color(0xFFc5ddf6))
+            .fillMaxSize()
+            .padding(8.dp)
     ) {
         Row(
             modifier = Modifier
@@ -47,11 +48,12 @@ fun FullBoardView(
                 ButtonXYItem("Zdj bazy", 55, 60)
             }
 
-            Column(modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth()
-                .weight(4f)
-                .padding(5.dp),
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .weight(4f)
+                    .padding(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
@@ -93,7 +95,7 @@ fun ButtonItem(
             text = txt,
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
-            color = Color(255,255,255)
+            color = Color(255, 255, 255)
         )
     }
 }
@@ -104,8 +106,10 @@ fun ButtonXYItem(
     x: Int = 0,
     y: Int = 0
 ) {
-    Column(modifier = Modifier,
-        verticalArrangement = Arrangement.Bottom) {
+    Column(
+        modifier = Modifier,
+        verticalArrangement = Arrangement.Bottom
+    ) {
         Row {
             Button(
                 modifier = Modifier
@@ -119,21 +123,23 @@ fun ButtonXYItem(
                     text = txt,
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
-                    color = Color(255,255,255)
+                    color = Color(255, 255, 255)
                 )
             }
         }
 
-        Row(modifier = Modifier
-            .background(Color(0xff266330))
-            .width(110.dp),
+        Row(
+            modifier = Modifier
+                .background(Color(0xff266330))
+                .width(110.dp),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically) {
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Text(
                 text = "X: $x, Y: $y",
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color(255,255,255)
+                color = Color(255, 255, 255)
             )
         }
     }

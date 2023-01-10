@@ -93,8 +93,8 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             Button(
                 onClick = {
                     viewModel?.logout()
-                    navController.navigate(ROUTE_LOGIN){
-                        popUpTo(ROUTE_HOME){
+                    navController.navigate(ROUTE_LOGIN) {
+                        popUpTo(ROUTE_HOME) {
                             inclusive = true
                         }
                     }
