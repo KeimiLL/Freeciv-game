@@ -50,25 +50,26 @@ fun  BuyArmy(
         mutableStateOf("Units count")
     }
 ) {
+    Row(modifier.fillMaxWidth(0.7f),
+        verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.SpaceAround) {
+        Column() {
+            OutlinedTextField(
+                value = units.value,
+                onValueChange = { units.value = it },
+                label = { Text("") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                ),
+            )
+        }
+        Button(
+            onClick = {}
+        ) {
+            Text("Buy")
+        }
+    }
 
-    Column(
-        modifier.fillMaxWidth(),
-    ) {
-        OutlinedTextField(
-            modifier= Modifier.fillMaxWidth(),
-            value = units.value,
-            onValueChange = { units.value = it },
-            label = { Text("") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-            ),
-        )
-    }
-    Button(
-        onClick = {}
-    ) {
-        Text("Buy")
-    }
 }
 
 
@@ -92,38 +93,40 @@ fun Coordinates(
         mutableStateOf("")
     }
 ) {
+    Row(modifier.fillMaxWidth(0.7f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround) {
+        Column() {
+            OutlinedTextField(
+                value = x.value,
+                onValueChange = { x.value = it },
+                label = { Text("X") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                ),
+            )
+            OutlinedTextField(
+                value = y.value,
+                onValueChange = { y.value = it },
+                label = { Text("Y") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                ),
+            )
+        }
+        Button(onClick = {}) {
+            Text("Send")
+        }
+    }
 
-    Column(
-        modifier.fillMaxWidth(),
-    ) {
-        OutlinedTextField(
-            modifier= Modifier.fillMaxWidth(),
-            value = x.value,
-            onValueChange = { x.value = it },
-            label = { Text("X") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-            ),
-        )
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = y.value,
-            onValueChange = { y.value = it },
-            label = { Text("Y") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-            ),
-        )
-    }
-    Button(onClick = {}) {
-        Text("Send")
-    }
 }
 
 
 @Composable
 fun ExitButtons() {
-    Row{
+    Row(modifier = Modifier.fillMaxWidth(0.35f),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround){
         Button(onClick = {}) {
             Text("Cancel")
         }
