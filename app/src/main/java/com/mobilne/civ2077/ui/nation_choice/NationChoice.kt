@@ -42,8 +42,9 @@ fun NationChoice(viewModel: NationChoiceViewModel) {
 
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -72,7 +73,23 @@ fun NationChoice(viewModel: NationChoiceViewModel) {
                 viewModel = viewModel
             )
         }
-        /* Todo button to submit*/
+        Row {
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(0.2f)
+                    .padding(8.dp),
+                onClick = { viewModel.saveToFB() },
+
+            ) {
+                Text(
+                    text = "Submit",
+                    style = MaterialTheme.typography.h5,
+                    textAlign = TextAlign.Center,
+                )
+            }
+            /* Todo Navigation to board?*/
+        }
+
     }
 }
 
