@@ -3,7 +3,9 @@ package com.mobilne.civ2077.ui.board
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilne.civ2077.data.Resource
@@ -21,6 +23,9 @@ class BoardViewModel @Inject constructor(
 
     private var _game = mutableStateOf(Game())
     val game: State<Game> = _game
+
+    var currentView by mutableStateOf("Mapa")
+
 
     init {
         gameRepository.getGameRealtime()
@@ -40,4 +45,10 @@ class BoardViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
     }
+
+    fun changeView(newView: String){
+        currentView = newView
+    }
+
+
 }
