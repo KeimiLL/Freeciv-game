@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +20,7 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun BuyGoldDialog(){
+fun BuyGoldDialog(viewModel: BuyGoldDialogViewModel){
     Box(modifier = Modifier
         .background(Color(0xFFffffff))
         .fillMaxSize()
@@ -35,16 +32,22 @@ fun BuyGoldDialog(){
 
             BuyGoldHeader()
 
-            BuyGold()
+            BuyGold(
+                value = viewModel.goldToBuy,
+                onValueChanged = { viewModel.onTextChanged(it) },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                )
+            )
             Text(
-                text = "Total: €\u200E 1400",
+                text = "Total: €\u200E ${viewModel.euroToPay}",
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
             )
 
             Row(horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
+                verticalAlignment = Alignment.CenterVertically) {
                 RadioButtonSample()
                 ExitButtons()
             }
@@ -95,13 +98,14 @@ fun BuyGoldHeader(){
     )
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun  BuyGold(
     modifier: Modifier = Modifier,
-    gold: MutableState<String> = remember {
-        mutableStateOf("999")
-    }
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    value: String,
+    onValueChanged: (String) -> Unit,
 ) {
     Row(modifier.fillMaxWidth(0.9f),
         verticalAlignment = Alignment.CenterVertically,
@@ -110,17 +114,12 @@ fun  BuyGold(
             painter = painterResource(id = R.drawable.gold),
             contentDescription = "Gold"
         )
-        Column() {
+        Column {
             OutlinedTextField(
-                value = gold.value,
-                onValueChange = { gold.value = it },
-                label = { Text("") },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                ),
+                value = value,
+                onValueChange = onValueChanged,
+                keyboardOptions = keyboardOptions
             )
-
-
         }
         Button(
             onClick = {}
@@ -145,10 +144,12 @@ fun ExitButtons() {
 }
 
 
+
+
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun BuyGoldDialogPreview() {
     AppTheme {
-        BuyGoldDialog()
+        BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
     }
 }
