@@ -17,13 +17,13 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.util.constants.Nations
 
 @Composable
-fun NationCard(nation: Nations, drawableId: Int, perk: String) {
+fun NationCard(nation: Nations, drawableId: Int, perk: String, viewModel: NationChoiceViewModel) {
 
     Card(
         modifier = Modifier
             .fillMaxHeight()
             .width(IntrinsicSize.Min)
-            .padding(8.dp),
+            .padding(5.dp),
         elevation = 8.dp,
     ) {
         Column(
@@ -54,7 +54,7 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String) {
             )
             Button(
                 modifier = Modifier.fillMaxWidth(0.7f),
-                onClick = { /*TODO*/ },
+                onClick = { viewModel.onNationChange(nation.nationName, drawableId) },
             ) {
                 Text(
                     text = "Choose",
@@ -70,5 +70,10 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String) {
 @Preview
 @Composable
 fun PreviewNationCard() {
-    NationCard(Nations.FRANCE, R.drawable.france, "Your army has five extra steps each turn")
+    NationCard(
+        Nations.SPAIN,
+        R.drawable.spain,
+        "Your army has five extra steps each turn",
+        viewModel = NationChoiceViewModel()
+    )
 }
