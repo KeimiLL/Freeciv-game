@@ -14,7 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
-import com.mobilne.civ2077.ui.theme.spacing
 import com.mobilne.civ2077.util.constants.Nations
 
 @Composable
@@ -53,7 +52,7 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String) {
                 text = perk,
                 style = MaterialTheme.typography.h6,
             )
-            Button (
+            Button(
                 modifier = Modifier.fillMaxWidth(0.7f),
                 onClick = { /*TODO*/ },
             ) {

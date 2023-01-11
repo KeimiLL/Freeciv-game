@@ -138,7 +138,10 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 width = Dimension.fillToConstraints
             }
         ) {
-            Text(text = stringResource(id = R.string.signup), style = MaterialTheme.typography.titleMedium)
+            Text(
+                text = stringResource(id = R.string.signup),
+                style = MaterialTheme.typography.titleMedium
+            )
         }
 
 

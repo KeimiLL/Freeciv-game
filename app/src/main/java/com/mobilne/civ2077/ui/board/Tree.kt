@@ -1,7 +1,5 @@
 package com.mobilne.civ2077.ui.board
 
-import android.print.PrintAttributes.Margins
-import androidx.compose.animation.expandVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -21,53 +19,80 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun Tree() {
-    Box(modifier = Modifier
-        .background(Color(0xFFfdebea))
-        .fillMaxSize()
+    Box(
+        modifier = Modifier
+            .background(Color(0xFFfdebea))
+            .fillMaxSize()
     ) {
-        Column(verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-            Column(modifier = Modifier
-                .weight(1f),
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp),
-                horizontalArrangement = Arrangement.Center) {
-                    Text(text = "Ekonomia", color = Color.Blue, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+        Column(
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Ekonomia",
+                        color = Color.Blue,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
                 }
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
                     RoundItem(1, "Eko")
                     RoundItem(2, "Eko")
                     RoundItem(3, "Eko")
                     RoundItem(4, "Eko")
                 }
             }
-            Column(modifier = Modifier
-                .weight(1f)) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp),
-                    horizontalArrangement = Arrangement.Center) {
-                    Text(text = "Wojsko", color = Color.Red, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Wojsko",
+                        color = Color.Red,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
                 }
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(5.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
                     RoundItem(1, "Woj")
                     RoundItem(2, "Woj")
                     RoundItem(3, "Woj")
                     RoundItem(4, "Woj")
                 }
             }
-            Row(modifier = Modifier
-                .weight(1f),
-            verticalAlignment = Alignment.Bottom) {
-                InfoBar(1,"Ekonomia")
+            Row(
+                modifier = Modifier
+                    .weight(1f),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                InfoBar(1, "Ekonomia")
             }
         }
     }
@@ -76,7 +101,8 @@ fun Tree() {
 @Composable
 fun RoundItem(
     id: Int = 1,
-    txt: String = "Ekonomia") {
+    txt: String = "Ekonomia"
+) {
     Button(
         modifier = Modifier
             .height(80.dp)
@@ -89,7 +115,7 @@ fun RoundItem(
             text = "$txt $id",
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
-            color = Color(255,255,255)
+            color = Color(255, 255, 255)
         )
     }
 }
@@ -97,12 +123,15 @@ fun RoundItem(
 @Composable
 fun InfoBar(
     id: Int = 1,
-    txt: String = "Ekonomia") {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(5.dp),
-    horizontalArrangement = Arrangement.SpaceEvenly,
-    verticalAlignment = Alignment.CenterVertically) {
+    txt: String = "Ekonomia"
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Text(text = "Info o turze $id dotyczacej zakladki $txt.")
         Button(
             modifier = Modifier
@@ -117,7 +146,7 @@ fun InfoBar(
                 text = "Kup",
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color(255,255,255)
+                color = Color(255, 255, 255)
             )
         }
     }

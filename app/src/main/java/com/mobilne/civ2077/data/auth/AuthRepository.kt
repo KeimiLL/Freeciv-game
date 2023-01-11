@@ -1,6 +1,7 @@
-package com.mobilne.civ2077.data
+package com.mobilne.civ2077.data.auth
 
 import com.google.firebase.auth.FirebaseUser
+import com.mobilne.civ2077.data.Resource
 
 interface AuthRepository {
     val currentUser: FirebaseUser?

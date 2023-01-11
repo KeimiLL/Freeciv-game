@@ -35,13 +35,13 @@ fun AppNavHost(
         composable(ROUTE_HOME) {
             HomeScreen(viewModel, navController)
         }
-        composable(ROUTE_BOARD){
+        composable(ROUTE_BOARD) {
             FullBoardView()
         }
-        composable(ROUTE_ARMYDIALOG){
+        composable(ROUTE_ARMYDIALOG) {
             SendArmyDialog()
         }
-        composable(ROUTE_NATIONS){
+        composable(ROUTE_NATIONS) {
             NationChoice()
         }
     }

@@ -2,9 +2,9 @@ package com.mobilne.civ2077.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mobilne.civ2077.data.AuthRepository
-import com.mobilne.civ2077.data.Resource
 import com.google.firebase.auth.FirebaseUser
+import com.mobilne.civ2077.data.Resource
+import com.mobilne.civ2077.data.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,7 +26,7 @@ class AuthViewModel @Inject constructor(
         get() = repository.currentUser
 
     init {
-        if(repository.currentUser != null){
+        if (repository.currentUser != null) {
             _loginFlow.value = Resource.Success(repository.currentUser!!)
         }
     }
