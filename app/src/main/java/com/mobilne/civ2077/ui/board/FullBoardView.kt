@@ -57,10 +57,10 @@ fun FullBoardView(
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-//                Map()
+                Map()
 //                Tree()
-//                SendArmyDialog()
-                BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
+//                SendArmyDialog(viewModel = SendArmyViewModel())
+//                BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
             }
 
             Column(
