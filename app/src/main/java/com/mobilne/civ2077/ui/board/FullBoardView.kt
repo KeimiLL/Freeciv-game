@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialog
-import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
+import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 
 @Composable
 fun FullBoardView() {
@@ -52,7 +52,7 @@ fun FullBoardView() {
 //                Map()
 //                Tree()
 //                SendArmyDialog()
-                BuyGoldDialog()
+                BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
             }
 
             Column(
