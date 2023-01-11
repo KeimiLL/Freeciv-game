@@ -1,11 +1,11 @@
-package com.mobilne.civ2077.ui.buyGoldDialog
+package com.mobilne.civ2077.ui.board.views.buyGold
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class BuyGoldDialogViewModel : ViewModel() {
+class BuyGoldViewModel : ViewModel() {
 
     //variables
     private val rate = 2

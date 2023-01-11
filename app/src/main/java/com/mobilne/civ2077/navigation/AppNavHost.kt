@@ -6,9 +6,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mobilne.civ2077.data.game.GameRepository
 import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.auth.LoginScreen
 import com.mobilne.civ2077.ui.auth.SignupScreen
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.ui.board.FullBoardView
 import com.mobilne.civ2077.ui.home.HomeScreen
 import com.mobilne.civ2077.ui.nation_choice.NationChoice
@@ -36,7 +38,7 @@ fun AppNavHost(
             HomeScreen(viewModel, navController)
         }
         composable(ROUTE_BOARD) {
-            FullBoardView()
+            FullBoardView(viewModel, navController)
         }
         composable(ROUTE_NATIONS) {
             NationChoice(viewModel = NationChoiceViewModel())

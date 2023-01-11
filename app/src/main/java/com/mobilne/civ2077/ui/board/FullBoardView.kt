@@ -13,14 +13,22 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialog
+import com.mobilne.civ2077.ui.board.views.buyGold.BuyGoldDialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
-import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.mobilne.civ2077.navigation.ROUTE_HOME
+import com.mobilne.civ2077.navigation.ROUTE_LOGIN
+import com.mobilne.civ2077.ui.auth.AuthViewModel
+import com.mobilne.civ2077.ui.board.views.army.SendArmyDialog
+import com.mobilne.civ2077.ui.board.views.buyGold.BuyGoldViewModel
+import com.mobilne.civ2077.ui.board.views.army.ArmyViewModel
 
 @Composable
 fun FullBoardView(
-    viewModel: BoardViewModel = hiltViewModel()
+    authViewModel: AuthViewModel?,
+    navController: NavHostController,
+    viewModel: BoardViewModel = hiltViewModel(),
 ) {
     Box(
         modifier = Modifier
@@ -42,10 +50,33 @@ fun FullBoardView(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 // Firebase DB test:
-                ButtonItem(viewModel.game.value.waiting.toString())
-                ButtonItem("Wyjście")
-                ButtonItem("Złoto")
-                ButtonXYItem("Zdj bazy", 55, 60)
+//                ButtonItem(viewModel.currentView, viewModel)
+                //Logout
+                Button(
+                    onClick = {
+                        authViewModel?.logout()
+                        navController.navigate(ROUTE_LOGIN) {
+                            popUpTo(ROUTE_HOME) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .height(80.dp)
+                        .width(110.dp),
+                    shape = RectangleShape,
+                    contentPadding = PaddingValues(16.dp),
+                ) {
+                Text(
+                    text = "Wyjscie",
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center,
+                    color = Color(255, 255, 255)
+                )
+            }
+
+                ButtonItem("Kup Zloto", viewModel)
+                ButtonXYItem("Mapa", 10, 10, viewModel)
             }
 
             Column(
@@ -57,11 +88,21 @@ fun FullBoardView(
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-                Map()
-//                Tree()
-//                SendArmyDialog(viewModel = SendArmyViewModel())
-//                BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
-            }
+                when (viewModel.currentView) {
+                    "Wojsko" -> {
+                        SendArmyDialog(viewModel = ArmyViewModel())
+                    }
+                    "Rozwoj" -> {
+                        Tree()
+                    }
+                    "Kup Zloto" -> {
+                        BuyGoldDialog(viewModel = BuyGoldViewModel())
+                    }
+                    else -> {
+                        Map()
+                    }
+                }
+             }
 
             Column(
                 modifier = Modifier
@@ -70,9 +111,9 @@ fun FullBoardView(
                     .padding(5.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                ButtonItem("Tura")
-                ButtonItem("Rozwoj")
-                ButtonXYItem("Zdj wojska", 75, 85)
+                ButtonItem("Tura", viewModel)
+                ButtonItem("Rozwoj", viewModel)
+                ButtonXYItem("Wojsko", 10, 10, viewModel)
             }
         }
     }
@@ -81,7 +122,8 @@ fun FullBoardView(
 
 @Composable
 fun ButtonItem(
-    txt: String = "Nazwa-przycisku"
+    txt: String = "Nazwa-przycisku",
+    viewModel: BoardViewModel,
 ) {
     Button(
         modifier = Modifier
@@ -89,7 +131,7 @@ fun ButtonItem(
             .width(110.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
-        onClick = { /*TODO*/ },
+        onClick = { viewModel.changeView(txt) },
     ) {
         Text(
             text = txt,
@@ -104,7 +146,8 @@ fun ButtonItem(
 fun ButtonXYItem(
     txt: String = "btnXY",
     x: Int = 0,
-    y: Int = 0
+    y: Int = 0,
+    viewModel: BoardViewModel
 ) {
     Column(
         modifier = Modifier,
@@ -117,7 +160,7 @@ fun ButtonXYItem(
                     .width(110.dp),
                 shape = RectangleShape,
                 contentPadding = PaddingValues(16.dp),
-                onClick = { /*TODO*/ },
+                onClick = { viewModel.changeView(txt) },
             ) {
                 Text(
                     text = txt,
@@ -148,5 +191,5 @@ fun ButtonXYItem(
 @Preview
 @Composable
 fun PreviewFullBoardView() {
-    FullBoardView()
+    FullBoardView(null, rememberNavController())
 }
