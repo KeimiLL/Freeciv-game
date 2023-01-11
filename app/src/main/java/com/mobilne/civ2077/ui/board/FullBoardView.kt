@@ -13,16 +13,16 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialog
+import com.mobilne.civ2077.ui.board.views.buyGold.BuyGoldDialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.ui.auth.AuthViewModel
-import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
-import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
-import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialogViewModel
+import com.mobilne.civ2077.ui.board.views.army.SendArmyDialog
+import com.mobilne.civ2077.ui.board.views.buyGold.BuyGoldViewModel
+import com.mobilne.civ2077.ui.board.views.army.ArmyViewModel
 
 @Composable
 fun FullBoardView(
@@ -90,14 +90,13 @@ fun FullBoardView(
             ) {
                 when (viewModel.currentView) {
                     "Wojsko" -> {
-                        SendArmyDialog(viewModel = SendArmyDialogViewModel())
-
+                        SendArmyDialog(viewModel = ArmyViewModel())
                     }
                     "Rozwoj" -> {
                         Tree()
                     }
                     "Kup Zloto" -> {
-                        BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
+                        BuyGoldDialog(viewModel = BuyGoldViewModel())
                     }
                     else -> {
                         Map()

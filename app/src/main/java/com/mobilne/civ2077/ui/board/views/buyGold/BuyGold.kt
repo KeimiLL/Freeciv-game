@@ -1,4 +1,4 @@
-package com.mobilne.civ2077.ui.buyGoldDialog
+package com.mobilne.civ2077.ui.board.views.buyGold
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -20,7 +20,7 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun BuyGoldDialog(viewModel: BuyGoldDialogViewModel){
+fun BuyGoldDialog(viewModel: BuyGoldViewModel){
     Box(modifier = Modifier
         .background(Color(0xFFffffff))
         .fillMaxSize()
@@ -49,7 +49,7 @@ fun BuyGoldDialog(viewModel: BuyGoldDialogViewModel){
             Row(horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically) {
                 RadioButtonSample()
-                ExitButtons()
+//                ExitButtons()
             }
 
         }
@@ -150,6 +150,6 @@ fun ExitButtons() {
 @Composable
 fun BuyGoldDialogPreview() {
     AppTheme {
-        BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
+        BuyGoldDialog(viewModel = BuyGoldViewModel())
     }
 }

@@ -1,4 +1,4 @@
-package com.mobilne.civ2077.ui.sendArmyDialog
+package com.mobilne.civ2077.ui.board.views.army
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun SendArmyDialog(viewModel: SendArmyDialogViewModel) {
+fun SendArmyDialog(viewModel: ArmyViewModel) {
     Column(
         modifier = Modifier
             .background(Color(0xFFffffff))
@@ -46,7 +46,7 @@ fun SendArmyDialog(viewModel: SendArmyDialogViewModel) {
         )
 
         Divider()
-        ExitButtons()
+//        ExitButtons()
     }
 }
 
@@ -157,6 +157,6 @@ fun ExitButtons() {
 @Composable
 fun SendArmyDialogLight() {
     AppTheme {
-        SendArmyDialog(viewModel = SendArmyDialogViewModel())
+        SendArmyDialog(viewModel = ArmyViewModel())
     }
 }
