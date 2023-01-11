@@ -12,7 +12,6 @@ import com.mobilne.civ2077.ui.auth.SignupScreen
 import com.mobilne.civ2077.ui.board.FullBoardView
 import com.mobilne.civ2077.ui.home.HomeScreen
 import com.mobilne.civ2077.ui.nation_choice.NationChoice
-import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
 
 @Composable
 fun AppNavHost(
@@ -37,9 +36,6 @@ fun AppNavHost(
         }
         composable(ROUTE_BOARD) {
             FullBoardView()
-        }
-        composable(ROUTE_ARMYDIALOG) {
-            SendArmyDialog()
         }
         composable(ROUTE_NATIONS) {
             NationChoice()
