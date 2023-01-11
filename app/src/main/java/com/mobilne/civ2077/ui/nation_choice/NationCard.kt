@@ -2,10 +2,7 @@ package com.mobilne.civ2077.ui.nation_choice
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,15 +13,16 @@ import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.util.constants.Nations
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun NationCard(nation: Nations, drawableId: Int, perk: String) {
-
+fun NationCard(nation: Nations, drawableId: Int, perk: String, viewModel: NationChoiceViewModel) {
     Card(
         modifier = Modifier
-            .fillMaxHeight()
+            .height(230.dp)
             .width(IntrinsicSize.Min)
-            .padding(8.dp),
+            .padding(5.dp),
         elevation = 8.dp,
+        onClick = { viewModel.onNationChange(nation.nationName, drawableId) }
     ) {
         Column(
             verticalArrangement = Arrangement.Top,
@@ -40,7 +38,7 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String) {
                         top = 16.dp,
                         start = 8.dp,
                         end = 8.dp,
-                        bottom = 8.dp
+                        bottom = 16.dp
                     ),
             )
             Text(
@@ -50,18 +48,9 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String) {
             Text(
                 modifier = Modifier.padding(8.dp),
                 text = perk,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.subtitle1,
+                textAlign = TextAlign.Justify
             )
-            Button(
-                modifier = Modifier.fillMaxWidth(0.7f),
-                onClick = { /*TODO*/ },
-            ) {
-                Text(
-                    text = "Choose",
-                    style = MaterialTheme.typography.body2,
-                    textAlign = TextAlign.Center,
-                )
-            }
         }
 
     }
@@ -70,5 +59,10 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String) {
 @Preview
 @Composable
 fun PreviewNationCard() {
-    NationCard(Nations.FRANCE, R.drawable.france, "Your army has five extra steps each turn")
+    NationCard(
+        Nations.SPAIN,
+        R.drawable.spain,
+        "Your army has five extra steps each turn",
+        viewModel = NationChoiceViewModel()
+    )
 }
