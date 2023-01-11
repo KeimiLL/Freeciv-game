@@ -15,13 +15,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialog
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.mobilne.civ2077.navigation.ROUTE_HOME
+import com.mobilne.civ2077.navigation.ROUTE_LOGIN
+import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialogViewModel
 
 @Composable
 fun FullBoardView(
-    viewModel: BoardViewModel = hiltViewModel()
+    authViewModel: AuthViewModel?,
+    navController: NavHostController,
+    viewModel: BoardViewModel = hiltViewModel(),
 ) {
     Box(
         modifier = Modifier
@@ -44,7 +51,30 @@ fun FullBoardView(
             ) {
                 // Firebase DB test:
 //                ButtonItem(viewModel.currentView, viewModel)
-                ButtonItem("Wyjscie", viewModel)
+                //Logout
+                Button(
+                    onClick = {
+                        authViewModel?.logout()
+                        navController.navigate(ROUTE_LOGIN) {
+                            popUpTo(ROUTE_HOME) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .height(80.dp)
+                        .width(110.dp),
+                    shape = RectangleShape,
+                    contentPadding = PaddingValues(16.dp),
+                ) {
+                Text(
+                    text = "Wyjscie",
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center,
+                    color = Color(255, 255, 255)
+                )
+            }
+
                 ButtonItem("Kup Zloto", viewModel)
                 ButtonXYItem("Mapa", 10, 10, viewModel)
             }
@@ -58,18 +88,22 @@ fun FullBoardView(
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-                if(viewModel.currentView == "Wojsko"){
-                    SendArmyDialog(viewModel = SendArmyDialogViewModel())
+                when (viewModel.currentView) {
+                    "Wojsko" -> {
+                        SendArmyDialog(viewModel = SendArmyDialogViewModel())
 
+                    }
+                    "Rozwoj" -> {
+                        Tree()
+                    }
+                    "Kup Zloto" -> {
+                        BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
+                    }
+                    else -> {
+                        Map()
+                    }
                 }
-                else if (viewModel.currentView == "Rozwoj"){
-                    Tree()
-                } else if (viewModel.currentView == "Kup Zloto") {
-                    BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
-                } else {
-                    Map()
-                }
-            }
+             }
 
             Column(
                 modifier = Modifier
@@ -158,5 +192,5 @@ fun ButtonXYItem(
 @Preview
 @Composable
 fun PreviewFullBoardView() {
-    FullBoardView()
+    FullBoardView(null, rememberNavController())
 }
