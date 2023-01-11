@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
@@ -16,17 +13,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun SendArmyDialog() {
+fun SendArmyDialog(viewModel: SendArmyDialogViewModel) {
     Column(
         modifier = Modifier.wrapContentSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         BuyArmyHeader()
-        BuyArmy()
+        BuyArmy(
+            valueGoldToPay = viewModel.goldToPay,
+            valueUnits = viewModel.unitsCount,
+            onValueChanged = { viewModel.onUnitsChanged(it) },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+            )
+        )
         Divider()
         SendArmyHeader()
-        Coordinates()
+
+        Coordinates(
+            valueX = viewModel.destinationX,
+            onValueXChanged = { viewModel.onXChange(it) },
+            valueY = viewModel.destinationY,
+            onValueYChanged = { viewModel.onYChange(it) },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+            )
+        )
+
         Divider()
         ExitButtons()
     }
@@ -46,9 +60,10 @@ fun BuyArmyHeader() {
 @Composable
 fun BuyArmy(
     modifier: Modifier = Modifier,
-    units: MutableState<String> = remember {
-        mutableStateOf("Units count")
-    }
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    valueUnits: String,
+    valueGoldToPay: String,
+    onValueChanged: (String) -> Unit,
 ) {
     Row(
         modifier.fillMaxWidth(0.9f),
@@ -57,18 +72,16 @@ fun BuyArmy(
     ) {
         Column {
             OutlinedTextField(
-                value = units.value,
-                onValueChange = { units.value = it },
-                label = { Text("") },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                ),
+                value = valueUnits,
+                onValueChange = onValueChanged,
+                keyboardOptions = keyboardOptions
             )
         }
         Button(
-            onClick = {}
-        ) {
-            Text("Buy")
+            onClick = {},
+
+            ) {
+            Text("Buy for $valueGoldToPay")
         }
     }
 
@@ -89,11 +102,13 @@ fun SendArmyHeader() {
 @Composable
 fun Coordinates(
     modifier: Modifier = Modifier,
-    x: MutableState<String> = remember {
-        mutableStateOf("")
-    }, y: MutableState<String> = remember {
-        mutableStateOf("")
-    }
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+
+    valueX: String,
+    onValueXChanged: (String) -> Unit,
+
+    valueY: String,
+    onValueYChanged: (String) -> Unit,
 ) {
     Row(
         modifier.fillMaxWidth(0.9f),
@@ -102,20 +117,14 @@ fun Coordinates(
     ) {
         Column {
             OutlinedTextField(
-                value = x.value,
-                onValueChange = { x.value = it },
-                label = { Text("X") },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                ),
+                value = valueX,
+                onValueChange = onValueXChanged,
+                keyboardOptions = keyboardOptions
             )
             OutlinedTextField(
-                value = y.value,
-                onValueChange = { y.value = it },
-                label = { Text("Y") },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                ),
+                value = valueY,
+                onValueChange = onValueYChanged,
+                keyboardOptions = keyboardOptions
             )
         }
         Button(onClick = {}) {
@@ -134,9 +143,6 @@ fun ExitButtons() {
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Button(onClick = {}) {
-            Text("Cancel")
-        }
-        Button(onClick = {}) {
             Text("Ok")
         }
     }
@@ -147,14 +153,6 @@ fun ExitButtons() {
 @Composable
 fun SendArmyDialogLight() {
     AppTheme {
-        SendArmyDialog()
-    }
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun SendArmyDialogDark() {
-    AppTheme {
-        SendArmyDialog()
+        SendArmyDialog(viewModel = SendArmyDialogViewModel())
     }
 }
