@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,7 +33,6 @@ fun BuyGoldDialog(viewModel: BuyGoldDialogViewModel){
             BuyGoldHeader()
 
             BuyGold(
-                label = "",
                 value = viewModel.goldToBuy,
                 onValueChanged = { viewModel.onTextChanged(it) },
                 keyboardOptions = KeyboardOptions(
@@ -105,8 +103,6 @@ fun BuyGoldHeader(){
 @Composable
 fun  BuyGold(
     modifier: Modifier = Modifier,
-    label: String,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     value: String,
     onValueChanged: (String) -> Unit,
@@ -122,12 +118,8 @@ fun  BuyGold(
             OutlinedTextField(
                 value = value,
                 onValueChange = onValueChanged,
-                label = { Text(text = label) },
-                visualTransformation = visualTransformation,
                 keyboardOptions = keyboardOptions
             )
-
-
         }
         Button(
             onClick = {}

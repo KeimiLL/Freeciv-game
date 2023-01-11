@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 
 class BuyGoldDialogViewModel : ViewModel() {
     //variables
-    val rate = 2
+    private val rate = 2
     //state
     var goldToBuy by mutableStateOf("")
     var euroToPay by mutableStateOf("0")
@@ -15,11 +15,12 @@ class BuyGoldDialogViewModel : ViewModel() {
     // events
     fun onTextChanged(newString: String) {
         if (newString.isNotEmpty()){
-            goldToBuy = newString
+            val result = newString.filter { it.isDigit() }
+            goldToBuy = result
             euroToPay = (goldToBuy.toInt()*rate).toString()
         } else {
-            euroToPay = "0"
             goldToBuy = ""
+            euroToPay = "0"
         }
 
     }
