@@ -80,7 +80,7 @@ fun NationChoice(viewModel: NationChoiceViewModel) {
                     .padding(8.dp),
                 onClick = { viewModel.saveToFB() },
 
-            ) {
+                ) {
                 Text(
                     text = "Submit",
                     style = MaterialTheme.typography.h5,
