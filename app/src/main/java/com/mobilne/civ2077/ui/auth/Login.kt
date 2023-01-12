@@ -27,12 +27,17 @@ import com.mobilne.civ2077.data.Resource
 import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
+fun LoginScreen(
+    viewModel: AuthViewModel?,
+    boardViewModel: BoardViewModel?,
+    navController: NavController
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -152,6 +157,9 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
                     LaunchedEffect(Unit) {
                         // ROUTE_BOARD used to test the DB
                         // TODO: add conditional navigation based on game state
+                        if (boardViewModel?.isUserAddedToTheGame() == false) {
+                            boardViewModel.addUserToTheGame()
+                        }
                         navController.navigate(ROUTE_BOARD) {
                             popUpTo(ROUTE_LOGIN) { inclusive = true }
                         }
@@ -166,7 +174,7 @@ fun LoginScreen(viewModel: AuthViewModel?, navController: NavController) {
 @Composable
 fun LoginScreenPreviewLight() {
     AppTheme {
-        LoginScreen(null, rememberNavController())
+        LoginScreen(null, null, rememberNavController())
     }
 }
 
@@ -174,6 +182,6 @@ fun LoginScreenPreviewLight() {
 @Composable
 fun LoginScreenPreviewDark() {
     AppTheme {
-        LoginScreen(null, rememberNavController())
+        LoginScreen(null, null, rememberNavController())
     }
 }
