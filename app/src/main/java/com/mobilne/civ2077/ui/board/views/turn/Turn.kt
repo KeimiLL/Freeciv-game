@@ -56,7 +56,7 @@ fun Turn(viewModel: TurnViewModel) {
 fun TurnHeader(){
     Text(
         modifier = Modifier.padding(vertical = 10.dp),
-        text = "Widok tury wśród graczy",
+        text = "Players state",
         style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,
         color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface

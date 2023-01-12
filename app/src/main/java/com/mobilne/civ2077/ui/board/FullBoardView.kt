@@ -67,20 +67,20 @@ fun FullBoardView(
                     },
                     modifier = Modifier
                         .height(80.dp)
-                        .width(110.dp),
+                        .width(120.dp),
                     shape = RectangleShape,
                     contentPadding = PaddingValues(16.dp),
                 ) {
                 Text(
-                    text = "Wyjscie",
+                    text = "Logout",
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
                     color = Color(255, 255, 255)
                 )
             }
 
-                ButtonItem("Kup Zloto", viewModel)
-                ButtonXYItem("Mapa", 10, 10, viewModel)
+                ButtonItem("Gold", viewModel)
+                ButtonXYItem("Map", 10, 10, viewModel)
             }
 
             Column(
@@ -93,16 +93,16 @@ fun FullBoardView(
 
             ) {
                 when (viewModel.currentView) {
-                    "Wojsko" -> {
+                    "Army" -> {
                         Army(viewModel = ArmyViewModel())
                     }
-                    "Rozwoj" -> {
+                    "Tech Tree" -> {
                         Tree(viewModel = TreeViewModel()) /* Todo Tree viewmodel*/
                     }
-                    "Kup Zloto" -> {
+                    "Gold" -> {
                         BuyGold(viewModel = BuyGoldViewModel())
                     }
-                    "Tura" ->{
+                    "Turn" ->{
                         Turn(viewModel = TurnViewModel())
                     }
                     else -> {
@@ -118,9 +118,9 @@ fun FullBoardView(
                     .padding(5.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                ButtonItem("Tura", viewModel)
-                ButtonItem("Rozwoj", viewModel)
-                ButtonXYItem("Wojsko", 10, 10, viewModel)
+                ButtonItem("Turn", viewModel)
+                ButtonItem("Tech Tree", viewModel)
+                ButtonXYItem("Army", 10, 10, viewModel)
             }
         }
     }
@@ -135,7 +135,7 @@ fun ButtonItem(
     Button(
         modifier = Modifier
             .height(80.dp)
-            .width(110.dp),
+            .width(120.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
         onClick = { viewModel.changeView(txt) },
@@ -164,7 +164,7 @@ fun ButtonXYItem(
             Button(
                 modifier = Modifier
                     .height(80.dp)
-                    .width(110.dp),
+                    .width(120.dp),
                 shape = RectangleShape,
                 contentPadding = PaddingValues(16.dp),
                 onClick = { viewModel.changeView(txt) },
@@ -181,7 +181,7 @@ fun ButtonXYItem(
         Row(
             modifier = Modifier
                 .background(Color(0xff266330))
-                .width(110.dp),
+                .width(120.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {

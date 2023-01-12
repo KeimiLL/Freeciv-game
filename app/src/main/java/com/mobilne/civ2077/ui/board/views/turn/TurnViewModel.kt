@@ -9,11 +9,11 @@ class TurnViewModel: ViewModel() {
     /*Todo sparwzdanie booleanów w bazie, kto zakończył turę, a kto nie
     *  dodanie propów dla innych userów z bazy i przklejenie ich do widoku*/
 
-    private val _endOfTurn = "Zakończ Turę"
-    private val _alreadyPassed = "Już zakończyłeś turę"
+    private val _endOfTurn = "End your turn"
+    private val _alreadyPassed = "Wait for others.."
 
-    private val _otherPlayerDuringTurn = "W trakcie tury"
-    private val _otherPlayerEndedTurn = "Koniec tury"
+    private val _otherPlayerDuringTurn = "Still playing.."
+    private val _otherPlayerEndedTurn = "End of turn"
 
 
     //Todo funkcja czytająca ich stan i dająca dobre dane
