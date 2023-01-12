@@ -20,7 +20,7 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun BuyGoldDialog(viewModel: BuyGoldViewModel){
+fun BuyGold(viewModel: BuyGoldViewModel){
     Box(modifier = Modifier
         .background(Color(0xFFffffff))
         .fillMaxSize()
@@ -150,6 +150,6 @@ fun ExitButtons() {
 @Composable
 fun BuyGoldDialogPreview() {
     AppTheme {
-        BuyGoldDialog(viewModel = BuyGoldViewModel())
+        BuyGold(viewModel = BuyGoldViewModel())
     }
 }
