@@ -13,8 +13,8 @@ class TreeViewModel : ViewModel() {
     * */
     //private
     //values
-    private val _economyPerk = "10 less gold for all other perks"
-    private val _armyPerk = "Army takes 10% more damage"
+    private val _economyPerkDescription = "10 less gold for all other perks"
+    private val _armyPerkDescription = "Army takes 10% more damage"
 
     //variables
     private var _economyPerks by mutableStateOf(0) // czytanie z bazy
@@ -32,47 +32,53 @@ class TreeViewModel : ViewModel() {
 
     fun changeForEconomyPerk() {
         buyButtonState = true
-        currentPerk = _economyPerk
+        currentPerk = _economyPerkDescription
     }
 
     fun changeForArmyPerk() {
-        buyButtonState =true
-        currentPerk = _armyPerk
+        buyButtonState = true
+        currentPerk = _armyPerkDescription
     }
 
     fun buy() {
-        if(currentPerk != "") {
-            if (currentPerk == _armyPerk) {
-                _armyPerks++
-            } else if (currentPerk == _economyPerk) {
-                _economyPerks++
-            }
-            currentPerk = ""
-            buyButtonState = false
-            changeButtonsState()
+        if (currentPerk == _armyPerkDescription) {
+            _armyPerks++
+            changeEconomyButtonsState()
+        } else if (currentPerk == _economyPerkDescription) {
+            _economyPerks++
+            changeArmyButtonsState()
         }
-    //Todo zapis do bazy nowych perków
+        currentPerk = ""
+        buyButtonState = false
+        checkDevelopmentState()
+        //Todo zapis do bazy nowych perków
     }
 
-    //Todo wywoływane po wczytaniu jak juz mamy na jakim miejscu rozwoju w drzewkach jest gracz z bazy
-    fun changeButtonsState() {
+    fun changeEconomyButtonsState() {
         economyPerksButtonsState = arrayOf(false, false, false, false)
-        armyPerksButtonsState = arrayOf(false, false, false, false)
         for (i in 0..3) {
             if (_economyPerks == i) {
                 economyPerksButtonsState[i] = true
             }
+        }
+    }
+
+    fun changeArmyButtonsState() {
+        armyPerksButtonsState = arrayOf(false, false, false, false)
+        for (i in 0..3) {
             if (_armyPerks == i) {
                 armyPerksButtonsState[i] = true
             }
         }
+    }
+
+    fun checkDevelopmentState() {
         if (_economyPerks == 4 && _armyPerks == 4) {
             buyButtonState = false
             currentPerk = "Development completed!"
         }
     }
 
-    //Todo czytamy z bazy jakie umiejętności ma graczi obniżamy(gdzie jest zero, tyle razy obniżamy o 10)
     fun changeGoldToPay() {
         goldToPay = 100 - 10 * _economyPerks
     }

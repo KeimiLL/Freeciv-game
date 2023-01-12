@@ -17,7 +17,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Tree(viewModel: TreeViewModel) {
-    viewModel.changeButtonsState()
+    // Todo czytanie z bazy zamiast funkcji, które czytają stan początkowy
+    viewModel.changeEconomyButtonsState()
+    viewModel.changeArmyButtonsState()
+    viewModel.checkDevelopmentState()
+    viewModel.changeGoldToPay()
     Box(
         modifier = Modifier
             .background(Color(0xFFffffff))
@@ -27,7 +31,7 @@ fun Tree(viewModel: TreeViewModel) {
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            viewModel.changeGoldToPay()
+
             Column(
                 modifier = Modifier
                     .weight(1f),
@@ -172,7 +176,6 @@ fun InfoBar(
             enabled = viewModel.buyButtonState,
             onClick = {
                 viewModel.buy()
-                viewModel.changeButtonsState()
             },
         ) {
             Text(
