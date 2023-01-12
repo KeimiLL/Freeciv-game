@@ -23,6 +23,8 @@ import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.board.views.army.Army
 import com.mobilne.civ2077.ui.board.views.buyGold.BuyGoldViewModel
 import com.mobilne.civ2077.ui.board.views.army.ArmyViewModel
+import com.mobilne.civ2077.ui.board.views.tree.Tree
+import com.mobilne.civ2077.ui.board.views.tree.TreeViewModel
 import com.mobilne.civ2077.ui.board.views.turn.Turn
 import com.mobilne.civ2077.ui.board.views.turn.TurnViewModel
 
@@ -95,7 +97,7 @@ fun FullBoardView(
                         Army(viewModel = ArmyViewModel())
                     }
                     "Rozwoj" -> {
-                        Tree() /* Todo Tree viewmodel*/
+                        Tree(viewModel = TreeViewModel()) /* Todo Tree viewmodel*/
                     }
                     "Kup Zloto" -> {
                         BuyGold(viewModel = BuyGoldViewModel())
