@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
@@ -22,7 +23,7 @@ fun Army(viewModel: ArmyViewModel) {
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
+        //BuyArmy
         BuyArmyHeader()
         BuyArmy(
             valueGoldToPay = viewModel.goldToPay,
@@ -32,9 +33,8 @@ fun Army(viewModel: ArmyViewModel) {
                 keyboardType = KeyboardType.Number,
             )
         )
-        Divider()
+        //Send Army
         SendArmyHeader()
-
         Coordinates(
             valueX = viewModel.destinationX,
             onValueXChanged = { viewModel.onXChange(it) },
@@ -44,15 +44,14 @@ fun Army(viewModel: ArmyViewModel) {
                 keyboardType = KeyboardType.Number,
             )
         )
-
-        Divider()
-//        ExitButtons()
+    //        ExitButtons()
     }
 }
 
 @Composable
 fun BuyArmyHeader() {
     Text(
+        modifier = Modifier.padding(vertical = 10.dp),
         text = "Buy Units",
         style = MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,
@@ -76,6 +75,7 @@ fun BuyArmy(
     ) {
         Column {
             OutlinedTextField(
+                modifier = Modifier.padding(vertical = 10.dp),
                 value = valueUnits,
                 onValueChange = onValueChanged,
                 keyboardOptions = keyboardOptions
@@ -95,6 +95,7 @@ fun BuyArmy(
 @Composable
 fun SendArmyHeader() {
     Text(
+        modifier = Modifier.padding(vertical = 10.dp),
         text = "Move Army",
         style = MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,
@@ -121,11 +122,14 @@ fun Coordinates(
     ) {
         Column {
             OutlinedTextField(
+                modifier = Modifier.padding(vertical = 5.dp),
                 value = valueX,
                 onValueChange = onValueXChanged,
                 keyboardOptions = keyboardOptions
             )
             OutlinedTextField(
+                modifier = Modifier.padding(vertical = 5.dp),
+
                 value = valueY,
                 onValueChange = onValueYChanged,
                 keyboardOptions = keyboardOptions
@@ -139,18 +143,18 @@ fun Coordinates(
 }
 
 
-@Composable
-fun ExitButtons() {
-    Row(
-        modifier = Modifier.fillMaxWidth(0.35f),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        Button(onClick = {}) {
-            Text("Ok")
-        }
-    }
-}
+//@Composable
+//fun ExitButtons() {
+//    Row(
+//        modifier = Modifier.fillMaxWidth(0.35f),
+//        verticalAlignment = Alignment.CenterVertically,
+//        horizontalArrangement = Arrangement.SpaceAround
+//    ) {
+//        Button(onClick = {}) {
+//            Text("Ok")
+//        }
+//    }
+//}
 
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
