@@ -27,6 +27,7 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.data.Resource
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
+import com.mobilne.civ2077.navigation.ROUTE_NATIONS
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
 import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
@@ -179,7 +180,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 }
                 is Resource.Success -> {
                     LaunchedEffect(Unit) {
-                        navController.navigate(ROUTE_HOME) {
+                        navController.navigate(ROUTE_NATIONS) {
                             popUpTo(ROUTE_SIGNUP) { inclusive = true }
                         }
                     }
