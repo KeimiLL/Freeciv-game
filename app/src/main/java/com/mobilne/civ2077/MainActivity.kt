@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.mobilne.civ2077.navigation.AppNavHost
 import com.mobilne.civ2077.ui.auth.AuthViewModel
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,13 +16,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val authViewModel by viewModels<AuthViewModel>()
+    private val boardViewModel by viewModels<BoardViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             AppTheme {
-                AppNavHost(viewModel = authViewModel)
+                AppNavHost(authViewModel = authViewModel, boardViewModel = boardViewModel)
             }
         }
 

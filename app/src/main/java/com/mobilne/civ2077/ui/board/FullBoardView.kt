@@ -15,12 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobilne.civ2077.ui.sendArmyDialog.SendArmyDialog
 import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 
 @Composable
 fun FullBoardView(
-    viewModel: BoardViewModel = hiltViewModel()
+    viewModel: BoardViewModel
 ) {
     Box(
         modifier = Modifier
@@ -41,8 +40,10 @@ fun FullBoardView(
                     .padding(5.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                // Firebase DB test:
-                ButtonItem(viewModel.game.value.waiting.toString())
+                // Firebase DB testing:
+//                ButtonItem(viewModel.gameState.value.waiting.toString())
+//                ButtonItem(viewModel.currentTurnUid.value)
+                ButtonItem(viewModel.players.value.uid1.toString())
                 ButtonItem("Wyjście")
                 ButtonItem("Złoto")
                 ButtonXYItem("Zdj bazy", 55, 60)
@@ -148,5 +149,5 @@ fun ButtonXYItem(
 @Preview
 @Composable
 fun PreviewFullBoardView() {
-    FullBoardView()
+    FullBoardView(hiltViewModel())
 }

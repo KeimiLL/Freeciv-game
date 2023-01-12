@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.auth.LoginScreen
 import com.mobilne.civ2077.ui.auth.SignupScreen
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.ui.board.FullBoardView
 import com.mobilne.civ2077.ui.home.HomeScreen
 import com.mobilne.civ2077.ui.nation_choice.NationChoice
@@ -16,7 +17,8 @@ import com.mobilne.civ2077.ui.nation_choice.NationChoiceViewModel
 
 @Composable
 fun AppNavHost(
-    viewModel: AuthViewModel,
+    authViewModel: AuthViewModel,
+    boardViewModel: BoardViewModel,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = ROUTE_LOGIN
@@ -27,16 +29,16 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(ROUTE_LOGIN) {
-            LoginScreen(viewModel, navController)
+            LoginScreen(authViewModel, boardViewModel, navController)
         }
         composable(ROUTE_SIGNUP) {
-            SignupScreen(viewModel, navController)
+            SignupScreen(authViewModel, navController)
         }
         composable(ROUTE_HOME) {
-            HomeScreen(viewModel, navController)
+            HomeScreen(authViewModel, navController)
         }
         composable(ROUTE_BOARD) {
-            FullBoardView()
+            FullBoardView(boardViewModel)
         }
         composable(ROUTE_NATIONS) {
             NationChoice(viewModel = NationChoiceViewModel())
