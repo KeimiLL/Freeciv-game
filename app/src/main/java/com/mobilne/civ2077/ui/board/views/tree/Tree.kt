@@ -11,18 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.mobilne.civ2077.ui.board.views.army.Army
 
 @Composable
 fun Tree(viewModel: TreeViewModel) {
+    viewModel.changeButtonsState()
     Box(
         modifier = Modifier
-            .background(Color(0xFFfdebea))
+            .background(Color(0xFFffffff))
             .fillMaxSize()
     ) {
         Column(
@@ -111,6 +109,7 @@ fun EconomyItem(
             .width(80.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
+        enabled = viewModel.economyPerksButtonsState[id - 1],
         onClick = { viewModel.changeForEconomyPerk() },
     ) {
         Text(
@@ -133,6 +132,7 @@ fun ArmyItem(
             .width(80.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
+        enabled = viewModel.armyPerksButtonsState[id - 1],
         onClick = { viewModel.changeForArmyPerk() },
     ) {
         Text(
@@ -169,8 +169,11 @@ fun InfoBar(
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff507d00)),
             shape = RectangleShape,
             contentPadding = PaddingValues(16.dp),
-
-            onClick = { viewModel.buy() },
+            enabled = viewModel.buyButtonState,
+            onClick = {
+                viewModel.buy()
+                viewModel.changeButtonsState()
+            },
         ) {
             Text(
                 text = "Buy for " + viewModel.goldToPay,
