@@ -34,17 +34,17 @@ fun Tree(viewModel: TreeViewModel) {
 
             Column(
                 modifier = Modifier
-                    .weight(1f),
+                    .weight(2.5f),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(5.dp),
+                        .padding(0.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        modifier = Modifier.padding(vertical = 5.dp),
+                        modifier = Modifier.padding(vertical = 0.dp),
                         text = "Economy",
                         color = Color.Blue,
                         style = MaterialTheme.typography.h4,
@@ -64,16 +64,16 @@ fun Tree(viewModel: TreeViewModel) {
             }
             Column(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(2.5f)
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(5.dp),
+                        .padding(0.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        modifier = Modifier.padding(vertical = 5.dp),
+                        modifier = Modifier.padding(vertical = 0.dp),
                         text = "Army",
                         color = Color.Red,
                         style = MaterialTheme.typography.h4,
