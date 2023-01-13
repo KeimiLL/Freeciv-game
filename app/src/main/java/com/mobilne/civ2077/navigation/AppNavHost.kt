@@ -38,10 +38,10 @@ fun AppNavHost(
             HomeScreen(authViewModel, navController)
         }
         composable(ROUTE_BOARD) {
-            FullBoardView(viewModel, navController)
+            FullBoardView(authViewModel, navController)
         }
         composable(ROUTE_NATIONS) {
-            NationChoice(viewModel, navController, NationChoiceViewModel())
+            NationChoice(authViewModel, navController, NationChoiceViewModel())
         }
     }
 }

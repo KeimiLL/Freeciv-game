@@ -27,7 +27,6 @@ import com.mobilne.civ2077.ui.board.views.tree.Tree
 import com.mobilne.civ2077.ui.board.views.tree.TreeViewModel
 import com.mobilne.civ2077.ui.board.views.turn.Turn
 import com.mobilne.civ2077.ui.board.views.turn.TurnViewModel
-import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 
 @Composable
 fun FullBoardView(
