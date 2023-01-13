@@ -20,10 +20,11 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun BuyGold(viewModel: BuyGoldViewModel){
-    Box(modifier = Modifier
-        .background(Color(0xFFffffff))
-        .fillMaxSize()
+fun BuyGold(viewModel: BuyGoldViewModel) {
+    Box(
+        modifier = Modifier
+            .background(Color(0xFFffffff))
+            .fillMaxSize()
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -46,8 +47,10 @@ fun BuyGold(viewModel: BuyGoldViewModel){
                 color = MaterialTheme.colorScheme.onSurface,
             )
 
-            Row(horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 RadioButtonSample()
 //                ExitButtons()
             }
@@ -59,9 +62,13 @@ fun BuyGold(viewModel: BuyGoldViewModel){
 @Composable
 fun RadioButtonSample() {
     val radioOptions = listOf("PayPal", "Bank transfer", "Credit card")
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1] ) }
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1]) }
     Column {
-        Text(text = "Select a payment method:", Modifier.padding(horizontal = 10.dp, vertical = 5.dp), style = MaterialTheme.typography.bodyMedium)
+        Text(
+            text = "Select a payment method:",
+            Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
         radioOptions.forEach { text ->
             Row(
                 Modifier
@@ -89,7 +96,7 @@ fun RadioButtonSample() {
 }
 
 @Composable
-fun BuyGoldHeader(){
+fun BuyGoldHeader() {
     Text(
         modifier = Modifier.padding(vertical = 10.dp),
         text = "Buy Gold",
@@ -102,16 +109,19 @@ fun BuyGoldHeader(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun  BuyGold(
+fun BuyGold(
     modifier: Modifier = Modifier,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     value: String,
     onValueChanged: (String) -> Unit,
 ) {
     Row(
-        modifier.fillMaxWidth(0.9f).padding(vertical = 10.dp),
+        modifier
+            .fillMaxWidth(0.9f)
+            .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround) {
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
         Image(
             painter = painterResource(id = R.drawable.gold),
             contentDescription = "Gold"
@@ -133,19 +143,18 @@ fun  BuyGold(
 }
 
 
-
 @Composable
 fun ExitButtons() {
-    Row(modifier = Modifier.fillMaxWidth(0.7f),
+    Row(
+        modifier = Modifier.fillMaxWidth(0.7f),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround){
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
         Button(onClick = {}) {
             Text("Cancel")
         }
     }
 }
-
-
 
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
