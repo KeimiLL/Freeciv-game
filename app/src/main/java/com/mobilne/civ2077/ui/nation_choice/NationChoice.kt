@@ -10,21 +10,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
-import com.mobilne.civ2077.ui.auth.AuthViewModel
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.util.constants.Nations
 
 @Composable
 fun NationChoice(
-    authViewModel: AuthViewModel?,
+    nationChoiceViewModel: NationChoiceViewModel,
+    boardViewModel: BoardViewModel,
     navController: NavHostController,
-    viewModel: NationChoiceViewModel
 ) {
     Column(
         verticalArrangement = Arrangement.Top,
@@ -36,8 +34,8 @@ fun NationChoice(
                 style = MaterialTheme.typography.h3,
             )
             Image(
-                painter = painterResource(id = viewModel.drawableId),
-                contentDescription = "${viewModel.currentNation} flag",
+                painter = painterResource(id = nationChoiceViewModel.drawableId),
+                contentDescription = "${nationChoiceViewModel.currentNation} flag",
                 modifier = Modifier
                     .height(70.dp)
                     .padding(
@@ -60,26 +58,26 @@ fun NationChoice(
             NationCard(
                 nation = Nations.FRANCE,
                 drawableId = R.drawable.france,
-                perk = viewModel.francePerk,
-                viewModel = viewModel
+                perk = nationChoiceViewModel.francePerk,
+                viewModel = nationChoiceViewModel
             )
             NationCard(
                 nation = Nations.SPAIN,
                 drawableId = R.drawable.spain,
-                perk = viewModel.spainPerk,
-                viewModel = viewModel
+                perk = nationChoiceViewModel.spainPerk,
+                viewModel = nationChoiceViewModel
             )
             NationCard(
                 nation = Nations.UNITED_KINGDOM,
                 drawableId = R.drawable.uk,
-                perk = viewModel.ukPerk,
-                viewModel = viewModel
+                perk = nationChoiceViewModel.ukPerk,
+                viewModel = nationChoiceViewModel
             )
             NationCard(
                 nation = Nations.UNITED_STATES,
                 drawableId = R.drawable.usa,
-                perk = viewModel.usaPerk,
-                viewModel = viewModel
+                perk = nationChoiceViewModel.usaPerk,
+                viewModel = nationChoiceViewModel
             )
         }
         Row {
@@ -88,10 +86,11 @@ fun NationChoice(
                     .fillMaxWidth(0.2f)
                     .padding(8.dp),
                 onClick = {
-                    viewModel.saveToFB()
+                    nationChoiceViewModel.saveToFB()
                     navController.navigate(ROUTE_BOARD) {
                         popUpTo(ROUTE_LOGIN) { inclusive = true }
-                    } },
+                    }
+                },
 
                 ) {
                 Text(
@@ -104,10 +103,4 @@ fun NationChoice(
         }
 
     }
-}
-
-@Preview
-@Composable
-fun PreviewNationChoice() {
-    NationChoice(null, rememberNavController(), NationChoiceViewModel())
 }
