@@ -12,11 +12,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
+import com.mobilne.civ2077.navigation.ROUTE_BOARD
+import com.mobilne.civ2077.navigation.ROUTE_LOGIN
+import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.util.constants.Nations
 
 @Composable
-fun NationChoice(viewModel: NationChoiceViewModel) {
+fun NationChoice(
+    authViewModel: AuthViewModel?,
+    navController: NavHostController,
+    viewModel: NationChoiceViewModel
+) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,7 +87,11 @@ fun NationChoice(viewModel: NationChoiceViewModel) {
                 modifier = Modifier
                     .fillMaxWidth(0.2f)
                     .padding(8.dp),
-                onClick = { viewModel.saveToFB() },
+                onClick = {
+                    viewModel.saveToFB()
+                    navController.navigate(ROUTE_BOARD) {
+                        popUpTo(ROUTE_LOGIN) { inclusive = true }
+                    } },
 
                 ) {
                 Text(
@@ -96,5 +109,5 @@ fun NationChoice(viewModel: NationChoiceViewModel) {
 @Preview
 @Composable
 fun PreviewNationChoice() {
-    NationChoice(viewModel = NationChoiceViewModel())
+    NationChoice(null, rememberNavController(), NationChoiceViewModel())
 }

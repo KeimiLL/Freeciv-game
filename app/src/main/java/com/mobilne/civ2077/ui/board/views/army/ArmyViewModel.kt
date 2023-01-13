@@ -1,11 +1,11 @@
-package com.mobilne.civ2077.ui.sendArmyDialog
+package com.mobilne.civ2077.ui.board.views.army
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class SendArmyDialogViewModel : ViewModel() {
+class ArmyViewModel : ViewModel() {
 //    Todo
 //     przekazanie aktualnych koordynatów i ustalenie limitu chodzenia,
 //     przekazanie wartości z bazy ile golda ma osoba żeby wyliczyć ile moze jednostek kupić,

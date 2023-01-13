@@ -1,4 +1,4 @@
-package com.mobilne.civ2077.ui.buyGoldDialog
+package com.mobilne.civ2077.ui.board.views.buyGold
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -20,7 +20,7 @@ import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
-fun BuyGoldDialog(viewModel: BuyGoldDialogViewModel){
+fun BuyGold(viewModel: BuyGoldViewModel){
     Box(modifier = Modifier
         .background(Color(0xFFffffff))
         .fillMaxSize()
@@ -49,7 +49,7 @@ fun BuyGoldDialog(viewModel: BuyGoldDialogViewModel){
             Row(horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically) {
                 RadioButtonSample()
-                ExitButtons()
+//                ExitButtons()
             }
 
         }
@@ -61,7 +61,7 @@ fun RadioButtonSample() {
     val radioOptions = listOf("PayPal", "Bank transfer", "Credit card")
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1] ) }
     Column {
-        Text(text = "Select a payment method:", Modifier.padding(horizontal = 10.dp), style = MaterialTheme.typography.bodyMedium)
+        Text(text = "Select a payment method:", Modifier.padding(horizontal = 10.dp, vertical = 5.dp), style = MaterialTheme.typography.bodyMedium)
         radioOptions.forEach { text ->
             Row(
                 Modifier
@@ -91,6 +91,7 @@ fun RadioButtonSample() {
 @Composable
 fun BuyGoldHeader(){
     Text(
+        modifier = Modifier.padding(vertical = 10.dp),
         text = "Buy Gold",
         style = MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,
@@ -107,7 +108,8 @@ fun  BuyGold(
     value: String,
     onValueChanged: (String) -> Unit,
 ) {
-    Row(modifier.fillMaxWidth(0.9f),
+    Row(
+        modifier.fillMaxWidth(0.9f).padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround) {
         Image(
@@ -150,6 +152,6 @@ fun ExitButtons() {
 @Composable
 fun BuyGoldDialogPreview() {
     AppTheme {
-        BuyGoldDialog(viewModel = BuyGoldDialogViewModel())
+        BuyGold(viewModel = BuyGoldViewModel())
     }
 }
