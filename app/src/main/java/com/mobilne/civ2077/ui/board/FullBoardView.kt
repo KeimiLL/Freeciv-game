@@ -27,13 +27,13 @@ import com.mobilne.civ2077.ui.board.views.tree.Tree
 import com.mobilne.civ2077.ui.board.views.tree.TreeViewModel
 import com.mobilne.civ2077.ui.board.views.turn.Turn
 import com.mobilne.civ2077.ui.board.views.turn.TurnViewModel
+import com.mobilne.civ2077.ui.buyGoldDialog.BuyGoldDialogViewModel
 
 @Composable
 fun FullBoardView(
     authViewModel: AuthViewModel?,
     navController: NavHostController,
-    viewModel: BoardViewModel = hiltViewModel(),
-) {
+    viewModel: BoardViewModel = hiltViewModel()) {
     Box(
         modifier = Modifier
             .background(Color(0xFFc5ddf6))
@@ -81,6 +81,13 @@ fun FullBoardView(
 
                 ButtonItem("Gold", viewModel)
                 ButtonXYItem("Map", 10, 10, viewModel)
+                // Firebase DB testing:
+//                ButtonItem(viewModel.gameState.value.waiting.toString())
+//                ButtonItem(viewModel.currentTurnUid.value)
+//                ButtonItem(viewModel.players.value.uid1.toString())
+//                ButtonItem("Wyjście")
+//                ButtonItem("Złoto")
+//                ButtonXYItem("Zdj bazy", 55, 60)
             }
 
             Column(
