@@ -194,7 +194,7 @@ class BoardViewModel @Inject constructor(
 
         coroutineScope {
             gameRepository.addPlayerToTheGame(playersToSave)
-            delay(500L)
+            delay(800L)
             setPlayerIndex()
         }
     }
