@@ -33,7 +33,7 @@ fun Turn(viewModel: TurnViewModel) {
         Divider()
 
         Button(
-            modifier = Modifier.padding(vertical = 50.dp)
+            modifier = Modifier.padding(vertical = 20.dp)
                 .height(50.dp)
                 .width(200.dp),
             shape = RectangleShape,
@@ -77,21 +77,21 @@ fun PlayersState(
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "user1: " + viewModel.user1State, //Todo nazwa gracza
-            style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
+            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "user2: " + viewModel.user2State, //Todo nazwa gracza
-            style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
+            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "user3: " + viewModel.user3State, //Todo nazwa gracza
-            style = androidx.compose.material3.MaterialTheme.typography.headlineSmall,
+            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
         )
