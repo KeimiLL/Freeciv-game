@@ -1,7 +1,5 @@
 package com.mobilne.civ2077.ui.auth
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -17,25 +15,24 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.data.Resource
 import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
+import com.mobilne.civ2077.navigation.ROUTE_NATIONS
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
 import com.mobilne.civ2077.ui.board.BoardViewModel
-import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     viewModel: AuthViewModel?,
-    boardViewModel: BoardViewModel?,
+    boardViewModel: BoardViewModel,
     navController: NavController
 ) {
     var email by remember { mutableStateOf("") }
@@ -154,34 +151,28 @@ fun LoginScreen(
                     })
                 }
                 is Resource.Success -> {
+                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    })
                     LaunchedEffect(Unit) {
-                        // ROUTE_BOARD used to test the DB
-                        // TODO: add conditional navigation based on game state
-                        if (boardViewModel?.isUserAddedToTheGame() == false) {
-                            boardViewModel.addUserToTheGame()
-                        }
-                        navController.navigate(ROUTE_BOARD) {
-                            popUpTo(ROUTE_LOGIN) { inclusive = true }
+                        delay(1000L)
+                        boardViewModel.checkAddingPlayer()
+
+                        if (boardViewModel.didPlayerMakeNationChoice()) {
+                            navController.navigate(ROUTE_BOARD) {
+                                popUpTo(ROUTE_LOGIN) { inclusive = true }
+                            }
+                        } else {
+                            navController.navigate(ROUTE_NATIONS) {
+                                popUpTo(ROUTE_LOGIN) { inclusive = true }
+                            }
                         }
                     }
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
-@Composable
-fun LoginScreenPreviewLight() {
-    AppTheme {
-        LoginScreen(null, null, rememberNavController())
-    }
-}
-
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun LoginScreenPreviewDark() {
-    AppTheme {
-        LoginScreen(null, null, rememberNavController())
     }
 }

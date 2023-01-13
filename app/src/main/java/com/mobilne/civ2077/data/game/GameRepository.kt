@@ -37,4 +37,28 @@ interface GameRepository {
      */
     fun getPlayersRealtime(): Flow<Resource<Players>>
     fun addPlayerToTheGame(players: Players)
+
+    /**
+     * Default:
+     *
+     * player<:index>: {
+     *  armyPosition: {
+     *   x: 0,
+     *   y: 0
+     *  },
+     *  armySize: 0,
+     *  basePosition: {
+     *   x: 0,
+     *   y: 0
+     *  },
+     *  dev: {
+     *   left: 0,
+     *   right: 0
+     *  },
+     *  gold: 1000,
+     *  nation: ""
+     * }
+     */
+    fun getPlayerWithIndexRealTime(index: Int): Flow<Resource<Player>>
+    fun savePlayerNationChoice(index: Int, nation: String)
 }

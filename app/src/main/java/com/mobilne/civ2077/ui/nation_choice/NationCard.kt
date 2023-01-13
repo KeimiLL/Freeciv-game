@@ -1,6 +1,7 @@
 package com.mobilne.civ2077.ui.nation_choice
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -8,26 +9,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mobilne.civ2077.R
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.util.constants.Nations
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun NationCard(nation: Nations, drawableId: Int, perk: String, viewModel: NationChoiceViewModel) {
+fun NationCard(
+    nation: Nations,
+    drawableId: Int,
+    perk: String,
+    nationChoiceViewModel: NationChoiceViewModel,
+    boardViewModel: BoardViewModel,
+) {
     Card(
         modifier = Modifier
             .height(230.dp)
             .width(IntrinsicSize.Min)
             .padding(5.dp),
         elevation = 8.dp,
-        onClick = { viewModel.onNationChange(nation.nationName, drawableId) }
+        onClick = {
+            nationChoiceViewModel.onNationChange(nation.nationName, drawableId)
+            boardViewModel.onNationChange(nation.nationName)
+        }
     ) {
         Column(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.width(140.dp)
+            modifier = Modifier
+                .border(2.dp, nationChoiceViewModel.getBorderForNationCard(nation))
+                .width(140.dp)
         ) {
             Image(
                 painter = painterResource(id = drawableId),
@@ -54,15 +65,4 @@ fun NationCard(nation: Nations, drawableId: Int, perk: String, viewModel: Nation
         }
 
     }
-}
-
-@Preview
-@Composable
-fun PreviewNationCard() {
-    NationCard(
-        Nations.SPAIN,
-        R.drawable.spain,
-        "Your army has five extra steps each turn",
-        viewModel = NationChoiceViewModel()
-    )
 }

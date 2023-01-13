@@ -30,9 +30,9 @@ import com.mobilne.civ2077.ui.board.views.turn.TurnViewModel
 
 @Composable
 fun FullBoardView(
-    authViewModel: AuthViewModel?,
-    navController: NavHostController,
-    viewModel: BoardViewModel = hiltViewModel()) {
+    authViewModel: AuthViewModel,
+    boardViewModel: BoardViewModel,
+    navController: NavHostController) {
     Box(
         modifier = Modifier
             .background(Color(0xFFc5ddf6))
@@ -57,7 +57,7 @@ fun FullBoardView(
                 //Logout
                 Button(
                     onClick = {
-                        authViewModel?.logout()
+                        authViewModel.logout()
                         navController.navigate(ROUTE_LOGIN) {
                             popUpTo(ROUTE_HOME) {
                                 inclusive = true
@@ -78,12 +78,12 @@ fun FullBoardView(
                 )
             }
 
-                ButtonItem("Gold", viewModel)
-                ButtonXYItem("Map", 10, 10, viewModel)
+                ButtonItem("Gold", boardViewModel)
+                ButtonXYItem("Map", 10, 10, boardViewModel)
                 // Firebase DB testing:
 //                ButtonItem(viewModel.gameState.value.waiting.toString())
 //                ButtonItem(viewModel.currentTurnUid.value)
-//                ButtonItem(viewModel.players.value.uid1.toString())
+//                ButtonItem(boardViewModel.currentPlayerIndex.value.toString())
 //                ButtonItem("Wyjście")
 //                ButtonItem("Złoto")
 //                ButtonXYItem("Zdj bazy", 55, 60)
@@ -98,7 +98,7 @@ fun FullBoardView(
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-                when (viewModel.currentView) {
+                when (boardViewModel.currentView) {
                     "Army" -> {
                         Army(viewModel = ArmyViewModel())
                     }
@@ -124,9 +124,9 @@ fun FullBoardView(
                     .padding(5.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                ButtonItem("Turn", viewModel)
-                ButtonItem("Tech Tree", viewModel)
-                ButtonXYItem("Army", 10, 10, viewModel)
+                ButtonItem("Turn", boardViewModel)
+                ButtonItem("Tech Tree", boardViewModel)
+                ButtonXYItem("Army", 10, 10, boardViewModel)
             }
         }
     }
@@ -136,7 +136,7 @@ fun FullBoardView(
 @Composable
 fun ButtonItem(
     txt: String = "Nazwa-przycisku",
-    viewModel: BoardViewModel,
+    boardViewModel: BoardViewModel,
 ) {
     Button(
         modifier = Modifier
@@ -144,7 +144,7 @@ fun ButtonItem(
             .width(120.dp),
         shape = RectangleShape,
         contentPadding = PaddingValues(16.dp),
-        onClick = { viewModel.changeView(txt) },
+        onClick = { boardViewModel.changeView(txt) },
     ) {
         Text(
             text = txt,
@@ -160,7 +160,7 @@ fun ButtonXYItem(
     txt: String = "btnXY",
     x: Int = 0,
     y: Int = 0,
-    viewModel: BoardViewModel
+    boardViewModel: BoardViewModel
 ) {
     Column(
         modifier = Modifier,
@@ -173,7 +173,7 @@ fun ButtonXYItem(
                     .width(120.dp),
                 shape = RectangleShape,
                 contentPadding = PaddingValues(16.dp),
-                onClick = { viewModel.changeView(txt) },
+                onClick = { boardViewModel.changeView(txt) },
             ) {
                 Text(
                     text = txt,
@@ -204,5 +204,5 @@ fun ButtonXYItem(
 @Preview
 @Composable
 fun PreviewFullBoardView() {
-    FullBoardView(null, rememberNavController())
+    FullBoardView(hiltViewModel(), hiltViewModel(), rememberNavController())
 }
