@@ -3,6 +3,7 @@ package com.mobilne.civ2077.ui.board.views.tree
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import com.mobilne.civ2077.data.game.Dev
 import com.mobilne.civ2077.data.game.GameRepository
@@ -54,7 +55,6 @@ class TreeViewModel(val player: Player, val id: Int, private var gameRepository:
             if (currentPerk == _armyPerkDescription) {
                 _armyPerks++
                 changeEconomyButtonsState()
-                save(player)
             } else if (currentPerk == _economyPerkDescription) {
                 _economyPerks++
                 changeArmyButtonsState()
@@ -111,8 +111,10 @@ class TreeViewModel(val player: Player, val id: Int, private var gameRepository:
     fun initState() {
         _economyPerks = player.dev.left
         _armyPerks = player.dev.right
-        if (player.nation == "UK") {
-            goldToPay = 90
+        goldToPay = if (player.nation == "UK") {
+            90
+        } else {
+            100
         }
         changeGoldToPay()
         changeEconomyButtonsState()
