@@ -58,7 +58,7 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
                 _economyPerks++
                 changeArmyButtonsState()
             }
-            save(Player(armyPosition = player.armyPosition, armySize = player.armySize,
+            save(Player(armyPosition = player.armyPosition, armyPositionChanged = player.armyPositionChanged, armySize = player.armySize,
                 basePosition = player.basePosition, dev = Dev(left = _economyPerks, right = _armyPerks),
                 gold = player.gold - goldToPay ,nation = player.nation))
             currentPerk = ""

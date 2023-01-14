@@ -133,6 +133,11 @@ class GameRepositoryImpl @Inject constructor(
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
+        databaseRef.child("player$index").child("armyPositionChanged").setValue(player.armyPositionChanged).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
         databaseRef.child("player$index").child("armySize").setValue(player.armySize).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {

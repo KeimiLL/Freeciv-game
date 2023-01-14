@@ -6,19 +6,18 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.mobilne.civ2077.data.game.Player
 
-class ArmyViewModel(player: Player) : ViewModel() {
+class ArmyViewModel(var player: Player) : ViewModel() {
 //    Todo
 //     przekazanie aktualnych koordynatów i ustalenie limitu chodzenia,
 //     przekazanie wartości z bazy ile golda ma osoba żeby wyliczyć ile moze jednostek kupić,
 //     zapisywanie do bazy kupionych jednostek,
 //     zapisywanie nowych koordynatów wojska do bazy
 
-    var player = player
-
     //variables
     private val maxUnits = 1000
     private val maxCoordinate = 10
     private val goldPerUnit = 10
+    private val maxRange = 1
 
     //state
     var destinationX by mutableStateOf("")
