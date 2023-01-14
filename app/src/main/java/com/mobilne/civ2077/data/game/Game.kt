@@ -44,3 +44,11 @@ data class Dev(
     val left: Int = 0,
     val right: Int = 0,
 )
+
+@IgnoreExtraProperties
+data class Turn(
+    val number: Int = 0,
+    val player1: Boolean = false,
+    val player2: Boolean = false,
+    val player3: Boolean = false,
+)

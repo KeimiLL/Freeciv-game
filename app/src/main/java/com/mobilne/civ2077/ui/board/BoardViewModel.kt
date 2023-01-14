@@ -11,10 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilne.civ2077.data.Resource
 import com.mobilne.civ2077.data.auth.AuthRepository
-import com.mobilne.civ2077.data.game.GameRepository
-import com.mobilne.civ2077.data.game.GameState
-import com.mobilne.civ2077.data.game.Player
-import com.mobilne.civ2077.data.game.Players
+import com.mobilne.civ2077.data.game.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -33,6 +30,9 @@ class BoardViewModel @Inject constructor(
 
     private var _currentTurnUid = mutableStateOf("")
     val currentTurnUid: State<String> = _currentTurnUid
+
+    private var _turn = mutableStateOf(Turn())
+    val turn: State<Turn> = _turn
 
     private var _players = mutableStateOf(Players())
     val players: State<Players> = _players
@@ -60,6 +60,7 @@ class BoardViewModel @Inject constructor(
         initPlayer(1, _player1)
         initPlayer(2, _player2)
         initPlayer(3, _player3)
+        initTurn()
     }
 
     private fun initGameState() {
@@ -126,7 +127,7 @@ class BoardViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun changeView(newView: String){
+    fun changeView(newView: String) {
         currentView = newView
     }
 
@@ -199,6 +200,23 @@ class BoardViewModel @Inject constructor(
         }
     }
 
+    private fun initTurn() {
+        gameRepository.getTurnStatus().onEach { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    _turn.value = resource.result
+                }
+                is Resource.Failure -> {
+                    Log.d(TAG, "failure")
+                }
+                is Resource.Loading -> {
+                    Log.d(TAG, "loading")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+
     fun getPlayerByIndex(index: Int): Player {
         return when (index) {
             1 -> player1.value
@@ -223,4 +241,6 @@ class BoardViewModel @Inject constructor(
     fun onNationChange(nation: String) {
         currentNationChoice = nation
     }
+
+
 }

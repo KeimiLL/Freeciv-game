@@ -64,4 +64,7 @@ interface GameRepository {
     fun savePlayerNationChoice(index: Int, nation: String)
 
     fun savePlayer(index: Int, player: Player)
+    fun getTurnStatus(): Flow<Resource<Turn>>
+
+    fun savePlayerEndOfTurn(index: Int)
 }

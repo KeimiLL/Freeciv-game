@@ -33,6 +33,8 @@ fun Turn(viewModel: TurnViewModel) {
         verticalArrangement = Arrangement.Center
     ) {
 
+        viewModel.usersState()
+
         TurnHeader()
 
         PlayersState(viewModel)
@@ -94,21 +96,21 @@ fun PlayersState(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
-            text = "user1: " + viewModel.user1State, //Todo nazwa gracza
+            text = viewModel.user1 + viewModel.user1State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
-            text = "user2: " + viewModel.user2State, //Todo nazwa gracza
+            text = viewModel.user2  + viewModel.user2State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
-            text = "user3: " + viewModel.user3State, //Todo nazwa gracza
+            text = viewModel.user3 + viewModel.user3State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
@@ -120,10 +122,10 @@ fun PlayersState(
 
 
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Composable
-fun TurnPreview() {
-    AppTheme {
-        Turn(viewModel = TurnViewModel())
-    }
-}
+//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+//@Composable
+//fun TurnPreview() {
+//    AppTheme {
+//        Turn(viewModel = TurnViewModel())
+//    }
+//}

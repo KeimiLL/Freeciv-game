@@ -8,6 +8,7 @@ import com.mobilne.civ2077.data.game.ArmyPosition
 import com.mobilne.civ2077.data.game.GameRepository
 import com.mobilne.civ2077.data.game.Player
 
+
 class ArmyViewModel(val player: Player, val id: Int, private var gameRepository: GameRepository) :
     ViewModel() {
 //    Todo

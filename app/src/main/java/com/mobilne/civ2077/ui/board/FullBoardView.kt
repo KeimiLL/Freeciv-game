@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.ui.board.views.buyGold.BuyGold
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.navigation.ROUTE_HOME
@@ -129,7 +130,11 @@ fun FullBoardView(
                 else if (boardViewModel.currentView.contains("Gold"))
                     BuyGold(viewModel = BuyGoldViewModel())
                 else if (boardViewModel.currentView.contains("Turn"))
-                    Turn(viewModel = TurnViewModel())
+                    Turn(viewModel = TurnViewModel(
+                        id = boardViewModel.currentPlayerIndex.value,
+                        gameRepository = boardViewModel.gameRepository,
+                        turn= boardViewModel.turn.value
+                    ))
                 else
                     Map()
             }
@@ -141,7 +146,7 @@ fun FullBoardView(
                     .padding(5.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                ButtonItem("Turn", boardViewModel)
+                ButtonItem("Turn: ${boardViewModel.turn.value.number}", boardViewModel)
                 ButtonItem("Tech Tree", boardViewModel)
                 ButtonXYItem(
                     "Army",

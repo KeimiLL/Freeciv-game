@@ -174,4 +174,32 @@ class GameRepositoryImpl @Inject constructor(
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
     }
+
+
+    override fun getTurnStatus(): Flow<Resource<Turn>> = callbackFlow {
+        database.getReference("turn").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val turn = dataSnapshot.getValue<Turn>()!!
+                trySend(Resource.Success(turn)).isSuccess
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("game", "Failed to read value.")
+                trySend(Resource.Failure(Exception(error.message))).isFailure
+            }
+        })
+
+        awaitClose {
+            close()
+        }
+    }
+
+    override fun savePlayerEndOfTurn(index: Int) {
+        databaseRef.child("turn").child("player$index").setValue(true).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+    }
+
 }
