@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NationChoiceViewModel @Inject constructor() : ViewModel() {
     // perks
-    val francePerk: String = "Your army has five extra steps each turn"
+    val francePerk: String = "Your army has 2 extra steps each turn"
     val spainPerk: String = "Each turn gain additional 100 gold"
     val ukPerk: String = "Each perk costs 10% less"
     val usaPerk: String = "Your army deal 10% more damage"
