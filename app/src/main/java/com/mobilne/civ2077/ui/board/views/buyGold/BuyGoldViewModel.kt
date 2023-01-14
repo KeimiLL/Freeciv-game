@@ -17,18 +17,22 @@ class BuyGoldViewModel : ViewModel() {
 
     // events
     fun onTextChanged(newString: String) {
-        if (newString.isNotEmpty()) {
-            val result = newString.filter { it.isDigit() }
-            if (result.toInt() < maxGold) {
-                goldToBuy = result
-                euroToPay = (goldToBuy.toInt() * rate).toString()
+        try {
+            if (newString.isNotEmpty()) {
+                val result = newString.filter { it.isDigit() }
+                if (result.toInt() < maxGold) {
+                    goldToBuy = result
+                    euroToPay = (goldToBuy.toInt() * rate).toString()
+                } else {
+                    goldToBuy = maxGold.toString()
+                    euroToPay = (maxGold * 2).toString()
+                }
             } else {
-                goldToBuy = maxGold.toString()
-                euroToPay = (maxGold * 2).toString()
+                goldToBuy = ""
+                euroToPay = "0"
             }
-        } else {
-            goldToBuy = ""
-            euroToPay = "0"
+        } catch (e: Exception) {
+            println(e)
         }
 
     }
