@@ -53,8 +53,6 @@ class BoardViewModel @Inject constructor(
 
     var currentView by mutableStateOf("Map")
 
-
-
     init {
         initGameState()
         initCurrentTurnUid()

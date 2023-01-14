@@ -8,7 +8,8 @@ import com.mobilne.civ2077.data.game.Dev
 import com.mobilne.civ2077.data.game.GameRepository
 import com.mobilne.civ2077.data.game.Player
 
-class TreeViewModel(var player: Player, val id: Int, private var gameRepository: GameRepository) : ViewModel() {
+class TreeViewModel(val player: Player, val id: Int, private var gameRepository: GameRepository) :
+    ViewModel() {
 
     /*Todo czytanie z bazy, które perki są kupione i na tej podsatwie wyłączać przyciski kupione
     *  i te niemożliwe od kupienia i zostawić tylko te do kupienia
@@ -58,9 +59,17 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
                 _economyPerks++
                 changeArmyButtonsState()
             }
-            save(Player(armyPosition = player.armyPosition, armyPositionChanged = player.armyPositionChanged, armySize = player.armySize,
-                basePosition = player.basePosition, dev = Dev(left = _economyPerks, right = _armyPerks),
-                gold = player.gold - goldToPay ,nation = player.nation))
+            save(
+                Player(
+                    armyPosition = player.armyPosition,
+                    armyPositionChanged = player.armyPositionChanged,
+                    armySize = player.armySize,
+                    basePosition = player.basePosition,
+                    dev = Dev(left = _economyPerks, right = _armyPerks),
+                    gold = player.gold - goldToPay,
+                    nation = player.nation
+                )
+            )
             currentPerk = ""
             buyButtonState = false
             checkDevelopmentState()
@@ -69,7 +78,7 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
         //Todo zapis do bazy nowych perków
     }
 
-    fun changeEconomyButtonsState() {
+    private fun changeEconomyButtonsState() {
         economyPerksButtonsState = arrayOf(false, false, false, false)
         for (i in 0..3) {
             if (_economyPerks == i) {
@@ -78,7 +87,7 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
         }
     }
 
-    fun changeArmyButtonsState() {
+    private fun changeArmyButtonsState() {
         armyPerksButtonsState = arrayOf(false, false, false, false)
         for (i in 0..3) {
             if (_armyPerks == i) {
@@ -87,7 +96,7 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
         }
     }
 
-    fun checkDevelopmentState() {
+    private fun checkDevelopmentState() {
         if (_economyPerks == 4 && _armyPerks == 4) {
             buyButtonState = false
             goldToPay = 0
@@ -95,14 +104,14 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
         }
     }
 
-    fun changeGoldToPay() {
+    private fun changeGoldToPay() {
         goldToPay -= 10 * player.dev.left
     }
 
-    fun initState(){
+    fun initState() {
         _economyPerks = player.dev.left
         _armyPerks = player.dev.right
-        if (player.nation == "UK"){
+        if (player.nation == "UK") {
             goldToPay = 90
         }
         changeGoldToPay()
@@ -111,7 +120,7 @@ class TreeViewModel(var player: Player, val id: Int, private var gameRepository:
         checkDevelopmentState()
     }
 
-    fun save(player: Player){
+    private fun save(player: Player) {
         gameRepository.savePlayer(id, player)
     }
 }

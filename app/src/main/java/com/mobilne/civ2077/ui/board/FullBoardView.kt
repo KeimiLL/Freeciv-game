@@ -34,7 +34,8 @@ import com.mobilne.civ2077.ui.board.views.turn.TurnViewModel
 fun FullBoardView(
     authViewModel: AuthViewModel,
     boardViewModel: BoardViewModel,
-    navController: NavHostController) {
+    navController: NavHostController
+) {
     Box(
         modifier = Modifier
             .background(Color(0xFFc5ddf6))
@@ -72,16 +73,24 @@ fun FullBoardView(
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
                     contentPadding = PaddingValues(16.dp),
                 ) {
-                Text(
-                    text = "Logout",
-                    style = MaterialTheme.typography.body2,
-                    textAlign = TextAlign.Center,
-                    color = Color(255, 255, 255)
-                )
-            }
+                    Text(
+                        text = "Logout",
+                        style = MaterialTheme.typography.body2,
+                        textAlign = TextAlign.Center,
+                        color = Color(255, 255, 255)
+                    )
+                }
 
-                ButtonItem("Gold: ${boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).gold}", boardViewModel)
-                ButtonXYItem("Map", 10, 10, boardViewModel)
+                ButtonItem(
+                    "Gold: ${boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).gold}",
+                    boardViewModel
+                )
+                ButtonXYItem(
+                    "Map",
+                    x = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).basePosition.x,
+                    y = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).basePosition.y,
+                    boardViewModel
+                )
                 // Firebase DB testing:
 //                ButtonItem(viewModel.gameState.value.waiting.toString())
 //                ButtonItem(viewModel.currentTurnUid.value)
@@ -102,16 +111,28 @@ fun FullBoardView(
             ) {
                 //boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.toString().toInt()))
                 if (boardViewModel.currentView.contains("Army"))
-                    Army(viewModel = ArmyViewModel(player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value)))
+                    Army(
+                        viewModel = ArmyViewModel(
+                            player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value),
+                            id = boardViewModel.currentPlayerIndex.value,
+                            gameRepository = boardViewModel.gameRepository
+                        )
+                    )
                 else if (boardViewModel.currentView.contains("Tech Tree"))
-                    Tree(viewModel = TreeViewModel(player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value), id =boardViewModel.currentPlayerIndex.value, gameRepository = boardViewModel.gameRepository))
-                else if(boardViewModel.currentView.contains("Gold"))
+                    Tree(
+                        viewModel = TreeViewModel(
+                            player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value),
+                            id = boardViewModel.currentPlayerIndex.value,
+                            gameRepository = boardViewModel.gameRepository
+                        )
+                    )
+                else if (boardViewModel.currentView.contains("Gold"))
                     BuyGold(viewModel = BuyGoldViewModel())
-                else if(boardViewModel.currentView.contains("Turn"))
+                else if (boardViewModel.currentView.contains("Turn"))
                     Turn(viewModel = TurnViewModel())
                 else
                     Map()
-             }
+            }
 
             Column(
                 modifier = Modifier
@@ -122,7 +143,12 @@ fun FullBoardView(
             ) {
                 ButtonItem("Turn", boardViewModel)
                 ButtonItem("Tech Tree", boardViewModel)
-                ButtonXYItem("Army", 10, 10, boardViewModel)
+                ButtonXYItem(
+                    "Army",
+                    x = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).armyPosition.x,
+                    y = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).armyPosition.y,
+                    boardViewModel
+                )
             }
         }
     }
