@@ -1,6 +1,7 @@
 package com.mobilne.civ2077.ui.board.views.army
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -9,10 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
@@ -50,13 +54,24 @@ fun Army(viewModel: ArmyViewModel) {
 
 @Composable
 fun BuyArmyHeader() {
-    Text(
-        modifier = Modifier.padding(vertical = 10.dp),
-        text = "Buy Units",
-        style = MaterialTheme.typography.headlineMedium,
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colorScheme.onSurface
-    )
+    Row(verticalAlignment = Alignment.CenterVertically){
+        Text(
+            modifier = Modifier.padding(vertical = 10.dp),
+            text = "Buy Units",
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        Spacer(modifier = Modifier.width(width = 10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.buyunits),
+            contentDescription = "Buy units",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(30.dp)
+        )
+    }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,13 +109,24 @@ fun BuyArmy(
 
 @Composable
 fun SendArmyHeader() {
-    Text(
-        modifier = Modifier.padding(vertical = 10.dp),
-        text = "Move Army",
-        style = MaterialTheme.typography.headlineMedium,
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colorScheme.onSurface
-    )
+    Row(verticalAlignment = Alignment.CenterVertically){
+        Text(
+            modifier = Modifier.padding(vertical = 10.dp),
+            text = "Move Army",
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+        Spacer(modifier = Modifier.width(width = 10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.movearmy),
+            contentDescription = "Move army",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(30.dp)
+        )
+    }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
