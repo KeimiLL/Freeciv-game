@@ -61,4 +61,6 @@ interface GameRepository {
      */
     fun getPlayerWithIndexRealTime(index: Int): Flow<Resource<Player>>
     fun savePlayerNationChoice(index: Int, nation: String)
+
+    fun savePlayer(index: Int, player: Player)
 }

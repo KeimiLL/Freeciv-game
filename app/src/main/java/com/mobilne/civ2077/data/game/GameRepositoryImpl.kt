@@ -121,4 +121,52 @@ class GameRepositoryImpl @Inject constructor(
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
     }
+
+    override fun savePlayer(index: Int, player: Player) {
+        databaseRef.child("player$index").child("armyPosition").child("x").setValue(player.armyPosition.x).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("armyPosition").child("y").setValue(player.armyPosition.y).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("armySize").setValue(player.armySize).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("basePosition").child("x").setValue(player.basePosition.x).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("basePosition").child("y").setValue(player.basePosition.y).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("dev").child("left").setValue(player.dev.left).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("dev").child("right").setValue(player.dev.right).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("gold").setValue(player.gold).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("nation").setValue(player.nation).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+    }
 }
