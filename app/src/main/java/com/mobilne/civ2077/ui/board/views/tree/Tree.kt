@@ -1,5 +1,6 @@
 package com.mobilne.civ2077.ui.board.views.tree
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -11,9 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mobilne.civ2077.R
 
 @Composable
 fun Tree(viewModel: TreeViewModel) {
@@ -41,13 +45,22 @@ fun Tree(viewModel: TreeViewModel) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(0.dp),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 0.dp),
                         text = "Economy",
                         color = Color.Blue,
                         style = MaterialTheme.typography.h4,
+                    )
+                    Spacer(modifier = Modifier.width(width = 10.dp))
+                    Image(
+                        painter = painterResource(id = R.drawable.economy),
+                        contentDescription = "Economy",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(40.dp)
                     )
                 }
                 Row(
@@ -70,13 +83,22 @@ fun Tree(viewModel: TreeViewModel) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(0.dp),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = 0.dp),
                         text = "Army",
                         color = Color.Red,
                         style = MaterialTheme.typography.h4,
+                    )
+                    Spacer(modifier = Modifier.width(width = 10.dp))
+                    Image(
+                        painter = painterResource(id = R.drawable.army),
+                        contentDescription = "Army",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(40.dp)
                     )
                 }
                 Row(
