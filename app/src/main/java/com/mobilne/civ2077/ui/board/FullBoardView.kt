@@ -102,9 +102,9 @@ fun FullBoardView(
             ) {
                 //boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.toString().toInt()))
                 if (boardViewModel.currentView.contains("Army"))
-                    Army(viewModel = ArmyViewModel())
+                    Army(viewModel = ArmyViewModel(player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value)))
                 else if (boardViewModel.currentView.contains("Tech Tree"))
-                    Tree(viewModel = TreeViewModel())
+                    Tree(viewModel = TreeViewModel(player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value), id =boardViewModel.currentPlayerIndex.value, gameRepository = boardViewModel.gameRepository))
                 else if(boardViewModel.currentView.contains("Gold"))
                     BuyGold(viewModel = BuyGoldViewModel())
                 else if(boardViewModel.currentView.contains("Turn"))

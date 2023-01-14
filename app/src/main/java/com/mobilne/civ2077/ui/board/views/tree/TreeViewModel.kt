@@ -4,13 +4,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.mobilne.civ2077.data.game.Dev
+import com.mobilne.civ2077.data.game.GameRepository
+import com.mobilne.civ2077.data.game.Player
 
-class TreeViewModel : ViewModel() {
+class TreeViewModel(var player: Player, val id: Int, private var gameRepository: GameRepository) : ViewModel() {
 
     /*Todo czytanie z bazy, które perki są kupione i na tej podsatwie wyłączać przyciski kupione
     *  i te niemożliwe od kupienia i zostawić tylko te do kupienia
     *  Sprawdzanie czy jest doś hajsu na dane akcje
     * */
+
     //private
     //values
     private val _economyPerkDescription = "10 less gold for all other perks"
@@ -19,9 +23,9 @@ class TreeViewModel : ViewModel() {
     val armyPerkDescription get() = _armyPerkDescription
 
     //variables
-    private var _economyPerks by mutableStateOf(0) // czytanie z bazy
+    private var _economyPerks = (player.dev.left) // czytanie z bazy
     val economyPerks get() = _economyPerks
-    private var _armyPerks by mutableStateOf(0) //czytanie z bazy
+    private var _armyPerks = (player.dev.right) //czytanie z bazy
     val armyPerks get() = _armyPerks
 
     //states
@@ -45,16 +49,23 @@ class TreeViewModel : ViewModel() {
     }
 
     fun buy() {
-        if (currentPerk == _armyPerkDescription) {
-            _armyPerks++
-            changeEconomyButtonsState()
-        } else if (currentPerk == _economyPerkDescription) {
-            _economyPerks++
-            changeArmyButtonsState()
+        if (player.gold > goldToPay) {
+            if (currentPerk == _armyPerkDescription) {
+                _armyPerks++
+                changeEconomyButtonsState()
+                save(player)
+            } else if (currentPerk == _economyPerkDescription) {
+                _economyPerks++
+                changeArmyButtonsState()
+            }
+            save(Player(armyPosition = player.armyPosition, armySize = player.armySize,
+                basePosition = player.basePosition, dev = Dev(left = _economyPerks, right = _armyPerks),
+                gold = player.gold - goldToPay ,nation = player.nation))
+            currentPerk = ""
+            buyButtonState = false
+            checkDevelopmentState()
+
         }
-        currentPerk = ""
-        buyButtonState = false
-        checkDevelopmentState()
         //Todo zapis do bazy nowych perków
     }
 
@@ -79,12 +90,28 @@ class TreeViewModel : ViewModel() {
     fun checkDevelopmentState() {
         if (_economyPerks == 4 && _armyPerks == 4) {
             buyButtonState = false
+            goldToPay = 0
             currentPerk = "Development completed!"
         }
     }
 
     fun changeGoldToPay() {
-        goldToPay = 100 - 10 * _economyPerks
+        goldToPay -= 10 * player.dev.left
     }
 
+    fun initState(){
+        _economyPerks = player.dev.left
+        _armyPerks = player.dev.right
+        if (player.nation == "UK"){
+            goldToPay = 90
+        }
+        changeGoldToPay()
+        changeEconomyButtonsState()
+        changeArmyButtonsState()
+        checkDevelopmentState()
+    }
+
+    fun save(player: Player){
+        gameRepository.savePlayer(id, player)
+    }
 }

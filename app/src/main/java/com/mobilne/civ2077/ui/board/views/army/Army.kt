@@ -17,6 +17,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
@@ -33,6 +35,7 @@ fun Army(viewModel: ArmyViewModel) {
             valueGoldToPay = viewModel.goldToPay,
             valueUnits = viewModel.unitsCount,
             onValueChanged = { viewModel.onUnitsChanged(it) },
+            viewModel = viewModel,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
             )
@@ -44,11 +47,11 @@ fun Army(viewModel: ArmyViewModel) {
             onValueXChanged = { viewModel.onXChange(it) },
             valueY = viewModel.destinationY,
             onValueYChanged = { viewModel.onYChange(it) },
+            viewModel = viewModel,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
             )
         )
-    //        ExitButtons()
     }
 }
 
@@ -82,6 +85,7 @@ fun BuyArmy(
     valueUnits: String,
     valueGoldToPay: String,
     onValueChanged: (String) -> Unit,
+    viewModel: ArmyViewModel
 ) {
     Row(
         modifier.fillMaxWidth(0.9f),
@@ -97,8 +101,7 @@ fun BuyArmy(
             )
         }
         Button(
-            onClick = {},
-
+            onClick =  {viewModel.buy()},
             ) {
             Text("Buy for $valueGoldToPay")
         }
@@ -140,6 +143,8 @@ fun Coordinates(
 
     valueY: String,
     onValueYChanged: (String) -> Unit,
+
+    viewModel: ArmyViewModel
 ) {
     Row(
         modifier.fillMaxWidth(0.9f),
@@ -161,32 +166,17 @@ fun Coordinates(
                 keyboardOptions = keyboardOptions
             )
         }
-        Button(onClick = {}) {
+        Button(onClick = {viewModel.send()}) {
             Text("Send")
         }
     }
 
 }
 
-
-//@Composable
-//fun ExitButtons() {
-//    Row(
-//        modifier = Modifier.fillMaxWidth(0.35f),
-//        verticalAlignment = Alignment.CenterVertically,
-//        horizontalArrangement = Arrangement.SpaceAround
-//    ) {
-//        Button(onClick = {}) {
-//            Text("Ok")
-//        }
-//    }
-//}
-
-
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun SendArmyDialogLight() {
     AppTheme {
-        Army(viewModel = ArmyViewModel())
+        Army(viewModel = ArmyViewModel(player = Player()))
     }
 }

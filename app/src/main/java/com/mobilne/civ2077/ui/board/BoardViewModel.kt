@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BoardViewModel @Inject constructor(
-    private val gameRepository: GameRepository,
+    val gameRepository: GameRepository,
     private val authRepository: AuthRepository,
 ) : ViewModel() {
 

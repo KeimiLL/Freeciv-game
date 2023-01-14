@@ -4,13 +4,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.mobilne.civ2077.data.game.Player
 
-class ArmyViewModel : ViewModel() {
+class ArmyViewModel(player: Player) : ViewModel() {
 //    Todo
 //     przekazanie aktualnych koordynatów i ustalenie limitu chodzenia,
 //     przekazanie wartości z bazy ile golda ma osoba żeby wyliczyć ile moze jednostek kupić,
 //     zapisywanie do bazy kupionych jednostek,
 //     zapisywanie nowych koordynatów wojska do bazy
+
+    var player = player
 
     //variables
     private val maxUnits = 1000
@@ -64,6 +67,18 @@ class ArmyViewModel : ViewModel() {
             }
         } else
             destinationY = ""
+    }
+
+    fun buy(){
+        if (goldToPay.toInt()<= player.gold) {
+            /*Todo zapis do bazy player z nowym goldem  który jest aktualny stan + units count*/
+        }
+    }
+
+    fun send(){
+        if(destinationX != "" && destinationY != "") {
+            /*Todo zapis nowych coordynatów, destx i desty (sprawdzic czy )*/
+        }
     }
 
 }
