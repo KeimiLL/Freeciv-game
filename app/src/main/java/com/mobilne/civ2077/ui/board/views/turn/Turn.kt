@@ -1,8 +1,11 @@
 package com.mobilne.civ2077.ui.board.views.turn
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Divider
@@ -12,9 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
@@ -23,20 +29,21 @@ fun Turn(viewModel: TurnViewModel) {
         modifier = Modifier
             .background(Color(0xFFffffff))
             .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
         TurnHeader()
 
         PlayersState(viewModel)
 
-        Divider()
+//        Divider()
 
         Button(
             modifier = Modifier.padding(vertical = 20.dp)
                 .height(50.dp)
                 .width(200.dp),
-            shape = RectangleShape,
+            shape = RoundedCornerShape(50.dp),
             contentPadding = PaddingValues(16.dp),
             onClick = { viewModel.pass() },
             enabled = viewModel.duringTurn
@@ -54,13 +61,24 @@ fun Turn(viewModel: TurnViewModel) {
 
 @Composable
 fun TurnHeader(){
-    Text(
-        modifier = Modifier.padding(vertical = 10.dp),
-        text = "Players state",
-        style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
-        textAlign = TextAlign.Center,
-        color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
-    )
+    Row(verticalAlignment = Alignment.CenterVertically){
+        Text(
+            modifier = Modifier.padding(vertical = 10.dp),
+            text = "Players state",
+            style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
+            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+        )
+        Spacer(modifier = Modifier.width(width = 10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.stage),
+            contentDescription = "Stage",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(50.dp)
+        )
+    }
+
 }
 
 @Composable

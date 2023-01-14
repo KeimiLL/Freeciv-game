@@ -2,7 +2,9 @@ package com.mobilne.civ2077.ui.board
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -67,7 +69,7 @@ fun FullBoardView(
                     modifier = Modifier
                         .height(80.dp)
                         .width(120.dp),
-                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
                     contentPadding = PaddingValues(16.dp),
                 ) {
                 Text(
@@ -142,7 +144,7 @@ fun ButtonItem(
         modifier = Modifier
             .height(80.dp)
             .width(120.dp),
-        shape = RectangleShape,
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
         contentPadding = PaddingValues(16.dp),
         onClick = { boardViewModel.changeView(txt) },
     ) {
@@ -171,7 +173,7 @@ fun ButtonXYItem(
                 modifier = Modifier
                     .height(80.dp)
                     .width(120.dp),
-                shape = RectangleShape,
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
                 contentPadding = PaddingValues(16.dp),
                 onClick = { boardViewModel.changeView(txt) },
             ) {
