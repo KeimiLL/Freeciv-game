@@ -80,7 +80,7 @@ fun FullBoardView(
                 )
             }
 
-                ButtonItem("Gold", boardViewModel)
+                ButtonItem("Gold: ${boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).gold}", boardViewModel)
                 ButtonXYItem("Map", 10, 10, boardViewModel)
                 // Firebase DB testing:
 //                ButtonItem(viewModel.gameState.value.waiting.toString())
@@ -100,23 +100,17 @@ fun FullBoardView(
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-                when (boardViewModel.currentView) {
-                    "Army" -> {
-                        Army(viewModel = ArmyViewModel())
-                    }
-                    "Tech Tree" -> {
-                        Tree(viewModel = TreeViewModel()) /* Todo Tree viewmodel*/
-                    }
-                    "Gold" -> {
-                        BuyGold(viewModel = BuyGoldViewModel())
-                    }
-                    "Turn" ->{
-                        Turn(viewModel = TurnViewModel())
-                    }
-                    else -> {
-                        Map()
-                    }
-                }
+                //boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.toString().toInt()))
+                if (boardViewModel.currentView.contains("Army"))
+                    Army(viewModel = ArmyViewModel())
+                else if (boardViewModel.currentView.contains("Tech Tree"))
+                    Tree(viewModel = TreeViewModel())
+                else if(boardViewModel.currentView.contains("Gold"))
+                    BuyGold(viewModel = BuyGoldViewModel())
+                else if(boardViewModel.currentView.contains("Turn"))
+                    Turn(viewModel = TurnViewModel())
+                else
+                    Map()
              }
 
             Column(

@@ -51,7 +51,9 @@ class BoardViewModel @Inject constructor(
 
     var currentNationChoice = ""
 
-    var currentView by mutableStateOf("Mapa")
+    var currentView by mutableStateOf("Map")
+
+
 
     init {
         initGameState()
