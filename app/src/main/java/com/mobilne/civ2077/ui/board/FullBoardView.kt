@@ -193,12 +193,37 @@ fun ButtonXYItem(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "X: $x, Y: $y",
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Center,
-                color = Color(255, 255, 255)
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center) {
+                Text(
+                    text = "X: $x, Y: $y",
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center,
+                    color = Color(255, 255, 255)
+                )
+                if(txt == "Army"){
+                    Row(modifier = Modifier
+                        .background(Color(0xff266330))
+                        .width(120.dp),
+                        horizontalArrangement = Arrangement.SpaceAround,
+                        verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "Size:",
+                            style = MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                            color = Color(255, 255, 255)
+                        )
+                        Text(
+                            text = "73434 k",
+                            style = MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                            color = Color(255, 255, 255)
+                        )
+                    }
+
+                }
+            }
+
         }
     }
 }
