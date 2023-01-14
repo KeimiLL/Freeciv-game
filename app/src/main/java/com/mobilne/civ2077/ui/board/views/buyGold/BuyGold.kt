@@ -10,7 +10,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -90,6 +92,35 @@ fun RadioButtonSample() {
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(horizontal = 10.dp)
                 )
+                when (text) {
+                    "PayPal" -> {
+                        Image(
+                            painter = painterResource(id = R.drawable.paypal),
+                            contentDescription = "Paypal",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(30.dp)
+                        )
+                    }
+                    "Bank transfer" -> {
+                        Image(
+                            painter = painterResource(id = R.drawable.banktransfer),
+                            contentDescription = "Bank transfer",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(30.dp)
+                        )
+                    }
+                    "Credit card" -> {
+                        Image(
+                            painter = painterResource(id = R.drawable.creditcard),
+                            contentDescription = "Credit card",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(30.dp)
+                        )
+                    }
+                }
             }
         }
     }
