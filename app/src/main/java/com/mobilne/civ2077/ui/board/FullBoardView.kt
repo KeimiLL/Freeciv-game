@@ -59,13 +59,30 @@ fun FullBoardView(
                 // Firebase DB test:
 //                ButtonItem(viewModel.currentView, viewModel)
                 //Logout
+//                Button(
+//                    onClick = {
+//                        authViewModel.logout()
+//                        navController.navigate(ROUTE_LOGIN) {
+//                            popUpTo(ROUTE_HOME) {
+//                                inclusive = true
+//                            }
+//                        }
+//                    },
+//                    modifier = Modifier
+//                        .height(80.dp)
+//                        .width(120.dp),
+//                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
+//                    contentPadding = PaddingValues(16.dp),
+//                ) {
+//                Text(
+//                    text = "Logout",
+//                    style = MaterialTheme.typography.body2,
+//                    textAlign = TextAlign.Center,
+//                    color = Color(255, 255, 255)
+//                )
                 Button(
                     onClick = {
-                        authViewModel.logout()
-                        navController.navigate(ROUTE_LOGIN) {
-                            popUpTo(ROUTE_HOME) {
-                                inclusive = true
-                            }
+                        navController.navigate(ROUTE_HOME) {
                         }
                     },
                     modifier = Modifier
@@ -75,7 +92,7 @@ fun FullBoardView(
                     contentPadding = PaddingValues(16.dp),
                 ) {
                     Text(
-                        text = "Logout",
+                        text = "Home",
                         style = MaterialTheme.typography.body2,
                         textAlign = TextAlign.Center,
                         color = Color(255, 255, 255)
