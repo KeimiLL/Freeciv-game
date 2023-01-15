@@ -8,8 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
@@ -32,17 +34,28 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(
-            text = stringResource(id = R.string.welcome_back),
-            style = MaterialTheme.typography.headlineSmall,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        Row(verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center) {
+            Text(
+                text = stringResource(id = R.string.welcome_back),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            // miejsce na łączneie z nazwą usera
+            Text(
+                text = "Nazwa-usera",
+                style = MaterialTheme.typography.headlineSmall,
+                color = Color(0xffe86d01)
+            )
 
-        Text(
-            text = viewModel?.currentUser?.displayName ?: "",
-            style = MaterialTheme.typography.displaySmall,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+            Text(
+                text = viewModel?.currentUser?.displayName ?: "",
+                style = MaterialTheme.typography.displaySmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+
 
         Column(
             modifier = Modifier
