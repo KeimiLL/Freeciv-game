@@ -21,7 +21,7 @@ class TreeViewModel(val player: Player, val id: Int, private var gameRepository:
     //values
     private val _economyPerkDescription = "10 less gold for all other perks"
     val economyDescription get() = _economyPerkDescription
-    private val _armyPerkDescription = "Army takes 10% more damage"
+    private val _armyPerkDescription = "Army deals 10% more damage"
     val armyPerkDescription get() = _armyPerkDescription
 
     //variables
