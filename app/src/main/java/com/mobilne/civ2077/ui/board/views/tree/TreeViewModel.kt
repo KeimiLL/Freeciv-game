@@ -14,11 +14,15 @@ class TreeViewModel : ViewModel() {
     //private
     //values
     private val _economyPerkDescription = "10 less gold for all other perks"
+    val economyDescription get() = _economyPerkDescription
     private val _armyPerkDescription = "Army takes 10% more damage"
+    val armyPerkDescription get() = _armyPerkDescription
 
     //variables
     private var _economyPerks by mutableStateOf(0) // czytanie z bazy
+    val economyPerks get() = _economyPerks
     private var _armyPerks by mutableStateOf(0) //czytanie z bazy
+    val armyPerks get() = _armyPerks
 
     //states
     //buttons booleans
