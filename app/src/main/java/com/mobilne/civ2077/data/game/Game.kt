@@ -19,6 +19,7 @@ data class Players(
 @IgnoreExtraProperties
 data class Player(
     val armyPosition: ArmyPosition = ArmyPosition(),
+    val armyPositionChanged: Boolean = false,
     val armySize: Int = 0,
     val basePosition: BasePosition = BasePosition(),
     val dev: Dev = Dev(),
@@ -42,4 +43,12 @@ data class BasePosition(
 data class Dev(
     val left: Int = 0,
     val right: Int = 0,
+)
+
+@IgnoreExtraProperties
+data class Turn(
+    val number: Int = 0,
+    val player1: Boolean = false,
+    val player2: Boolean = false,
+    val player3: Boolean = false,
 )

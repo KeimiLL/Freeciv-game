@@ -17,15 +17,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.R
 
 @Composable
 fun Tree(viewModel: TreeViewModel) {
     // Todo czytanie z bazy zamiast funkcji, które czytają stan początkowy
-    viewModel.changeEconomyButtonsState()
-    viewModel.changeArmyButtonsState()
-    viewModel.checkDevelopmentState()
-    viewModel.changeGoldToPay()
+    viewModel.initState()
     Box(
         modifier = Modifier
             .background(Color(0xFFffffff))
@@ -210,8 +209,8 @@ fun InfoBar(
     }
 }
 
-@Preview
-@Composable
-fun PreviewTree() {
-    Tree(TreeViewModel())
-}
+//@Preview
+//@Composable
+//fun PreviewTree() {
+//    Tree(TreeViewModel(player = Player(), id=0, gameRepository = hiltViewModel()))
+//}

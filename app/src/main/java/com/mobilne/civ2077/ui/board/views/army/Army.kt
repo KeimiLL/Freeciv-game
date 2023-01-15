@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
+import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
@@ -28,33 +29,37 @@ fun Army(viewModel: ArmyViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         //BuyArmy
+        viewModel.changeMaxRange()
         BuyArmyHeader()
         BuyArmy(
             valueGoldToPay = viewModel.goldToPay,
             valueUnits = viewModel.unitsCount,
             onValueChanged = { viewModel.onUnitsChanged(it) },
+            viewModel = viewModel,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
             )
         )
         //Send Army
-        SendArmyHeader()
+        SendArmyHeader(
+            step = viewModel.maxRange
+        )
         Coordinates(
             valueX = viewModel.destinationX,
             onValueXChanged = { viewModel.onXChange(it) },
             valueY = viewModel.destinationY,
             onValueYChanged = { viewModel.onYChange(it) },
+            viewModel = viewModel,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
             )
         )
-    //        ExitButtons()
     }
 }
 
 @Composable
 fun BuyArmyHeader() {
-    Row(verticalAlignment = Alignment.CenterVertically){
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "Buy Units",
@@ -67,11 +72,9 @@ fun BuyArmyHeader() {
             painter = painterResource(id = R.drawable.buyunits),
             contentDescription = "Buy units",
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(30.dp)
+            modifier = Modifier.size(30.dp)
         )
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -82,6 +85,7 @@ fun BuyArmy(
     valueUnits: String,
     valueGoldToPay: String,
     onValueChanged: (String) -> Unit,
+    viewModel: ArmyViewModel
 ) {
     Row(
         modifier.fillMaxWidth(0.9f),
@@ -97,49 +101,57 @@ fun BuyArmy(
             )
         }
         Button(
-            onClick = {},
-
-            ) {
+            onClick = { viewModel.buy() },
+        ) {
             Text("Buy for $valueGoldToPay")
         }
     }
-
 }
 
 
 @Composable
-fun SendArmyHeader() {
-    Row(verticalAlignment = Alignment.CenterVertically){
+fun SendArmyHeader(
+    step: Int
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                modifier = Modifier.padding(vertical = 10.dp),
+                text = "Move Army",
+                style = MaterialTheme.typography.headlineMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Spacer(modifier = Modifier.width(width = 10.dp))
+            Image(
+                painter = painterResource(id = R.drawable.movearmy),
+                contentDescription = "Move army",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(30.dp)
+            )
+        }
         Text(
-            modifier = Modifier.padding(vertical = 10.dp),
-            text = "Move Army",
-            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier.padding(vertical = 5.dp),
+            text = "Max ${step}step(s) in each direction",
+            style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
         )
-        Spacer(modifier = Modifier.width(width = 10.dp))
-        Image(
-            painter = painterResource(id = R.drawable.movearmy),
-            contentDescription = "Move army",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(30.dp)
-        )
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Coordinates(
-    modifier: Modifier = Modifier,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    modifier: Modifier = Modifier, keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 
-    valueX: String,
-    onValueXChanged: (String) -> Unit,
+    valueX: String, onValueXChanged: (String) -> Unit,
 
-    valueY: String,
-    onValueYChanged: (String) -> Unit,
+    valueY: String, onValueYChanged: (String) -> Unit,
+
+    viewModel: ArmyViewModel
 ) {
     Row(
         modifier.fillMaxWidth(0.9f),
@@ -156,37 +168,19 @@ fun Coordinates(
             OutlinedTextField(
                 modifier = Modifier.padding(vertical = 5.dp),
 
-                value = valueY,
-                onValueChange = onValueYChanged,
-                keyboardOptions = keyboardOptions
+                value = valueY, onValueChange = onValueYChanged, keyboardOptions = keyboardOptions
             )
         }
-        Button(onClick = {}) {
+        Button(onClick = { viewModel.send() }) {
             Text("Send")
         }
     }
-
 }
 
-
+//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 //@Composable
-//fun ExitButtons() {
-//    Row(
-//        modifier = Modifier.fillMaxWidth(0.35f),
-//        verticalAlignment = Alignment.CenterVertically,
-//        horizontalArrangement = Arrangement.SpaceAround
-//    ) {
-//        Button(onClick = {}) {
-//            Text("Ok")
-//        }
+//fun SendArmyDialogLight() {
+//    AppTheme {
+//        Army(viewModel = ArmyViewModel(player = Player()))
 //    }
 //}
-
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Composable
-fun SendArmyDialogLight() {
-    AppTheme {
-        Army(viewModel = ArmyViewModel())
-    }
-}

@@ -46,6 +46,7 @@ interface GameRepository {
      *   x: 0,
      *   y: 0
      *  },
+     *  armyPositionChanged: false
      *  armySize: 0,
      *  basePosition: {
      *   x: 0,
@@ -63,4 +64,7 @@ interface GameRepository {
     fun savePlayerNationChoice(index: Int, nation: String)
 
     fun savePlayer(index: Int, player: Player)
+    fun getTurnStatus(): Flow<Resource<Turn>>
+
+    fun savePlayerEndOfTurn(index: Int)
 }
