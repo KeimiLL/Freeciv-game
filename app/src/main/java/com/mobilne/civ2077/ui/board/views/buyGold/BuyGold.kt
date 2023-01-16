@@ -10,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -46,7 +45,7 @@ fun BuyGold(viewModel: BuyGoldViewModel) {
                 text = "Total: €\u200E ${viewModel.euroToPay}",
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = Color.Black,
             )
 
             Row(
@@ -133,7 +132,7 @@ fun BuyGoldHeader() {
         text = "Buy Gold",
         style = MaterialTheme.typography.headlineMedium,
         textAlign = TextAlign.Center,
-        color = MaterialTheme.colorScheme.onSurface
+        color = Color.Black
     )
 }
 

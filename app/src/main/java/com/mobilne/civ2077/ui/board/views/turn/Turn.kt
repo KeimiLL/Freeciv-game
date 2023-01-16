@@ -4,24 +4,20 @@ import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
-import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
 fun Turn(viewModel: TurnViewModel) {
@@ -69,7 +65,7 @@ fun TurnHeader(){
             text = "Players state",
             style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
-            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+            color = Color.Black
         )
         Spacer(modifier = Modifier.width(width = 10.dp))
         Image(
@@ -99,21 +95,21 @@ fun PlayersState(
             text = viewModel.user1 + viewModel.user1State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+            color = Color.Black
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = viewModel.user2  + viewModel.user2State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+            color = Color.Black
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = viewModel.user3 + viewModel.user3State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+            color = Color.Black
         )
 
     }
