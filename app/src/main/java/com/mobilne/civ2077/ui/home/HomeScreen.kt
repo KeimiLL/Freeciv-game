@@ -90,7 +90,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
 
         Column(
             modifier = Modifier
-                .width(400.dp)
+                .width(500.dp)
                 .wrapContentHeight()
                 .padding(spacing.medium),
             horizontalAlignment = Alignment.Start
