@@ -1,6 +1,7 @@
 package com.mobilne.civ2077.ui.board.views.endOfTurn
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -22,15 +23,20 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
         modifier = Modifier.fillMaxSize(),
         color = Color.White,
     ) {
-        Column(modifier = Modifier.fillMaxSize(),
+        Column(
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Turn summary",
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Turn summary",
                     style = MaterialTheme.typography.headlineLarge,
-                    color = Color.Black)
+                    color = Color.Black
+                )
                 Spacer(modifier = Modifier.width(10.dp))
                 Image(
                     painter = painterResource(id = R.drawable.summary),
@@ -41,83 +47,162 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 )
             }
 
-            Spacer(modifier = Modifier.width(30.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
-            //User 1
-            Text(text = "User 1:",
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.Black)
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Gold:",
+            // Gold
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.gold),
+                    contentDescription = "Gold",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(30.dp)
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = "Gold Summary:",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color.Black
+                )
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "User1:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Black)
+                    color = Color.Black
+                )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user1.gold)
             }
-            Spacer(modifier = Modifier.width(5.dp))
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Army:",
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "User2:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Black)
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                DisplayValue(boardViewModel.onWar.value.user2.gold)
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "User3:",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.Black
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                DisplayValue(boardViewModel.onWar.value.user3.gold)
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Gold
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.army),
+                    contentDescription = "War",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(30.dp)
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Text(
+                    text = "War Summary:",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color.Black
+                )
+
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "User1:",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.Black
+                )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user1.units)
             }
-            Spacer(modifier = Modifier.width(30.dp))
-
-            // User 2
-            Text(text = "User 2:",
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.Black)
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Gold:",
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "User2:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Black)
-                Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.onWar.value.user2.gold)
-
-            }
-            Spacer(modifier = Modifier.width(5.dp))
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Army:",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Black)
+                    color = Color.Black
+                )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user2.units)
             }
-            Spacer(modifier = Modifier.width(30.dp))
-
-            // User 3
-            Text(text = "User 3:",
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.Black)
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Gold:",
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "User3:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Black)
-                Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.onWar.value.user3.gold)
-
-            }
-            Spacer(modifier = Modifier.width(5.dp))
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
-                Text(text = "Army:",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = Color.Black)
+                    color = Color.Black
+                )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user3.units)
             }
+            Spacer(modifier = Modifier.height(10.dp))
+            SummInfo(boardViewModel.wasWarLastTurn.value)
         }
     }
 }
 
 @Composable
-fun DisplayValue(value: Int) {
+fun SummInfo(wasWar: Boolean = true) {
+    Row(verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.Center) {
+        if(wasWar){
+            Image(
+                painter = painterResource(id = R.drawable.blood),
+                contentDescription = "Blood",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(40.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(text = "It was a bloody day in the world of Civilization 2077",
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.Black)
+        } else {
+            Image(
+                painter = painterResource(id = R.drawable.peace),
+                contentDescription = "Peace",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(30.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(text = "It was a peaceful day in the world of Civilization 2077",
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.Black)
+        }
+    }
+}
+
+@Composable
+fun DisplayValue(value: Int = 0) {
     if (value > 0) {
         Text(text = value.toString(),
             style = MaterialTheme.typography.bodyLarge,
