@@ -59,7 +59,7 @@ fun Army(viewModel: ArmyViewModel) {
 fun BuyArmyHeader() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
-            modifier = Modifier.padding(vertical = 10.dp),
+            modifier = Modifier.padding(vertical = 5.dp),
             text = "Buy Units",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
@@ -116,7 +116,7 @@ fun SendArmyHeader(
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                modifier = Modifier.padding(vertical = 10.dp),
+                modifier = Modifier.padding(vertical = 3.dp),
                 text = "Move Army",
                 style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center,
@@ -131,9 +131,9 @@ fun SendArmyHeader(
             )
         }
         Text(
-            modifier = Modifier.padding(vertical = 5.dp),
-            text = "Max ${step}step(s) in each direction",
-            style = MaterialTheme.typography.headlineSmall,
+            modifier = Modifier.padding(vertical = 0.dp),
+            text = "Max ${step} step(s) in each direction",
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             color = Color.Black
         )
