@@ -123,44 +123,52 @@ class GameRepositoryImpl @Inject constructor(
     }
 
     override fun savePlayer(index: Int, player: Player) {
-        databaseRef.child("player$index").child("armyPosition").child("x").setValue(player.armyPosition.x).addOnSuccessListener {
+        databaseRef.child("player$index").child("armyPosition").child("x")
+            .setValue(player.armyPosition.x).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("armyPosition").child("y").setValue(player.armyPosition.y).addOnSuccessListener {
+        databaseRef.child("player$index").child("armyPosition").child("y")
+            .setValue(player.armyPosition.y).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("armyPositionChanged").setValue(player.armyPositionChanged).addOnSuccessListener {
+        databaseRef.child("player$index").child("armyPositionChanged")
+            .setValue(player.armyPositionChanged).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("armySize").setValue(player.armySize).addOnSuccessListener {
+        databaseRef.child("player$index").child("armySize").setValue(player.armySize)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("player$index").child("basePosition").child("x")
+            .setValue(player.basePosition.x).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("basePosition").child("x").setValue(player.basePosition.x).addOnSuccessListener {
+        databaseRef.child("player$index").child("basePosition").child("y")
+            .setValue(player.basePosition.y).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("basePosition").child("y").setValue(player.basePosition.y).addOnSuccessListener {
-            Log.d(TAG, "Saved successfully")
-        }.addOnFailureListener {
+        databaseRef.child("player$index").child("dev").child("left").setValue(player.dev.left)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("dev").child("left").setValue(player.dev.left).addOnSuccessListener {
-            Log.d(TAG, "Saved successfully")
-        }.addOnFailureListener {
-            Log.d(TAG, "Failed to save value: ${it.message}")
-        }
-        databaseRef.child("player$index").child("dev").child("right").setValue(player.dev.right).addOnSuccessListener {
-            Log.d(TAG, "Saved successfully")
-        }.addOnFailureListener {
+        databaseRef.child("player$index").child("dev").child("right").setValue(player.dev.right)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
         databaseRef.child("player$index").child("gold").setValue(player.gold).addOnSuccessListener {
@@ -168,9 +176,10 @@ class GameRepositoryImpl @Inject constructor(
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
-        databaseRef.child("player$index").child("nation").setValue(player.nation).addOnSuccessListener {
-            Log.d(TAG, "Saved successfully")
-        }.addOnFailureListener {
+        databaseRef.child("player$index").child("nation").setValue(player.nation)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
         }
     }
@@ -202,4 +211,65 @@ class GameRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getOnWarRealtime(): Flow<Resource<OnWar>> = callbackFlow {
+        database.getReference("war").child("onWar")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val onWar = dataSnapshot.getValue<OnWar>()!!
+                    trySend(Resource.Success(onWar)).isSuccess
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("game", "Failed to read value.")
+                    trySend(Resource.Failure(Exception(error.message))).isFailure
+                }
+            })
+
+        awaitClose {
+            close()
+        }
+    }
+
+    override fun saveOnWar(index: Int, gold: Int, units: Int) {
+        databaseRef.child("war").child("onWar").child("user$index").child("gold").setValue(gold)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+        databaseRef.child("war").child("onWar").child("user$index").child("units").setValue(units)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+    }
+
+    override fun getWasWarLastTurn(): Flow<Resource<Boolean>> = callbackFlow {
+        database.getReference("war").child("wasWarLastTurn")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val wasWarLastTurn = dataSnapshot.getValue<Boolean>()!!
+                    trySend(Resource.Success(wasWarLastTurn)).isSuccess
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("game", "Failed to read value.")
+                    trySend(Resource.Failure(Exception(error.message))).isFailure
+                }
+            })
+
+        awaitClose {
+            close()
+        }
+    }
+
+    override fun saveWasWarLastTurn(wasWarLastTurn: Boolean) {
+        databaseRef.child("war").child("wasWarLastTurn").setValue(wasWarLastTurn)
+            .addOnSuccessListener {
+                Log.d(TAG, "Saved successfully")
+            }.addOnFailureListener {
+                Log.d(TAG, "Failed to save value: ${it.message}")
+            }
+    }
 }

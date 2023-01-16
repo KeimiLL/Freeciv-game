@@ -49,6 +49,12 @@ class BoardViewModel @Inject constructor(
     private var _currentPlayerIndex = mutableStateOf(0)
     val currentPlayerIndex: State<Int> = _currentPlayerIndex
 
+    private var _onWar = mutableStateOf(OnWar())
+    val onWar: State<OnWar> = _onWar
+
+    private var _wasWarLastTurn = mutableStateOf(false)
+    val wasWarLastTurn: State<Boolean> = _wasWarLastTurn
+
     var currentNationChoice = ""
 
     var currentView by mutableStateOf("Map")
@@ -61,6 +67,8 @@ class BoardViewModel @Inject constructor(
         initPlayer(2, _player2)
         initPlayer(3, _player3)
         initTurn()
+        initOnWar()
+        initWasWarLastTurn()
     }
 
     private fun initGameState() {
@@ -216,7 +224,6 @@ class BoardViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-
     fun getPlayerByIndex(index: Int): Player {
         return when (index) {
             1 -> player1.value
@@ -242,5 +249,35 @@ class BoardViewModel @Inject constructor(
         currentNationChoice = nation
     }
 
+    private fun initOnWar() {
+        gameRepository.getOnWarRealtime().onEach { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    _onWar.value = resource.result
+                }
+                is Resource.Failure -> {
+                    Log.d(TAG, "failure")
+                }
+                is Resource.Loading -> {
+                    Log.d(TAG, "loading")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
 
+    private fun initWasWarLastTurn() {
+        gameRepository.getWasWarLastTurn().onEach { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    _wasWarLastTurn.value = resource.result
+                }
+                is Resource.Failure -> {
+                    Log.d(TAG, "failure")
+                }
+                is Resource.Loading -> {
+                    Log.d(TAG, "loading")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
 }

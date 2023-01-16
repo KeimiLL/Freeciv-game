@@ -67,4 +67,10 @@ interface GameRepository {
     fun getTurnStatus(): Flow<Resource<Turn>>
 
     fun savePlayerEndOfTurn(index: Int)
+
+    fun getOnWarRealtime(): Flow<Resource<OnWar>>
+    fun saveOnWar(index: Int, gold: Int, units: Int)
+
+    fun getWasWarLastTurn(): Flow<Resource<Boolean>>
+    fun saveWasWarLastTurn(wasWarLastTurn: Boolean)
 }
