@@ -1,6 +1,8 @@
 package com.mobilne.civ2077.ui.home
 
 import android.content.res.Configuration
+import android.media.Image
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -9,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,92 +60,135 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             )
         }
 
+        Image(
+            modifier = Modifier.width(120.dp),
+            painter = painterResource(id = R.drawable.france),
+            contentDescription = "Nation flag"
+        )
 
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .width(400.dp)
                 .wrapContentHeight()
-                .padding(spacing.medium)
+                .padding(spacing.medium),
+            horizontalAlignment = Alignment.Start
         ) {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .wrapContentHeight(),
+//                verticalAlignment = Alignment.CenterVertically,
+//                horizontalArrangement = Arrangement.Center
+//            ) {
+//                Text(
+//                    text = stringResource(id = R.string.name),
+//                    style = MaterialTheme.typography.bodyLarge,
+//                    color = MaterialTheme.colorScheme.onSurface
+//                )
+//                Spacer(modifier = Modifier.width(20.dp))
+//                Text(
+//                    text = viewModel?.currentUser?.displayName ?: "",
+//                    style = MaterialTheme.typography.bodyLarge,
+//                    color = MaterialTheme.colorScheme.onSurface
+//                )
+//            }
+
+            // Email
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .wrapContentHeight(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = stringResource(id = R.string.name),
+                    text = stringResource(id = R.string.email),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.width(20.dp))
                 Text(
-                    text = viewModel?.currentUser?.displayName ?: "",
+                    text = viewModel?.currentUser?.email ?: "",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
-            Column(verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.email),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Text(
-                        text = viewModel?.currentUser?.email ?: "",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-                Row(verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center) {
-                    Button(
-                        onClick = {
-                            viewModel?.logout()
-                            navController.navigate(ROUTE_LOGIN) {
-                                popUpTo(ROUTE_HOME) {
-                                    inclusive = true
-                                }
-                            }
-                        },
-                        modifier = Modifier
-                            .padding(top = spacing.extraLarge)
-                            .height(50.dp)
-                            .width(150.dp)
-                    ) {
-                        Text(text = stringResource(id = R.string.logout))
-                    }
-                    Spacer(modifier = Modifier.width(40.dp))
-                    Button(
-                        onClick = {
-                            navController.navigate(ROUTE_BOARD) {
-                                popUpTo(ROUTE_HOME) {
-                                    inclusive = true
-                                }
-                            }
-                        },
-                        modifier = Modifier
-                            .padding(top = spacing.extraLarge)
-                            .height(50.dp)
-                            .width(150.dp)
-                    ) {
-                        Text(text = "back")
-                    }
-                }
+            // Nacja
+            Row(
+                modifier = Modifier
+                    .wrapContentHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "nacja",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.width(20.dp))
+                Text(
+                    text = "",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
 
-
+            // Perk
+            Row(
+                modifier = Modifier
+                    .wrapContentHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "perk",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.width(20.dp))
+                Text(
+                    text = "",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
+        // Przyciski wyloguj i wróć
+        Row(modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center) {
+            Button(
+                onClick = {
+                    viewModel?.logout()
+                    navController.navigate(ROUTE_LOGIN) {
+                        popUpTo(ROUTE_HOME) {
+                            inclusive = true
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .padding(top = spacing.extraLarge)
+                    .height(50.dp)
+                    .width(150.dp)
+            ) {
+                Text(text = stringResource(id = R.string.logout))
+            }
+            Spacer(modifier = Modifier.width(40.dp))
+            Button(
+                onClick = {
+                    navController.navigate(ROUTE_BOARD) {
+                        popUpTo(ROUTE_HOME) {
+                            inclusive = true
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .padding(top = spacing.extraLarge)
+                    .height(50.dp)
+                    .width(150.dp)
+            ) {
+                Text(text = "back")
+            }
         }
     }
 }
