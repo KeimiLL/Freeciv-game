@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
+import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.ui.auth.AuthViewModel
@@ -28,24 +29,24 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
             .padding(spacing.medium)
             .padding(top = spacing.extraLarge),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
 
         Row(verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center) {
             Text(
                 text = stringResource(id = R.string.welcome_back),
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.width(10.dp))
             // miejsce na łączneie z nazwą usera
             Text(
                 text = "Nazwa-usera",
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineLarge,
                 color = Color(0xffe86d01)
             )
 
@@ -66,58 +67,82 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
+                    .wrapContentHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = stringResource(id = R.string.name),
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(0.3f),
                     color = MaterialTheme.colorScheme.onSurface
                 )
-
+                Spacer(modifier = Modifier.width(20.dp))
                 Text(
                     text = viewModel?.currentUser?.displayName ?: "",
                     style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(0.7f),
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.email),
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(0.3f),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-
-                Text(
-                    text = viewModel?.currentUser?.email ?: "",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(0.7f),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
-
-            Button(
-                onClick = {
-                    viewModel?.logout()
-                    navController.navigate(ROUTE_LOGIN) {
-                        popUpTo(ROUTE_HOME) {
-                            inclusive = true
-                        }
+            Column(verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.email),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(
+                        text = viewModel?.currentUser?.email ?: "",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center) {
+                    Button(
+                        onClick = {
+                            viewModel?.logout()
+                            navController.navigate(ROUTE_LOGIN) {
+                                popUpTo(ROUTE_HOME) {
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .padding(top = spacing.extraLarge)
+                            .height(50.dp)
+                            .width(150.dp)
+                    ) {
+                        Text(text = stringResource(id = R.string.logout))
                     }
-                },
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = spacing.extraLarge)
-            ) {
-                Text(text = stringResource(id = R.string.logout))
+                    Spacer(modifier = Modifier.width(40.dp))
+                    Button(
+                        onClick = {
+                            navController.navigate(ROUTE_BOARD) {
+                                popUpTo(ROUTE_HOME) {
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .padding(top = spacing.extraLarge)
+                            .height(50.dp)
+                            .width(150.dp)
+                    ) {
+                        Text(text = "back")
+                    }
+                }
             }
+
+
         }
     }
 }
