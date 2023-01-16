@@ -52,3 +52,17 @@ data class Turn(
     val player2: Boolean = false,
     val player3: Boolean = false,
 )
+
+@IgnoreExtraProperties
+data class OnWar(
+    val user1: User = User(),
+    val user2: User = User(),
+    val user3: User = User(),
+    val wasWarLastTurn: Boolean = false,
+)
+
+@IgnoreExtraProperties
+data class User(
+    val gold: Int = 0,
+    val units: Int = 0,
+)
