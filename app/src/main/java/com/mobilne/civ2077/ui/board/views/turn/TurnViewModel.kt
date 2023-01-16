@@ -1,7 +1,5 @@
 package com.mobilne.civ2077.ui.board.views.turn
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,12 +7,15 @@ import androidx.lifecycle.ViewModel
 import com.mobilne.civ2077.data.game.GameRepository
 import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.data.game.Turn
+import kotlin.random.Random
 
-class TurnViewModel(var turn: Turn , val id: Int,
-                    val player1: Player,
-                    val player2: Player,
-                    val player3: Player,
-                    private val gameRepository: GameRepository) :
+class TurnViewModel(
+    var turn: Turn, val id: Int,
+    val player1: Player,
+    val player2: Player,
+    val player3: Player,
+    private val gameRepository: GameRepository
+) :
     ViewModel() {
     /*Todo sparwzdanie booleanów w bazie, kto zakończył turę, a kto nie
     *  dodanie propów dla innych userów z bazy i przklejenie ich do widoku*/
@@ -27,7 +28,13 @@ class TurnViewModel(var turn: Turn , val id: Int,
 
     private val goldPerTurn = 100
     private val goldPerTurnForSpain = 200
+
+
+    // war
     private var wasWar = false
+    private var isPlayer1onWar = false
+    private var isPlayer2onWar = false
+    private var isPlayer3onWar = false
 
 
     //Todo funkcja czytająca ich stan i dająca dobre dane
@@ -96,24 +103,186 @@ class TurnViewModel(var turn: Turn , val id: Int,
             _otherPlayerEndedTurn
     }
 
-    private fun endOfTurnAction(){
-        if (player1.nation == "Spain")
-            savePlayerGold(1, player1, goldPerTurnForSpain)
-        else
-            savePlayerGold(1, player1, goldPerTurn)
-        if (player2.nation == "Spain")
-            savePlayerGold(2, player2, goldPerTurnForSpain)
-        else
-            savePlayerGold(2, player2, goldPerTurn)
-        if (player3.nation == "Spain")
-            savePlayerGold(3, player3, goldPerTurnForSpain)
-        else
-            savePlayerGold(3, player3, goldPerTurn)
+    private fun endOfTurnAction() {
 
-        gameRepository.changeTurnCounter(turn.number+1)
+        isWar()
+        if (wasWar) {
+            val warWinner = warResult()
+        }
+        goldForEndingTurn()
+
+        gameRepository.changeTurnCounter(turn.number + 1)
         gameRepository.savePlayerStateOfTurn(1, false)
         gameRepository.savePlayerStateOfTurn(2, false)
         gameRepository.savePlayerStateOfTurn(3, false)
+    }
+
+    private fun isWar() {
+        //ataki na bazy
+        //player1
+        if (player1.armyPosition.x == player2.basePosition.x && player1.armyPosition.y == player2.basePosition.y) {
+            isPlayer1onWar = true
+            isPlayer2onWar = true
+        }
+        if (player1.armyPosition.x == player3.basePosition.x && player1.armyPosition.y == player3.basePosition.y) {
+            isPlayer1onWar = true
+            isPlayer3onWar = true
+        }
+        //player2
+        if (player2.armyPosition.x == player1.basePosition.x && player2.armyPosition.y == player1.basePosition.y) {
+            isPlayer2onWar = true
+            isPlayer1onWar = true
+        }
+        if (player2.armyPosition.x == player3.basePosition.x && player2.armyPosition.y == player3.basePosition.y) {
+            isPlayer2onWar = true
+            isPlayer3onWar = true
+        }
+        //player3
+        if (player3.armyPosition.x == player1.basePosition.x && player3.armyPosition.y == player1.basePosition.y) {
+            isPlayer3onWar = true
+            isPlayer1onWar = true
+        }
+        if (player3.armyPosition.x == player2.basePosition.x && player3.armyPosition.y == player2.basePosition.y) {
+            isPlayer3onWar = true
+            isPlayer2onWar = true
+        }
+        //spotkanie wojsk
+        //player1
+        if (player1.armyPosition.x == player2.armyPosition.x && player1.armyPosition.y == player2.armyPosition.y) {
+            isPlayer1onWar = true
+            isPlayer2onWar = true
+        }
+        if (player1.armyPosition.x == player3.armyPosition.x && player1.armyPosition.y == player3.basePosition.y) {
+            isPlayer1onWar = true
+            isPlayer3onWar = true
+        }
+        //player2
+        if (player2.armyPosition.x == player1.armyPosition.x && player2.armyPosition.y == player1.armyPosition.y) {
+            isPlayer2onWar = true
+            isPlayer1onWar = true
+        }
+        if (player2.armyPosition.x == player3.armyPosition.x && player2.armyPosition.y == player3.armyPosition.y) {
+            isPlayer2onWar = true
+            isPlayer3onWar = true
+        }
+        //player3
+        if (player3.armyPosition.x == player1.armyPosition.x && player3.armyPosition.y == player1.armyPosition.y) {
+            isPlayer3onWar = true
+            isPlayer1onWar = true
+        }
+        if (player3.armyPosition.x == player2.armyPosition.x && player3.armyPosition.y == player2.armyPosition.y) {
+            isPlayer3onWar = true
+            isPlayer2onWar = true
+        }
+
+        wasWar = isPlayer1onWar || isPlayer3onWar || isPlayer2onWar
+
+    }
+
+    private fun warResult() : Int {
+        var winnerId = 0
+        var army1 = player1.armySize
+        var army2 = player2.armySize
+        var army3 = player3.armySize
+        if (player1.nation == "USA") {
+            army1 += (army1 * 1.1).toInt()
+        }
+        if (player2.nation == "USA") {
+            army2 += (army2 * 1.1).toInt()
+        }
+        if (player3.nation == "USA") {
+            army3 += (army3 * 1.1).toInt()
+        }
+        if (isPlayer1onWar && isPlayer2onWar && isPlayer3onWar) {
+            if (army1 > army2 && army1 > army3) {
+                winnerId = 1
+            } else if (army2 > army1 && army2 > army3) {
+                winnerId = 2
+            } else if (army3 > army1 && army3 > army2) {
+                winnerId = 3
+            } else if (army1 > army2) {
+                do {
+                    winnerId = Random.nextInt(1, 3)
+                } while (winnerId == 2)
+            } else if (army2 > army1) {
+                winnerId = Random.nextInt(2, 3)
+            } else if (army1 > army3)
+                winnerId = Random.nextInt(1, 2)
+            else  {
+                winnerId = Random.nextInt(1, 3)
+            }
+        } else if (isPlayer1onWar && isPlayer2onWar) {
+            winnerId = if (army1 > army2) {
+                1
+            } else if (army2 > army1) {
+                2
+            } else {
+                Random.nextInt(1, 2)
+            }
+        } else if (isPlayer1onWar && isPlayer3onWar) {
+            if (army1 > army3) {
+                winnerId = 1
+            } else if (army3 > army1) {
+                winnerId = 2
+            } else{
+                do {
+                    winnerId = Random.nextInt(1, 3)
+                } while (winnerId == 2)
+            }
+        } else if (isPlayer2onWar && isPlayer3onWar) {
+            if (army2 > army3) {
+                winnerId = 1
+            } else if (army3 > army2) {
+                winnerId = 2
+            } else {
+                winnerId = Random.nextInt(2, 3)
+            }
+        }
+        return winnerId
+    }
+
+    private fun warResultBot() : Int {
+        var winnerId = 0
+        val armies = mutableListOf(player1.armySize, player2.armySize, player3.armySize)
+        val nations = listOf(player1.nation, player2.nation, player3.nation)
+
+        for (i in 0 until armies.size) {
+            if (nations[i] == "USA") {
+                armies[i] += (armies[i] * 1.1).toInt()
+            }
+        }
+
+        val playersOnWar = mutableListOf<Int>()
+        if (isPlayer1onWar) playersOnWar.add(1)
+        if (isPlayer2onWar) playersOnWar.add(2)
+        if (isPlayer3onWar) playersOnWar.add(3)
+
+        var maxArmy = 0
+        for (i in playersOnWar) {
+            if (armies[i - 1] > maxArmy) {
+                maxArmy = armies[i - 1]
+                winnerId = i
+            } else if (armies[i - 1] == maxArmy) {
+                val randomPlayer = Random.nextInt(playersOnWar.first(), playersOnWar.last() + 1)
+                while (randomPlayer == i) {
+                    winnerId = randomPlayer
+                }
+            }
+        }
+        return winnerId
+    }
+
+    private fun goldForEndingTurn() {
+        var player1gold = goldPerTurn
+        var player2gold = goldPerTurn
+        var player3gold = goldPerTurn
+
+        if (player1.nation == "Spain")
+            player1gold = goldPerTurnForSpain
+        if (player2.nation == "Spain")
+            player2gold = goldPerTurnForSpain
+        if (player3.nation == "Spain")
+            player3gold = goldPerTurnForSpain
     }
 
     private fun savePlayerGold(index: Int, player: Player, gold: Int) {
