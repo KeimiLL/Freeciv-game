@@ -64,7 +64,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
             )
         }
 
-        when (boardViewModel.currentNationChoice) {
+        when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
             "France" -> {
                 Image(
                     modifier = Modifier.width(120.dp),
@@ -86,7 +86,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                     contentDescription = "Nation flag"
                 )
             }
-            "Usa" -> {
+            "USA" -> {
                 Image(
                     modifier = Modifier.width(120.dp),
                     painter = painterResource(id = R.drawable.usa),
@@ -131,7 +131,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = stringResource(id = R.string.email),
+                    text = "Email: ",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -151,7 +151,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "nacja",
+                    text = "Nation: " + (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -171,12 +171,12 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "perk",
+                    text = "Perk: ",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.width(20.dp))
-                when (boardViewModel.currentNationChoice) {
+                when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
                     "France" -> {
                         Text(
                             text = "Your army has 2 extra steps each turn",
@@ -198,7 +198,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    "Usa" -> {
+                    "USA" -> {
                         Text(
                             text = "Your army deals 10% more damage",
                             style = MaterialTheme.typography.bodyLarge,
