@@ -15,19 +15,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
+import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.ui.auth.AuthViewModel
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
+import hilt_aggregated_deps._com_mobilne_civ2077_ui_board_BoardViewModel_HiltModules_KeyModule
 
 
 @Composable
-fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
+fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boardViewModel: BoardViewModel) {
     val spacing = MaterialTheme.spacing
     Column(
         modifier = Modifier
@@ -47,24 +51,50 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             )
             Spacer(modifier = Modifier.width(10.dp))
             // miejsce na łączneie z nazwą usera
-            Text(
-                text = "Nazwa-usera",
-                style = MaterialTheme.typography.headlineLarge,
-                color = Color(0xffe86d01)
-            )
+//            Text(
+//                text = "Nazwa-usera",
+//                style = MaterialTheme.typography.headlineLarge,
+//                color = Color(0xffe86d01)
+//            )
 
             Text(
                 text = viewModel?.currentUser?.displayName ?: "",
-                style = MaterialTheme.typography.displaySmall,
-                color = MaterialTheme.colorScheme.onSurface
+                style = MaterialTheme.typography.headlineLarge,
+                color = Color(0xffe86d01)
             )
         }
 
-        Image(
-            modifier = Modifier.width(120.dp),
-            painter = painterResource(id = R.drawable.france),
-            contentDescription = "Nation flag"
-        )
+        when (boardViewModel.currentNationChoice) {
+            "France" -> {
+                Image(
+                    modifier = Modifier.width(120.dp),
+                    painter = painterResource(id = R.drawable.france),
+                    contentDescription = "Nation flag"
+                )
+            }
+            "Spain" -> {
+                Image(
+                    modifier = Modifier.width(120.dp),
+                    painter = painterResource(id = R.drawable.spain),
+                    contentDescription = "Nation flag"
+                )
+            }
+            "Uk" -> {
+                Image(
+                    modifier = Modifier.width(120.dp),
+                    painter = painterResource(id = R.drawable.uk),
+                    contentDescription = "Nation flag"
+                )
+            }
+            "Usa" -> {
+                Image(
+                    modifier = Modifier.width(120.dp),
+                    painter = painterResource(id = R.drawable.usa),
+                    contentDescription = "Nation flag"
+                )
+            }
+        }
+
 
         Column(
             modifier = Modifier
@@ -127,7 +157,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 )
                 Spacer(modifier = Modifier.width(20.dp))
                 Text(
-                    text = "",
+                    text = boardViewModel.currentNationChoice,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -146,11 +176,37 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.width(20.dp))
-                Text(
-                    text = "",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                when (boardViewModel.currentNationChoice) {
+                    "France" -> {
+                        Text(
+                            text = "Your army has 2 extra steps each turn",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    "Spain" -> {
+                        Text(
+                            text = "Each turn gives additional 100 gold",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    "Uk" -> {
+                        Text(
+                            text = "Each perk costs 10% less",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    "Usa" -> {
+                        Text(
+                            text = "Your army deals 10% more damage",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
             }
         }
         // Przyciski wyloguj i wróć
@@ -193,18 +249,18 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-@Composable
-fun HomeScreenPreviewLight() {
-    AppTheme {
-        HomeScreen(null, rememberNavController())
-    }
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun HomeScreenPreviewDark() {
-    AppTheme {
-        HomeScreen(null, rememberNavController())
-    }
-}
+//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+//@Composable
+//fun HomeScreenPreviewLight() {
+//    AppTheme {
+//        HomeScreen(null, rememberNavController())
+//    }
+//}
+//
+//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//fun HomeScreenPreviewDark() {
+//    AppTheme {
+//        HomeScreen(null, rememberNavController())
+//    }
+//}

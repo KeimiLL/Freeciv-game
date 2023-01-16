@@ -35,7 +35,7 @@ fun AppNavHost(
             SignupScreen(authViewModel, navController)
         }
         composable(ROUTE_HOME) {
-            HomeScreen(authViewModel, navController)
+            HomeScreen(authViewModel, navController, boardViewModel)
         }
         composable(ROUTE_BOARD) {
             FullBoardView(authViewModel, boardViewModel, navController)
