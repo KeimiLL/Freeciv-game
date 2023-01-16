@@ -1,7 +1,6 @@
 package com.mobilne.civ2077.ui.board.views.endOfTurn
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -12,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.board.BoardViewModel
@@ -79,7 +77,10 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.onWar.value.user1.gold)
+                var gold = 100
+                if (boardViewModel.getPlayerByIndex(1).nation == "Spain")
+                    gold = 200
+                DisplayValue(boardViewModel.onWar.value.user1.gold + gold)
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -91,7 +92,10 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.onWar.value.user2.gold)
+                var gold = 100
+                if (boardViewModel.getPlayerByIndex(2).nation == "Spain")
+                    gold = 200
+                DisplayValue(boardViewModel.onWar.value.user2.gold + gold)
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -103,7 +107,10 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.onWar.value.user3.gold)
+                var gold = 100
+                if (boardViewModel.getPlayerByIndex(3).nation == "Spain")
+                    gold = 200
+                DisplayValue(boardViewModel.onWar.value.user3.gold + gold)
             }
             Spacer(modifier = Modifier.height(10.dp))
 
