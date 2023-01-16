@@ -17,8 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
-import com.mobilne.civ2077.data.game.Player
-import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
 fun Army(viewModel: ArmyViewModel) {
@@ -65,7 +63,7 @@ fun BuyArmyHeader() {
             text = "Buy Units",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
+            color = Color.Black
         )
         Spacer(modifier = Modifier.width(width = 10.dp))
         Image(
@@ -122,7 +120,7 @@ fun SendArmyHeader(
                 text = "Move Army",
                 style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface
+                color = Color.Black
             )
             Spacer(modifier = Modifier.width(width = 10.dp))
             Image(
@@ -137,7 +135,7 @@ fun SendArmyHeader(
             text = "Max ${step}step(s) in each direction",
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
+            color = Color.Black
         )
     }
 }
