@@ -46,30 +46,6 @@ class TurnViewModel(
     var buttonText by mutableStateOf(_endOfTurn)
     var duringTurn by mutableStateOf(true)
 
-
-    fun pass() {
-        if (duringTurn) {
-            buttonText = _alreadyPassed
-            duringTurn = false
-            gameRepository.savePlayerStateOfTurn(id, true)
-        }
-        when (id) {
-            1 -> {
-                if (turn.player2 && turn.player3)
-                    endOfTurnAction()
-            }
-            2 -> {
-                if (turn.player1 && turn.player3)
-                    endOfTurnAction()
-            }
-            3 -> {
-                if (turn.player1 && turn.player2)
-                    endOfTurnAction()
-            }
-        }
-    }
-
-
     fun usersState() {
         when (id) {
             1 -> {
@@ -99,20 +75,41 @@ class TurnViewModel(
             _otherPlayerEndedTurn
     }
 
-    private fun endOfTurnAction() {
+    fun pass() {
+        if (duringTurn) {
+            buttonText = _alreadyPassed
+            duringTurn = false
+            gameRepository.savePlayerStateOfTurn(id, true)
+        }
+        when (id) {
+            1 -> {
+                if (turn.player2 && turn.player3)
+                    endOfTurnAction()
+            }
+            2 -> {
+                if (turn.player1 && turn.player3)
+                    endOfTurnAction()
+            }
+            3 -> {
+                if (turn.player1 && turn.player2)
+                    endOfTurnAction()
+            }
+        }
+    }
 
+
+    private fun endOfTurnAction() {
         isWar()
         if (wasWar) {
             warResult()
+            resetArmyPositionChanged(1, player1)
+            resetArmyPositionChanged(2, player2)
+            resetArmyPositionChanged(3, player3)
         } else {
             addGoldPerTurnWithoutWar(1, player1)
             addGoldPerTurnWithoutWar(2, player2)
             addGoldPerTurnWithoutWar(3, player3)
         }
-
-        resetArmyPositionChanged(1, player1)
-        resetArmyPositionChanged(2, player2)
-        resetArmyPositionChanged(3, player3)
 
         gameRepository.changeTurnCounter(turn.number + 1)
         gameRepository.savePlayerStateOfTurn(1, false)
@@ -123,7 +120,7 @@ class TurnViewModel(
     private fun resetArmyPositionChanged(id: Int, player: Player){
         gameRepository.savePlayer(id, Player(
             armyPosition = player.armyPosition,
-            armyPositionChanged = player.armyPositionChanged,
+            armyPositionChanged = false,
             armySize = player.armySize,
             basePosition = player.basePosition,
             dev = player.dev,
@@ -135,7 +132,7 @@ class TurnViewModel(
     private fun addGoldPerTurnWithoutWar(id: Int, player: Player){
         gameRepository.savePlayer(id, Player(
             armyPosition = player.armyPosition,
-            armyPositionChanged = player.armyPositionChanged,
+            armyPositionChanged = false,
             armySize = player.armySize,
             basePosition = player.basePosition,
             dev = player.dev,
