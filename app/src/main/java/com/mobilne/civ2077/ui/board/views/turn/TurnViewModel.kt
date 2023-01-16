@@ -206,7 +206,7 @@ class TurnViewModel(
                 armySizeCounter = 1.4
             }
         }
-        if (player1.nation == "USA") {
+        if (player.nation == "USA") {
             armySizeCounter += 0.1
         }
         armySize = (armySize * armySizeCounter).toInt()
@@ -264,11 +264,11 @@ class TurnViewModel(
         } else if (isPlayer2onWar && isPlayer3onWar) {
             addGoldPerTurnWithoutWar(1,  player1)
             if (armyWithPerks2 > armyWithPerks3) {
-                savePlayerAfterWar(2, player2, player3.gold)
-                savePlayerAfterWar(3, player3, -player3.gold)
+                savePlayerAfterWar(2, player2, player3.gold/2)
+                savePlayerAfterWar(3, player3, -player3.gold/2)
             } else if (armyWithPerks3 > armyWithPerks2) {
-                savePlayerAfterWar(2, player2, -player2.gold)
-                savePlayerAfterWar(3, player3, player2.gold)
+                savePlayerAfterWar(2, player2, -player2.gold/2)
+                savePlayerAfterWar(3, player3, player2.gold/2)
             } else {
                 savePlayerAfterWar(2, player2, 0)
                 savePlayerAfterWar(3, player3, 0)
