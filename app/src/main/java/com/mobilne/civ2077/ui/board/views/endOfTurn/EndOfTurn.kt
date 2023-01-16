@@ -1,7 +1,6 @@
 package com.mobilne.civ2077.ui.board.views.endOfTurn
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -20,7 +19,8 @@ import com.mobilne.civ2077.ui.board.BoardViewModel
 @Composable
 fun EndOfTurn(boardViewModel: BoardViewModel) {
     Surface(
-        modifier = Modifier.fillMaxSize().background(Color.Black)
+        modifier = Modifier.fillMaxSize(),
+        color = Color.White,
     ) {
         Column(modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -30,7 +30,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Turn summary",
                     style = MaterialTheme.typography.headlineLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
                 Image(
                     painter = painterResource(id = R.drawable.summary),
@@ -46,38 +46,37 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
             //User 1
             Text(text = "User 1:",
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onSurface)
+                color = Color.Black)
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Gold:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.onWa)
-
+                DisplayValue(boardViewModel.onWar.value.user1.gold)
             }
             Spacer(modifier = Modifier.width(5.dp))
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Army:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.player1.value.armySize)
+                DisplayValue(boardViewModel.onWar.value.user1.units)
             }
             Spacer(modifier = Modifier.width(30.dp))
 
             // User 2
             Text(text = "User 2:",
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onSurface)
+                color = Color.Black)
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Gold:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.player2.value.gold)
+                DisplayValue(boardViewModel.onWar.value.user2.gold)
 
             }
             Spacer(modifier = Modifier.width(5.dp))
@@ -85,23 +84,23 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Army:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.player2.value.armySize)
+                DisplayValue(boardViewModel.onWar.value.user2.units)
             }
             Spacer(modifier = Modifier.width(30.dp))
 
             // User 3
             Text(text = "User 3:",
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onSurface)
+                color = Color.Black)
             Row(verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Gold:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.player3.value.gold)
+                DisplayValue(boardViewModel.onWar.value.user3.gold)
 
             }
             Spacer(modifier = Modifier.width(5.dp))
@@ -109,9 +108,9 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 horizontalArrangement = Arrangement.Center) {
                 Text(text = "Army:",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface)
+                    color = Color.Black)
                 Spacer(modifier = Modifier.width(10.dp))
-                DisplayValue(boardViewModel.player3.value.armySize)
+                DisplayValue(boardViewModel.onWar.value.user3.units)
             }
         }
     }
@@ -126,7 +125,7 @@ fun DisplayValue(value: Int) {
     } else if (value == 0) {
         Text(text = value.toString(),
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface)
+            color = Color.Black)
     } else {
         Text(text = value.toString(),
             style = MaterialTheme.typography.bodyLarge,
