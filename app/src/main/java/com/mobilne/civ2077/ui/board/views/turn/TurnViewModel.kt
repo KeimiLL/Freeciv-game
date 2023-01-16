@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.mobilne.civ2077.data.game.GameRepository
 import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.data.game.Turn
-import kotlin.random.Random
 
 class TurnViewModel(
     var turn: Turn, val id: Int,
@@ -179,97 +178,93 @@ class TurnViewModel(
 
     }
 
-    private fun warResult() : Int {
-        var winnerId = 0
-        var army1 = player1.armySize
-        var army2 = player2.armySize
-        var army3 = player3.armySize
+    private fun calculateArmySize(player: Player): Int {
+        var armySize = player.armySize
+        var armySizeCounter = 1.0
+        when (player.dev.right) {
+            1 -> {
+                armySizeCounter = 1.1
+            }
+            2 -> {
+                armySizeCounter = 1.2
+            }
+            3 -> {
+                armySizeCounter = 1.3
+            }
+            4 -> {
+                armySizeCounter = 1.4
+            }
+        }
         if (player1.nation == "USA") {
-            army1 += (army1 * 1.1).toInt()
+            armySizeCounter += 0.1
         }
-        if (player2.nation == "USA") {
-            army2 += (army2 * 1.1).toInt()
-        }
-        if (player3.nation == "USA") {
-            army3 += (army3 * 1.1).toInt()
-        }
-        if (isPlayer1onWar && isPlayer2onWar && isPlayer3onWar) {
-            if (army1 > army2 && army1 > army3) {
-                winnerId = 1
-            } else if (army2 > army1 && army2 > army3) {
-                winnerId = 2
-            } else if (army3 > army1 && army3 > army2) {
-                winnerId = 3
-            } else if (army1 > army2) {
-                do {
-                    winnerId = Random.nextInt(1, 3)
-                } while (winnerId == 2)
-            } else if (army2 > army1) {
-                winnerId = Random.nextInt(2, 3)
-            } else if (army1 > army3)
-                winnerId = Random.nextInt(1, 2)
-            else  {
-                winnerId = Random.nextInt(1, 3)
-            }
-        } else if (isPlayer1onWar && isPlayer2onWar) {
-            winnerId = if (army1 > army2) {
-                1
-            } else if (army2 > army1) {
-                2
-            } else {
-                Random.nextInt(1, 2)
-            }
-        } else if (isPlayer1onWar && isPlayer3onWar) {
-            if (army1 > army3) {
-                winnerId = 1
-            } else if (army3 > army1) {
-                winnerId = 2
-            } else{
-                do {
-                    winnerId = Random.nextInt(1, 3)
-                } while (winnerId == 2)
-            }
-        } else if (isPlayer2onWar && isPlayer3onWar) {
-            if (army2 > army3) {
-                winnerId = 1
-            } else if (army3 > army2) {
-                winnerId = 2
-            } else {
-                winnerId = Random.nextInt(2, 3)
-            }
-        }
-        return winnerId
+        armySize = (armySize * armySizeCounter).toInt()
+        return armySize
     }
 
-    private fun warResultBot() : Int {
-        var winnerId = 0
-        val armies = mutableListOf(player1.armySize, player2.armySize, player3.armySize)
-        val nations = listOf(player1.nation, player2.nation, player3.nation)
 
-        for (i in 0 until armies.size) {
-            if (nations[i] == "USA") {
-                armies[i] += (armies[i] * 1.1).toInt()
+    private fun warResult() {
+        var armyWithPerks1 = calculateArmySize(player1)
+        var armyWithPerks2 = calculateArmySize(player2)
+        var armyWithPerks3 = calculateArmySize(player3)
+
+        if (isPlayer1onWar && isPlayer2onWar && isPlayer3onWar) {
+            if (armyWithPerks1 > armyWithPerks2 && armyWithPerks1 > armyWithPerks3) {
+                saveToWar(1, player1.armySize / 2, player2.gold/2+ player3.gold/2)
+                saveToWar(2, player2.armySize / 2, -player2.gold/2)
+                saveToWar(3, player3.armySize / 2, -player3.gold/2)
+            } else if (armyWithPerks2 > armyWithPerks1 && armyWithPerks2 > armyWithPerks3) {
+                saveToWar(1, player1.armySize / 2, -player1.gold/2)
+                saveToWar(2, player2.armySize / 2, player1.gold/2 + player3.gold/2)
+                saveToWar(3, player3.armySize / 2, -player3.gold/2)
+            } else if (armyWithPerks3 > armyWithPerks1 && armyWithPerks3 > armyWithPerks2) {
+                saveToWar(1, player1.armySize / 2, -player1.gold/2)
+                saveToWar(2, player2.armySize / 2, -player2.gold/2)
+                saveToWar(3, player3.armySize / 2, player1.gold/2 + player2.gold/2)
+            } else {
+                saveToWar(1, player1.armySize / 2, 0)
+                saveToWar(2, player2.armySize / 2, 0)
+                saveToWar(3, player3.armySize / 2, 0)
+            }
+        } else if (isPlayer1onWar && isPlayer2onWar) {
+            if (armyWithPerks1 > armyWithPerks2) {
+                saveToWar(1, player1.armySize / 2, player2.gold/2)
+                saveToWar(2, player2.armySize / 2, -player2.gold/2)
+            } else if (armyWithPerks2 > armyWithPerks1) {
+                saveToWar(1, player1.armySize / 2, -player1.gold/2)
+                saveToWar(2, player2.armySize / 2, player1.gold/2)
+            } else {
+                saveToWar(1, player1.armySize / 2, 0)
+                saveToWar(2, player2.armySize / 2, 0)
+            }
+        } else if (isPlayer1onWar && isPlayer3onWar) {
+            if (armyWithPerks1 > armyWithPerks3) {
+                saveToWar(1, player1.armySize / 2, player3.gold/2)
+                saveToWar(3, player3.armySize / 2, -player3.gold/2)
+            } else if (armyWithPerks3 > armyWithPerks1) {
+                saveToWar(1, player1.armySize / 2, -player1.gold/2)
+                saveToWar(3, player3.armySize / 2, player1.gold/2)
+            } else {
+                saveToWar(1, player1.armySize / 2, 0)
+                saveToWar(3, player3.armySize / 2, 0)
+            }
+        } else if (isPlayer2onWar && isPlayer3onWar) {
+            if (armyWithPerks2 > armyWithPerks3) {
+                saveToWar(2, player2.armySize / 2, player3.gold)
+                saveToWar(3, player3.armySize / 2, -player3.gold)
+            } else if (armyWithPerks3 > armyWithPerks2) {
+                saveToWar(2, player2.armySize / 2, -player2.gold)
+                saveToWar(3, player3.armySize / 2, player2.gold)
+            } else {
+                saveToWar(2, player2.armySize / 2, 0)
+                saveToWar(3, player3.armySize / 2, 0)
             }
         }
+    }
 
-        val playersOnWar = mutableListOf<Int>()
-        if (isPlayer1onWar) playersOnWar.add(1)
-        if (isPlayer2onWar) playersOnWar.add(2)
-        if (isPlayer3onWar) playersOnWar.add(3)
 
-        var maxArmy = 0
-        for (i in playersOnWar) {
-            if (armies[i - 1] > maxArmy) {
-                maxArmy = armies[i - 1]
-                winnerId = i
-            } else if (armies[i - 1] == maxArmy) {
-                val randomPlayer = Random.nextInt(playersOnWar.first(), playersOnWar.last() + 1)
-                while (randomPlayer == i) {
-                    winnerId = randomPlayer
-                }
-            }
-        }
-        return winnerId
+    private fun saveToWar(id: Int, armyChange: Int, goldChange: Int) {
+
     }
 
     private fun goldForEndingTurn() {
