@@ -149,6 +149,9 @@ fun FullBoardView(
                 else if (boardViewModel.currentView.contains("Turn"))
                     Turn(viewModel = TurnViewModel(
                         id = boardViewModel.currentPlayerIndex.value,
+                        player1 = boardViewModel.player1.value,
+                        player2 = boardViewModel.player2.value,
+                        player3 = boardViewModel.player3.value,
                         gameRepository = boardViewModel.gameRepository,
                         turn= boardViewModel.turn.value
                     ))
