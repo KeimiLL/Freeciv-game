@@ -1,7 +1,5 @@
 package com.mobilne.civ2077.ui.home
 
-import android.content.res.Configuration
-import android.media.Image
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -13,21 +11,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
-import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.navigation.ROUTE_BOARD
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.board.BoardViewModel
-import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
-import hilt_aggregated_deps._com_mobilne_civ2077_ui_board_BoardViewModel_HiltModules_KeyModule
 
 
 @Composable
