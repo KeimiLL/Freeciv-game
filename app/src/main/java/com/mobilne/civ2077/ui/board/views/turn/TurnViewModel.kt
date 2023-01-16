@@ -101,8 +101,10 @@ class TurnViewModel(
     private fun endOfTurnAction() {
         isWar()
         if (wasWar) {
+            gameRepository.saveWasWarLastTurn(wasWarLastTurn = true)
             warResult()
         } else {
+            zeroWar()
             addGoldPerTurnWithoutWar(1, player1)
             addGoldPerTurnWithoutWar(2, player2)
             addGoldPerTurnWithoutWar(3, player3)
@@ -114,16 +116,26 @@ class TurnViewModel(
         gameRepository.savePlayerStateOfTurn(3, false)
     }
 
-    private fun addGoldPerTurnWithoutWar(id: Int, player: Player){
-        gameRepository.savePlayer(id, Player(
-            armyPosition = player.armyPosition,
-            armyPositionChanged = false,
-            armySize = player.armySize,
-            basePosition = player.basePosition,
-            dev = player.dev,
-            gold = player.gold + getEndOfTurnGold(player),
-            nation = player.nation
-        ))
+    private fun zeroWar(){
+        gameRepository.saveWasWarLastTurn(wasWarLastTurn = false)
+        for (i in 1..3)
+            gameRepository.saveOnWar(i, 0, 0)
+    }
+
+
+
+    private fun addGoldPerTurnWithoutWar(id: Int, player: Player) {
+        gameRepository.savePlayer(
+            id, Player(
+                armyPosition = player.armyPosition,
+                armyPositionChanged = false,
+                armySize = player.armySize,
+                basePosition = player.basePosition,
+                dev = player.dev,
+                gold = player.gold + getEndOfTurnGold(player),
+                nation = player.nation
+            )
+        )
     }
 
 
@@ -186,7 +198,6 @@ class TurnViewModel(
         }
 
         wasWar = isPlayer1onWar || isPlayer3onWar || isPlayer2onWar
-        /*Todo Zapis wasWar do bazy*/
     }
 
     private fun calculateArmySize(player: Player): Int {
@@ -221,54 +232,54 @@ class TurnViewModel(
 
         if (isPlayer1onWar && isPlayer2onWar && isPlayer3onWar) {
             if (armyWithPerks1 > armyWithPerks2 && armyWithPerks1 > armyWithPerks3) {
-                saveToWar(1, player1.armySize / 2, player2.gold/2+ player3.gold/2)
-                saveToWar(2, player2.armySize / 2, -player2.gold/2)
-                saveToWar(3, player3.armySize / 2, -player3.gold/2)
+                savePlayerAfterWar(1, player1, (player2.gold / 2 + player3.gold / 2))
+                savePlayerAfterWar(2, player2, -player2.gold / 2)
+                savePlayerAfterWar(3, player3, -player3.gold / 2)
             } else if (armyWithPerks2 > armyWithPerks1 && armyWithPerks2 > armyWithPerks3) {
-                saveToWar(1, player1.armySize / 2, -player1.gold/2)
-                saveToWar(2, player2.armySize / 2, player1.gold/2 + player3.gold/2)
-                saveToWar(3, player3.armySize / 2, -player3.gold/2)
+                savePlayerAfterWar(1, player1, -player1.gold / 2)
+                savePlayerAfterWar(2, player2, (player1.gold / 2 + player3.gold / 2))
+                savePlayerAfterWar(3, player3, -player3.gold / 2)
             } else if (armyWithPerks3 > armyWithPerks1 && armyWithPerks3 > armyWithPerks2) {
-                saveToWar(1, player1.armySize / 2, -player1.gold/2)
-                saveToWar(2, player2.armySize / 2, -player2.gold/2)
-                saveToWar(3, player3.armySize / 2, player1.gold/2 + player2.gold/2)
+                savePlayerAfterWar(1, player1, -player1.gold / 2)
+                savePlayerAfterWar(2, player2, -player2.gold / 2)
+                savePlayerAfterWar(3, player3, (player1.gold / 2 + player2.gold / 2))
             } else {
-                saveToWar(1, player1.armySize / 2, 0)
-                saveToWar(2, player2.armySize / 2, 0)
-                saveToWar(3, player3.armySize / 2, 0)
+                savePlayerAfterWar(1, player1, 0)
+                savePlayerAfterWar(2, player2, 0)
+                savePlayerAfterWar(3, player3, 0)
             }
         } else if (isPlayer1onWar && isPlayer2onWar) {
-            addGoldPerTurnWithoutWar(3,  player3)
+            addGoldPerTurnWithoutWar(3, player3)
             if (armyWithPerks1 > armyWithPerks2) {
-                savePlayerAfterWar(1, player1, player2.gold/2)
-                savePlayerAfterWar(2, player2, -player2.gold/2)
+                savePlayerAfterWar(1, player1, player2.gold / 2)
+                savePlayerAfterWar(2, player2, -player2.gold / 2)
             } else if (armyWithPerks2 > armyWithPerks1) {
-                savePlayerAfterWar(1, player1, -player1.gold/2)
-                savePlayerAfterWar(2, player2, player1.gold/2)
+                savePlayerAfterWar(1, player1, -player1.gold / 2)
+                savePlayerAfterWar(2, player2, player1.gold / 2)
             } else {
                 savePlayerAfterWar(1, player1, 0)
                 savePlayerAfterWar(2, player2, 0)
             }
         } else if (isPlayer1onWar && isPlayer3onWar) {
-            addGoldPerTurnWithoutWar(2,  player2)
+            addGoldPerTurnWithoutWar(2, player2)
             if (armyWithPerks1 > armyWithPerks3) {
-                savePlayerAfterWar(1, player1, player3.gold/2)
-                savePlayerAfterWar(3, player3, -player3.gold/2)
+                savePlayerAfterWar(1, player1, player3.gold / 2)
+                savePlayerAfterWar(3, player3, -player3.gold / 2)
             } else if (armyWithPerks3 > armyWithPerks1) {
-                savePlayerAfterWar(1, player1, -player1.gold/2)
-                savePlayerAfterWar(3, player3, player1.gold/2)
+                savePlayerAfterWar(1, player1, -player1.gold / 2)
+                savePlayerAfterWar(3, player3, player1.gold / 2)
             } else {
                 savePlayerAfterWar(1, player1, 0)
                 savePlayerAfterWar(3, player3, 0)
             }
         } else if (isPlayer2onWar && isPlayer3onWar) {
-            addGoldPerTurnWithoutWar(1,  player1)
+            addGoldPerTurnWithoutWar(1, player1)
             if (armyWithPerks2 > armyWithPerks3) {
-                savePlayerAfterWar(2, player2, player3.gold/2)
-                savePlayerAfterWar(3, player3, -player3.gold/2)
+                savePlayerAfterWar(2, player2, player3.gold / 2)
+                savePlayerAfterWar(3, player3, -player3.gold / 2)
             } else if (armyWithPerks3 > armyWithPerks2) {
-                savePlayerAfterWar(2, player2, -player2.gold/2)
-                savePlayerAfterWar(3, player3, player2.gold/2)
+                savePlayerAfterWar(2, player2, -player2.gold / 2)
+                savePlayerAfterWar(3, player3, player2.gold / 2)
             } else {
                 savePlayerAfterWar(2, player2, 0)
                 savePlayerAfterWar(3, player3, 0)
@@ -276,35 +287,38 @@ class TurnViewModel(
         }
     }
 
-    private fun savePlayerAfterWar(id: Int, player: Player, goldChange: Int){
-        val armyChange = player.armySize/2
-        saveToWar(id, armyChange, goldChange)
+    private fun savePlayerAfterWar(id: Int, player: Player, goldChange: Int) {
+        val armyChange = player.armySize / 2
+        saveToWar(id, -armyChange, goldChange)
         savePlayerPropertiesAfterWar(id, player, armyChange, goldChange)
     }
 
-
-
     private fun saveToWar(id: Int, armyChange: Int, goldChange: Int) {
-
+        gameRepository.saveOnWar(id, gold = goldChange, units = armyChange)
     }
 
-    private fun savePlayerPropertiesAfterWar(id: Int, player: Player,armyChange: Int, goldChange: Int) {
+    private fun savePlayerPropertiesAfterWar(
+        id: Int,
+        player: Player,
+        armyChange: Int,
+        goldChange: Int
+    ) {
         val newPlayer = Player(
-                armyPosition = ArmyPosition(
-                    x = player.basePosition.x,
-                    y = player.basePosition.y,
-                ),
-                armyPositionChanged = false,
-                armySize = player.armySize - armyChange,
-                basePosition = player.basePosition,
-                dev = player.dev,
-                gold = player.gold + goldChange + getEndOfTurnGold(player),
-                nation = player.nation
+            armyPosition = ArmyPosition(
+                x = player.basePosition.x,
+                y = player.basePosition.y,
+            ),
+            armyPositionChanged = false,
+            armySize = player.armySize - armyChange,
+            basePosition = player.basePosition,
+            dev = player.dev,
+            gold = player.gold + goldChange + getEndOfTurnGold(player),
+            nation = player.nation
         )
         gameRepository.savePlayer(id, newPlayer)
     }
 
-    private fun getEndOfTurnGold(player: Player): Int{
+    private fun getEndOfTurnGold(player: Player): Int {
         return if (player.nation == "Spain")
             200
         else
