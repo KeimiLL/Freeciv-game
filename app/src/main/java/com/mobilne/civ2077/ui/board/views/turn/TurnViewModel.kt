@@ -1,5 +1,7 @@
 package com.mobilne.civ2077.ui.board.views.turn
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,7 +10,11 @@ import com.mobilne.civ2077.data.game.GameRepository
 import com.mobilne.civ2077.data.game.Player
 import com.mobilne.civ2077.data.game.Turn
 
-class TurnViewModel(val turn: Turn , val id: Int, private var gameRepository: GameRepository) :
+class TurnViewModel(var turn: Turn , val id: Int,
+                    val player1: Player,
+                    val player2: Player,
+                    val player3: Player,
+                    private val gameRepository: GameRepository) :
     ViewModel() {
     /*Todo sparwzdanie booleanów w bazie, kto zakończył turę, a kto nie
     *  dodanie propów dla innych userów z bazy i przklejenie ich do widoku*/
@@ -18,6 +24,10 @@ class TurnViewModel(val turn: Turn , val id: Int, private var gameRepository: Ga
 
     private val _otherPlayerDuringTurn = "Still playing.."
     private val _otherPlayerEndedTurn = "End of turn"
+
+    private val goldPerTurn = 100
+    private val goldPerTurnForSpain = 200
+    private var wasWar = false
 
 
     //Todo funkcja czytająca ich stan i dająca dobre dane
@@ -31,18 +41,32 @@ class TurnViewModel(val turn: Turn , val id: Int, private var gameRepository: Ga
 
 
     var buttonText by mutableStateOf(_endOfTurn)
-    var duringTurn by mutableStateOf(true) /* Todo Czytanie z bazy zalogowanego usera*/
+    var duringTurn by mutableStateOf(true)
 
 
     fun pass() {
         if (duringTurn) {
             buttonText = _alreadyPassed
             duringTurn = false
-            gameRepository.savePlayerEndOfTurn(id)
+            gameRepository.savePlayerStateOfTurn(id, true)
+        }
+        when (id) {
+            1 -> {
+                if (turn.player2 && turn.player3)
+                    endOfTurnAction()
+            }
+            2 -> {
+                if (turn.player1 && turn.player3)
+                    endOfTurnAction()
+            }
+            3 -> {
+                if (turn.player1 && turn.player2)
+                    endOfTurnAction()
+            }
         }
     }
 
-    /* Todo */
+
     fun usersState() {
         when (id) {
             1 -> {
@@ -70,6 +94,39 @@ class TurnViewModel(val turn: Turn , val id: Int, private var gameRepository: Ga
             _otherPlayerDuringTurn
         else
             _otherPlayerEndedTurn
+    }
+
+    private fun endOfTurnAction(){
+        if (player1.nation == "Spain")
+            savePlayerGold(1, player1, goldPerTurnForSpain)
+        else
+            savePlayerGold(1, player1, goldPerTurn)
+        if (player2.nation == "Spain")
+            savePlayerGold(2, player2, goldPerTurnForSpain)
+        else
+            savePlayerGold(2, player2, goldPerTurn)
+        if (player3.nation == "Spain")
+            savePlayerGold(3, player3, goldPerTurnForSpain)
+        else
+            savePlayerGold(3, player3, goldPerTurn)
+
+        gameRepository.changeTurnCounter(turn.number+1)
+        gameRepository.savePlayerStateOfTurn(1, false)
+        gameRepository.savePlayerStateOfTurn(2, false)
+        gameRepository.savePlayerStateOfTurn(3, false)
+    }
+
+    private fun savePlayerGold(index: Int, player: Player, gold: Int) {
+        val newPlayer = Player(
+            armyPosition = player.armyPosition,
+            armyPositionChanged = player.armyPositionChanged,
+            armySize = player.armySize,
+            basePosition = player.basePosition,
+            dev = player.dev,
+            gold = player.gold + gold,
+            nation = player.nation
+        )
+        gameRepository.savePlayer(index, newPlayer)
     }
 
 }

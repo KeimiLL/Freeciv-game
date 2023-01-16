@@ -203,8 +203,16 @@ class GameRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun savePlayerEndOfTurn(index: Int) {
-        databaseRef.child("turn").child("player$index").setValue(true).addOnSuccessListener {
+    override fun savePlayerStateOfTurn(index: Int, state: Boolean) {
+        databaseRef.child("turn").child("player$index").setValue(state).addOnSuccessListener {
+            Log.d(TAG, "Saved successfully")
+        }.addOnFailureListener {
+            Log.d(TAG, "Failed to save value: ${it.message}")
+        }
+    }
+
+    override fun changeTurnCounter(counter: Int) {
+        databaseRef.child("turn").child("number").setValue(counter).addOnSuccessListener {
             Log.d(TAG, "Saved successfully")
         }.addOnFailureListener {
             Log.d(TAG, "Failed to save value: ${it.message}")
