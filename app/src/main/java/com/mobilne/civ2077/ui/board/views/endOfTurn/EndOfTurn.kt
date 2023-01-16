@@ -164,7 +164,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 DisplayValue(boardViewModel.onWar.value.user3.units)
             }
             Spacer(modifier = Modifier.height(10.dp))
-            SummInfo(false)
+            SummInfo(boardViewModel.wasWarLastTurn.value)
         }
     }
 }
