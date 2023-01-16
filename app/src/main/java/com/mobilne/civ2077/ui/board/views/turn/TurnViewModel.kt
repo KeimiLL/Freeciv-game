@@ -102,9 +102,6 @@ class TurnViewModel(
         isWar()
         if (wasWar) {
             warResult()
-            resetArmyPositionChanged(1, player1)
-            resetArmyPositionChanged(2, player2)
-            resetArmyPositionChanged(3, player3)
         } else {
             addGoldPerTurnWithoutWar(1, player1)
             addGoldPerTurnWithoutWar(2, player2)
@@ -115,18 +112,6 @@ class TurnViewModel(
         gameRepository.savePlayerStateOfTurn(1, false)
         gameRepository.savePlayerStateOfTurn(2, false)
         gameRepository.savePlayerStateOfTurn(3, false)
-    }
-
-    private fun resetArmyPositionChanged(id: Int, player: Player){
-        gameRepository.savePlayer(id, Player(
-            armyPosition = player.armyPosition,
-            armyPositionChanged = false,
-            armySize = player.armySize,
-            basePosition = player.basePosition,
-            dev = player.dev,
-            gold = player.gold,
-            nation = player.nation
-        ))
     }
 
     private fun addGoldPerTurnWithoutWar(id: Int, player: Player){
@@ -253,6 +238,7 @@ class TurnViewModel(
                 saveToWar(3, player3.armySize / 2, 0)
             }
         } else if (isPlayer1onWar && isPlayer2onWar) {
+            addGoldPerTurnWithoutWar(3,  player3)
             if (armyWithPerks1 > armyWithPerks2) {
                 savePlayerAfterWar(1, player1, player2.gold/2)
                 savePlayerAfterWar(2, player2, -player2.gold/2)
@@ -264,6 +250,7 @@ class TurnViewModel(
                 savePlayerAfterWar(2, player2, 0)
             }
         } else if (isPlayer1onWar && isPlayer3onWar) {
+            addGoldPerTurnWithoutWar(2,  player2)
             if (armyWithPerks1 > armyWithPerks3) {
                 savePlayerAfterWar(1, player1, player3.gold/2)
                 savePlayerAfterWar(3, player3, -player3.gold/2)
@@ -275,6 +262,7 @@ class TurnViewModel(
                 savePlayerAfterWar(3, player3, 0)
             }
         } else if (isPlayer2onWar && isPlayer3onWar) {
+            addGoldPerTurnWithoutWar(1,  player1)
             if (armyWithPerks2 > armyWithPerks3) {
                 savePlayerAfterWar(2, player2, player3.gold)
                 savePlayerAfterWar(3, player3, -player3.gold)
@@ -306,7 +294,7 @@ class TurnViewModel(
                     x = player.basePosition.x,
                     y = player.basePosition.y,
                 ),
-                armyPositionChanged = player.armyPositionChanged,
+                armyPositionChanged = false,
                 armySize = player.armySize - armyChange,
                 basePosition = player.basePosition,
                 dev = player.dev,
