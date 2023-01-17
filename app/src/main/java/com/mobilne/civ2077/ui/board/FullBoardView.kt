@@ -232,7 +232,7 @@ fun ButtonXYItem(
                             color = Color(255, 255, 255)
                         )
                         Text(
-                            text = "73434 k",
+                            text = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).armySize.toString() + " k",
                             style = MaterialTheme.typography.body2,
                             textAlign = TextAlign.Center,
                             color = Color(255, 255, 255)
