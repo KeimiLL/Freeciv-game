@@ -71,7 +71,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                     contentDescription = "Nation flag"
                 )
             }
-            "Uk" -> {
+            "UK" -> {
                 Image(
                     modifier = Modifier.width(120.dp),
                     painter = painterResource(id = R.drawable.uk),
@@ -143,13 +143,13 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Nation: " + (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
+                    text = "Nation: ",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.width(20.dp))
                 Text(
-                    text = boardViewModel.currentNationChoice,
+                    text = (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -183,7 +183,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                             color = MaterialTheme.colorScheme.onSurface
                         )
                     }
-                    "Uk" -> {
+                    "UK" -> {
                         Text(
                             text = "Each perk costs 10% less",
                             style = MaterialTheme.typography.bodyLarge,
