@@ -178,9 +178,11 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
 
 @Composable
 fun SummInfo(wasWar: Boolean = true) {
-    Row(verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.Center) {
-        if(wasWar){
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        if (wasWar) {
             Image(
                 painter = painterResource(id = R.drawable.blood),
                 contentDescription = "Blood",
@@ -189,9 +191,11 @@ fun SummInfo(wasWar: Boolean = true) {
                     .size(40.dp)
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "It was a bloody day in the world of Civilization 2077",
+            Text(
+                text = "It was a bloody day in the world of Civilization 2077",
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.Black)
+                color = Color.Black
+            )
         } else {
             Image(
                 painter = painterResource(id = R.drawable.peace),
@@ -201,9 +205,11 @@ fun SummInfo(wasWar: Boolean = true) {
                     .size(30.dp)
             )
             Spacer(modifier = Modifier.width(10.dp))
-            Text(text = "It was a peaceful day in the world of Civilization 2077",
+            Text(
+                text = "It was a peaceful day in the world of Civilization 2077",
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.Black)
+                color = Color.Black
+            )
         }
     }
 }
@@ -211,16 +217,22 @@ fun SummInfo(wasWar: Boolean = true) {
 @Composable
 fun DisplayValue(value: Int = 0) {
     if (value > 0) {
-        Text(text = value.toString(),
+        Text(
+            text = value.toString(),
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.Green)
+            color = Color.Green
+        )
     } else if (value == 0) {
-        Text(text = value.toString(),
+        Text(
+            text = value.toString(),
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black)
+            color = Color.Black
+        )
     } else {
-        Text(text = value.toString(),
+        Text(
+            text = value.toString(),
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.Red)
+            color = Color.Red
+        )
     }
 }

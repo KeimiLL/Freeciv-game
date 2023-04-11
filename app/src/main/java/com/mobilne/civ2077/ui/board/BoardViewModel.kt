@@ -2,11 +2,7 @@ package com.mobilne.civ2077.ui.board
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilne.civ2077.data.Resource
@@ -54,6 +50,9 @@ class BoardViewModel @Inject constructor(
 
     private var _wasWarLastTurn = mutableStateOf(false)
     val wasWarLastTurn: State<Boolean> = _wasWarLastTurn
+
+    private var _isDarkModeOn = mutableStateOf(false)
+    val isDarkModeOn: MutableState<Boolean> = _isDarkModeOn
 
     var currentNationChoice = ""
 
@@ -279,5 +278,9 @@ class BoardViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun toggleDarkMode() {
+        _isDarkModeOn.value = !isDarkModeOn.value
     }
 }

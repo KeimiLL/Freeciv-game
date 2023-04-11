@@ -1,10 +1,7 @@
 package com.mobilne.civ2077
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.compose.ui.graphics.Color
 import com.mobilne.civ2077.ui.board.views.army.ArmyViewModel
-import com.mobilne.civ2077.ui.nation_choice.NationChoiceViewModel
-import com.mobilne.civ2077.util.constants.Nations
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

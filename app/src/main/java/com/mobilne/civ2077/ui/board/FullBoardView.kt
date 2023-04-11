@@ -14,7 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.mobilne.civ2077.navigation.ROUTE_HOME
-import com.mobilne.civ2077.ui.auth.AuthViewModel
 import com.mobilne.civ2077.ui.board.views.army.Army
 import com.mobilne.civ2077.ui.board.views.army.ArmyViewModel
 import com.mobilne.civ2077.ui.board.views.buyGold.BuyGold
@@ -107,14 +106,16 @@ fun FullBoardView(
                 else if (boardViewModel.currentView.contains("Gold"))
                     BuyGold(viewModel = BuyGoldViewModel())
                 else if (boardViewModel.currentView.contains("Turn"))
-                    Turn(viewModel = TurnViewModel(
-                        id = boardViewModel.currentPlayerIndex.value,
-                        player1 = boardViewModel.player1.value,
-                        player2 = boardViewModel.player2.value,
-                        player3 = boardViewModel.player3.value,
-                        gameRepository = boardViewModel.gameRepository,
-                        turn= boardViewModel.turn.value
-                    ))
+                    Turn(
+                        viewModel = TurnViewModel(
+                            id = boardViewModel.currentPlayerIndex.value,
+                            player1 = boardViewModel.player1.value,
+                            player2 = boardViewModel.player2.value,
+                            player3 = boardViewModel.player3.value,
+                            gameRepository = boardViewModel.gameRepository,
+                            turn = boardViewModel.turn.value
+                        )
+                    )
                 else if (boardViewModel.currentView.contains("War Summary"))
                     EndOfTurn(boardViewModel = boardViewModel)
                 else

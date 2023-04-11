@@ -3,7 +3,6 @@ package com.mobilne.civ2077.ui.board.views.tree
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import com.mobilne.civ2077.data.game.Dev
 import com.mobilne.civ2077.data.game.GameRepository

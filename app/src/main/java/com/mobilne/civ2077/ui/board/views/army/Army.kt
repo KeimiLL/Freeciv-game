@@ -1,6 +1,5 @@
 package com.mobilne.civ2077.ui.board.views.army
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,7 +13,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
 
@@ -22,8 +20,8 @@ import com.mobilne.civ2077.R
 fun Army(viewModel: ArmyViewModel) {
     Column(
         modifier = Modifier
-            .background(Color(0xFFffffff))
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         //BuyArmy
@@ -174,11 +172,3 @@ fun Coordinates(
         }
     }
 }
-
-//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-//@Composable
-//fun SendArmyDialogLight() {
-//    AppTheme {
-//        Army(viewModel = ArmyViewModel(player = Player()))
-//    }
-//}
