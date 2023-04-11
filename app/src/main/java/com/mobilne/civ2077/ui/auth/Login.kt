@@ -1,20 +1,18 @@
 package com.mobilne.civ2077.ui.auth
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
@@ -31,17 +29,19 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    viewModel: AuthViewModel?,
+    authViewModel: AuthViewModel?,
     boardViewModel: BoardViewModel,
     navController: NavController
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    val loginFlow = viewModel?.loginFlow?.collectAsState()
+    val loginFlow = authViewModel?.loginFlow?.collectAsState()
 
     ConstraintLayout(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
     ) {
 
         val (refHeader, refEmail, refPassword, refButtonLogin, refTextSignup, refLoader) = createRefs()
@@ -56,10 +56,10 @@ fun LoginScreen(
                     width = Dimension.fillToConstraints
                 }
                 .wrapContentSize()
+                .background(color = MaterialTheme.colorScheme.background)
         ) {
-            AuthHeader()
+            AuthHeader(boardViewModel)
         }
-
 
         TextField(
             value = email,
@@ -67,7 +67,10 @@ fun LoginScreen(
                 email = it
             },
             label = {
-                Text(text = stringResource(id = R.string.email))
+                Text(
+                    text = stringResource(id = R.string.email),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             },
             modifier = Modifier.constrainAs(refEmail) {
                 top.linkTo(refHeader.bottom, spacing.medium)
@@ -89,7 +92,10 @@ fun LoginScreen(
                 password = it
             },
             label = {
-                Text(text = stringResource(id = R.string.password))
+                Text(
+                    text = stringResource(id = R.string.password),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             },
             modifier = Modifier.constrainAs(refPassword) {
                 top.linkTo(refEmail.bottom, spacing.medium)
@@ -107,7 +113,7 @@ fun LoginScreen(
 
         Button(
             onClick = {
-                viewModel?.login(email, password)
+                authViewModel?.login(email, password)
             },
             modifier = Modifier.constrainAs(refButtonLogin) {
                 top.linkTo(refPassword.bottom, spacing.large)
@@ -116,25 +122,31 @@ fun LoginScreen(
                 width = Dimension.fillToConstraints
             }
         ) {
-            Text(text = stringResource(id = R.string.login))
+            Text(
+                text = stringResource(id = R.string.login),
+                color = MaterialTheme.colorScheme.onPrimary
+            )
         }
 
-
-        Text(
+        Button(
             modifier = Modifier
                 .constrainAs(refTextSignup) {
                     top.linkTo(refButtonLogin.bottom, spacing.medium)
                     start.linkTo(parent.start, spacing.extraLarge)
                     end.linkTo(parent.end, spacing.extraLarge)
-                }
-                .clickable {
-                    navController.navigate(ROUTE_SIGNUP) {
-                        popUpTo(ROUTE_LOGIN) { inclusive = true }
-                    }
                 },
-            text = stringResource(id = R.string.dont_have_account),
-            textAlign = TextAlign.Center,
-        )
+            onClick = {
+                navController.navigate(ROUTE_SIGNUP) {
+                    popUpTo(ROUTE_LOGIN) { inclusive = true }
+                }
+            },
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary)
+        ) {
+            Text(
+                text = stringResource(id = R.string.dont_have_account),
+                color = MaterialTheme.colorScheme.onSecondary
+            )
+        }
 
         loginFlow?.value?.let {
             when (it) {

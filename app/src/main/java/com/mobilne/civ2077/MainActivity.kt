@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AppTheme {
+            AppTheme(useDarkTheme = boardViewModel.isDarkModeOn.value) {
                 AppNavHost(authViewModel = authViewModel, boardViewModel = boardViewModel)
             }
         }

@@ -1,9 +1,11 @@
 package com.mobilne.civ2077.ui.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.navigation.ROUTE_BOARD
@@ -23,32 +27,31 @@ import com.mobilne.civ2077.ui.theme.spacing
 
 
 @Composable
-fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boardViewModel: BoardViewModel) {
+fun HomeScreen(
+    viewModel: AuthViewModel?,
+    navController: NavHostController,
+    boardViewModel: BoardViewModel
+) {
     val spacing = MaterialTheme.spacing
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(spacing.medium)
-            .padding(top = spacing.extraLarge),
+            .background(MaterialTheme.colorScheme.background),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
-        Row(verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center) {
+        Spacer(modifier = Modifier.height(spacing.extraLarge))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
             Text(
                 text = stringResource(id = R.string.welcome_back),
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.width(10.dp))
-            // miejsce na łączneie z nazwą usera
-//            Text(
-//                text = "Nazwa-usera",
-//                style = MaterialTheme.typography.headlineLarge,
-//                color = Color(0xffe86d01)
-//            )
-
             Text(
                 text = viewModel?.currentUser?.displayName ?: "",
                 style = MaterialTheme.typography.headlineLarge,
@@ -87,7 +90,6 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
             }
         }
 
-
         Column(
             modifier = Modifier
                 .width(500.dp)
@@ -95,26 +97,6 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 .padding(spacing.medium),
             horizontalAlignment = Alignment.Start
         ) {
-//            Row(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .wrapContentHeight(),
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.Center
-//            ) {
-//                Text(
-//                    text = stringResource(id = R.string.name),
-//                    style = MaterialTheme.typography.bodyLarge,
-//                    color = MaterialTheme.colorScheme.onSurface
-//                )
-//                Spacer(modifier = Modifier.width(20.dp))
-//                Text(
-//                    text = viewModel?.currentUser?.displayName ?: "",
-//                    style = MaterialTheme.typography.bodyLarge,
-//                    color = MaterialTheme.colorScheme.onSurface
-//                )
-//            }
-
             // Email
             Row(
                 modifier = Modifier
@@ -135,7 +117,6 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 )
             }
 
-            // Nacja
             Row(
                 modifier = Modifier
                     .wrapContentHeight(),
@@ -155,7 +136,6 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                 )
             }
 
-            // Perk
             Row(
                 modifier = Modifier
                     .wrapContentHeight(),
@@ -201,10 +181,33 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
 
             }
         }
-        // Przyciski wyloguj i wróć
-        Row(modifier = Modifier.fillMaxWidth(),
+
+        Row(
+            modifier = Modifier.wrapContentHeight(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                "Dark mode",
+                style = TextStyle(fontSize = 24.sp),
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background),
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Spacer(Modifier.width(8.dp))
+            Switch(
+                checked = boardViewModel.isDarkModeOn.value,
+                onCheckedChange = {
+                    boardViewModel.toggleDarkMode()
+                },
+            )
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
+            horizontalArrangement = Arrangement.Center
+        ) {
             Button(
                 onClick = {
                     viewModel?.logout()
@@ -235,24 +238,8 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController, boar
                     .height(50.dp)
                     .width(150.dp)
             ) {
-                Text(text = "back")
+                Text(text = "Back")
             }
         }
     }
 }
-
-//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-//@Composable
-//fun HomeScreenPreviewLight() {
-//    AppTheme {
-//        HomeScreen(null, rememberNavController())
-//    }
-//}
-//
-//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-//@Composable
-//fun HomeScreenPreviewDark() {
-//    AppTheme {
-//        HomeScreen(null, rememberNavController())
-//    }
-//}

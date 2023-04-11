@@ -25,22 +25,22 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.data.Resource
-import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.navigation.ROUTE_NATIONS
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
+import com.mobilne.civ2077.ui.board.BoardViewModel
 import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
+fun SignupScreen(authViewModel: AuthViewModel?, boardViewModel: BoardViewModel, navController: NavHostController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    val signupFlow = viewModel?.signupFlow?.collectAsState()
+    val signupFlow = authViewModel?.signupFlow?.collectAsState()
 
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
@@ -58,7 +58,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 }
                 .wrapContentSize()
         ) {
-            AuthHeader()
+            AuthHeader(boardViewModel)
         }
 
         TextField(
@@ -130,7 +130,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
 
         Button(
             onClick = {
-                viewModel?.signup(name, email, password)
+                authViewModel?.signup(name, email, password)
             },
             modifier = Modifier.constrainAs(refButtonSignup) {
                 top.linkTo(refPassword.bottom, spacing.large)
@@ -188,21 +188,5 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             }
         }
 
-    }
-}
-
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
-@Composable
-fun SignupScreenPreviewLight() {
-    AppTheme {
-        SignupScreen(null, rememberNavController())
-    }
-}
-
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun SignupScreenPreviewDark() {
-    AppTheme {
-        SignupScreen(null, rememberNavController())
     }
 }
