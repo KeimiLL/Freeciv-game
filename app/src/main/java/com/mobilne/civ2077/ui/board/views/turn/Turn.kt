@@ -1,6 +1,5 @@
 package com.mobilne.civ2077.ui.board.views.turn
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mobilne.civ2077.R
 
@@ -38,7 +36,8 @@ fun Turn(viewModel: TurnViewModel) {
 //        Divider()
 
         Button(
-            modifier = Modifier.padding(vertical = 20.dp)
+            modifier = Modifier
+                .padding(vertical = 20.dp)
                 .height(50.dp)
                 .width(200.dp),
             shape = RoundedCornerShape(50.dp),
@@ -58,8 +57,8 @@ fun Turn(viewModel: TurnViewModel) {
 }
 
 @Composable
-fun TurnHeader(){
-    Row(verticalAlignment = Alignment.CenterVertically){
+fun TurnHeader() {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "Players state",
@@ -82,7 +81,7 @@ fun TurnHeader(){
 @Composable
 fun PlayersState(
     viewModel: TurnViewModel
-){
+) {
     Column(
         modifier = Modifier
             .background(Color(0xFFffffff))
@@ -99,7 +98,7 @@ fun PlayersState(
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
-            text = viewModel.user2  + viewModel.user2State, //Todo nazwa gracza
+            text = viewModel.user2 + viewModel.user2State, //Todo nazwa gracza
             style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = Color.Black
@@ -114,8 +113,6 @@ fun PlayersState(
 
     }
 }
-
-
 
 
 //@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)

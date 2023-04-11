@@ -1,7 +1,5 @@
 package com.mobilne.civ2077.ui.auth
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -18,24 +16,25 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.data.Resource
 import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.navigation.ROUTE_NATIONS
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
 import com.mobilne.civ2077.ui.board.BoardViewModel
-import com.mobilne.civ2077.ui.theme.AppTheme
 import com.mobilne.civ2077.ui.theme.spacing
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen(authViewModel: AuthViewModel?, boardViewModel: BoardViewModel, navController: NavHostController) {
+fun SignupScreen(
+    authViewModel: AuthViewModel?,
+    boardViewModel: BoardViewModel,
+    navController: NavHostController
+) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }

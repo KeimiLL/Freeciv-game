@@ -116,12 +116,11 @@ class TurnViewModel(
         gameRepository.savePlayerStateOfTurn(3, false)
     }
 
-    private fun zeroWar(){
+    private fun zeroWar() {
         gameRepository.saveWasWarLastTurn(wasWarLastTurn = false)
         for (i in 1..3)
             gameRepository.saveOnWar(i, 0, 0)
     }
-
 
 
     private fun addGoldPerTurnWithoutWar(id: Int, player: Player) {
