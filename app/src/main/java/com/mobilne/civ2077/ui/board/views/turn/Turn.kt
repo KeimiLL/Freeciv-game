@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,40 +21,42 @@ import com.mobilne.civ2077.R
 
 @Composable
 fun Turn(viewModel: TurnViewModel) {
-    Column(
-        modifier = Modifier
-            .background(Color(0xFFffffff))
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
+    Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
 
-        viewModel.usersState()
+            viewModel.usersState()
 
-        TurnHeader()
+            TurnHeader()
 
-        PlayersState(viewModel)
+            PlayersState(viewModel)
 
 //        Divider()
+            Spacer(modifier = Modifier.height(15.dp))
+            Button(
+                modifier = Modifier
+                    .height(50.dp)
+                    .width(150.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+                contentPadding = PaddingValues(12.dp),
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.elevation(8.dp),
+                onClick = { viewModel.pass() },
+                enabled = viewModel.duringTurn
+            ) {
+                Text(
+                    text = viewModel.buttonText,
+                    style = androidx.compose.material.MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Center,
+                    color = Color(255, 255, 255)
+                )
+            }
 
-        Button(
-            modifier = Modifier
-                .padding(vertical = 20.dp)
-                .height(50.dp)
-                .width(200.dp),
-            shape = RoundedCornerShape(50.dp),
-            contentPadding = PaddingValues(16.dp),
-            onClick = { viewModel.pass() },
-            enabled = viewModel.duringTurn
-        ) {
-            Text(
-                text = viewModel.buttonText,
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Center,
-                color = Color(255, 255, 255)
-            )
         }
-
     }
 }
 
