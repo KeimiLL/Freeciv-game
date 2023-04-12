@@ -40,13 +40,10 @@ fun FullBoardView(
 ) {
     Box(
         modifier = Modifier
-            .background(Color(0xFFc5ddf6))
-            .fillMaxSize()
+            .background(Color.White)
             .padding(8.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -55,7 +52,8 @@ fun FullBoardView(
                     .fillMaxHeight()
                     .weight(1f)
                     .padding(5.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
                     onClick = {
@@ -101,7 +99,7 @@ fun FullBoardView(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth()
-                    .weight(4f)
+                    .weight(3.5f)
                     .padding(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -147,7 +145,8 @@ fun FullBoardView(
                     .fillMaxHeight()
                     .weight(1f)
                     .padding(5.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ButtonItem("Tech Tree", boardViewModel)
 

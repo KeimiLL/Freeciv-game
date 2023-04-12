@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -22,40 +23,42 @@ import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
 fun BuyGold(viewModel: BuyGoldViewModel) {
-    Box(
-        modifier = Modifier
-            .background(Color(0xFFffffff))
-            .fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+    Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+        Box(
+            modifier = Modifier
+                .background(Color(0xFFFAF8F1))
+                .fillMaxSize()
         ) {
-
-            BuyGoldHeader()
-
-            BuyGold(
-                value = viewModel.goldToBuy,
-                onValueChanged = { viewModel.onTextChanged(it) },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                )
-            )
-            Text(
-                text = "Total: €\u200E ${viewModel.euroToPay}",
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-            )
-
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                RadioButtonSample()
-//                ExitButtons()
-            }
 
+                BuyGoldHeader()
+
+                BuyGold(
+                    value = viewModel.goldToBuy,
+                    onValueChanged = { viewModel.onTextChanged(it) },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                    )
+                )
+                Text(
+                    text = "Total: €\u200E ${viewModel.euroToPay}",
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButtonSample()
+//                ExitButtons()
+                }
+
+            }
         }
     }
 }
@@ -153,7 +156,7 @@ fun BuyGold(
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Image(
-            painter = painterResource(id = R.drawable.gold),
+            painter = painterResource(id = R.drawable.gold_icon),
             contentDescription = "Gold"
         )
         Column {

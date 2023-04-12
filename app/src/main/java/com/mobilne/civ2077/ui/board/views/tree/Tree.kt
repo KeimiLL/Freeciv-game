@@ -24,7 +24,6 @@ fun Tree(viewModel: TreeViewModel) {
     viewModel.initState()
     Box(
         modifier = Modifier
-            .background(Color(0xFFffffff))
             .fillMaxSize()
     ) {
         Column(

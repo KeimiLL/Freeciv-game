@@ -19,7 +19,6 @@ import com.mobilne.civ2077.ui.board.BoardViewModel
 fun EndOfTurn(boardViewModel: BoardViewModel) {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.White,
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
