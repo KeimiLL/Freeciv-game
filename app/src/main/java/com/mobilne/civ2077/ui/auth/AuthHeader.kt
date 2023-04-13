@@ -21,29 +21,38 @@ import com.mobilne.civ2077.ui.theme.spacing
 fun AuthHeader(boardViewModel: BoardViewModel) {
     val spacing = MaterialTheme.spacing
 
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.surface)
-            .padding(top = 5.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(top = 0.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        Column(modifier = Modifier.weight(0.2f)){ }
 
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+                .padding(5.dp)
+                .weight(0.8f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ){
+            Text(
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.displayMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .padding(0.dp)
+                .weight(0.2f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
+        ){
             Text(
                 "Dark mode",
                 style = TextStyle(fontSize = 20.sp),
@@ -58,4 +67,42 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
             )
         }
     }
+//
+//    Column(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .background(color = MaterialTheme.colorScheme.surface)
+//            .padding(top = 5.dp),
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.Center
+//    ) {
+//        Text(
+//            modifier = Modifier.fillMaxWidth(),
+//            text = stringResource(id = R.string.app_name),
+//            style = MaterialTheme.typography.headlineLarge,
+//            textAlign = TextAlign.Center,
+//            color = MaterialTheme.colorScheme.onSurface
+//        )
+//
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(horizontal = 20.dp),
+//            horizontalArrangement = Arrangement.End,
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Text(
+//                "Dark mode",
+//                style = TextStyle(fontSize = 20.sp),
+//                color = MaterialTheme.colorScheme.onBackground
+//            )
+//            Spacer(Modifier.width(8.dp))
+//            Switch(
+//                checked = boardViewModel.isDarkModeOn.value,
+//                onCheckedChange = {
+//                    boardViewModel.toggleDarkMode()
+//                },
+//            )
+//        }
+//    }
 }

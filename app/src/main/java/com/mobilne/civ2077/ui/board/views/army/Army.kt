@@ -161,6 +161,7 @@ fun SendArmyHeader(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground
         )
+        Spacer(modifier = Modifier.height(15.dp))
     }
 }
 

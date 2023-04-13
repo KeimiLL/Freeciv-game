@@ -84,8 +84,8 @@ fun LoginScreen(
                     top.linkTo(refHeader.bottom, spacing.medium)
                     start.linkTo(parent.start, spacing.large)
                     end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                },
+//                    width = Dimension.fillToConstraints
+                }.fillMaxWidth(0.6f),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
                 autoCorrect = false,
@@ -109,8 +109,8 @@ fun LoginScreen(
                     top.linkTo(refEmail.bottom, spacing.medium)
                     start.linkTo(parent.start, spacing.large)
                     end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                },
+//                    width = Dimension.fillToConstraints
+                }.fillMaxWidth(0.6f),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
                 autoCorrect = false,
@@ -125,15 +125,15 @@ fun LoginScreen(
                     top.linkTo(refPassword.bottom, spacing.medium)
                     start.linkTo(parent.start, spacing.large)
                     end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                },
+//                    width = Dimension.fillToConstraints
+                }.fillMaxWidth(0.6f),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
                 modifier = Modifier
                     .height(60.dp)
-                    .width(250.dp),
+                    .width(150.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
                 contentPadding = PaddingValues(5.dp),
                 shape = RoundedCornerShape(20.dp),
@@ -150,7 +150,7 @@ fun LoginScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
-            Spacer(modifier = Modifier.width(100.dp))
+            Spacer(modifier = Modifier.width(40.dp))
             Button(
                 modifier = Modifier
                     .height(60.dp)

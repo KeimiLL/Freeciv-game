@@ -111,7 +111,7 @@ fun FullBoardView(
                             gameRepository = boardViewModel.gameRepository
                         )
                     )
-                else if (boardViewModel.currentView.contains("Tech Tree"))
+                else if (boardViewModel.currentView.contains("Tech"))
                     Tree(
                         viewModel = TreeViewModel(
                             player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value),
@@ -146,7 +146,7 @@ fun FullBoardView(
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ButtonItem("Tech Tree", boardViewModel)
+                ButtonItem("Tech", boardViewModel)
 
                 ButtonXYItem(
                     "Army",
