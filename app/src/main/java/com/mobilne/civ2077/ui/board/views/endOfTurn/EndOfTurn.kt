@@ -3,10 +3,9 @@ package com.mobilne.civ2077.ui.board.views.endOfTurn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.*
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +31,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "Turn summary",
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Image(
@@ -62,7 +61,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "Gold Summary:",
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
 
@@ -73,7 +72,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "User1:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 var gold = 100
@@ -88,7 +87,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "User2:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 var gold = 100
@@ -103,7 +102,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "User3:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 var gold = 100
@@ -129,7 +128,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "War Summary:",
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
 
             }
@@ -140,7 +139,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "User1:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user1.units)
@@ -152,7 +151,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "User2:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user2.units)
@@ -164,7 +163,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 Text(
                     text = "User3:",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onBackground
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 DisplayValue(boardViewModel.onWar.value.user3.units)
@@ -193,7 +192,7 @@ fun SummInfo(wasWar: Boolean = true) {
             Text(
                 text = "It was a bloody day in the world of Civilization 2077",
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onBackground
             )
         } else {
             Image(
@@ -207,7 +206,7 @@ fun SummInfo(wasWar: Boolean = true) {
             Text(
                 text = "It was a peaceful day in the world of Civilization 2077",
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }
@@ -223,9 +222,9 @@ fun DisplayValue(value: Int = 0) {
         )
     } else if (value == 0) {
         Text(
-            text = value.toString(),
+            text = "0",
             style = MaterialTheme.typography.bodyMedium,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
     } else {
         Text(

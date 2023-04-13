@@ -11,11 +11,6 @@ import com.mobilne.civ2077.data.game.Player
 class TreeViewModel(val player: Player, val id: Int, private var gameRepository: GameRepository) :
     ViewModel() {
 
-    /*Todo czytanie z bazy, które perki są kupione i na tej podsatwie wyłączać przyciski kupione
-    *  i te niemożliwe od kupienia i zostawić tylko te do kupienia
-    *  Sprawdzanie czy jest doś hajsu na dane akcje
-    * */
-
     //private
     //values
     private val _economyPerkDescription = "10 less gold for all other perks"
@@ -72,9 +67,7 @@ class TreeViewModel(val player: Player, val id: Int, private var gameRepository:
             currentPerk = ""
             buyButtonState = false
             checkDevelopmentState()
-
         }
-        //Todo zapis do bazy nowych perków
     }
 
     private fun changeEconomyButtonsState() {

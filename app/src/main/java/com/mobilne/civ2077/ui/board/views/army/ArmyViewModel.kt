@@ -11,11 +11,6 @@ import com.mobilne.civ2077.data.game.Player
 
 class ArmyViewModel(val player: Player, val id: Int, private var gameRepository: GameRepository) :
     ViewModel() {
-//    Todo
-//     przekazanie aktualnych koordynatów i ustalenie limitu chodzenia,
-//     przekazanie wartości z bazy ile golda ma osoba żeby wyliczyć ile moze jednostek kupić,
-//     zapisywanie do bazy kupionych jednostek,
-//     zapisywanie nowych koordynatów wojska do bazy
 
     //variables
     private val maxUnits = 1001
@@ -102,16 +97,11 @@ class ArmyViewModel(val player: Player, val id: Int, private var gameRepository:
 
     fun send() {
         if (destinationX != "" && destinationY != "" && !player.armyPositionChanged) {
-            if (destinationX.toInt() - maxRange <= player.armyPosition.x
-                && destinationX.toInt() + maxRange >= player.armyPosition.x
-                && destinationY.toInt() - maxRange <= player.armyPosition.y
-                && destinationY.toInt() + maxRange >= player.armyPosition.y
-            ) {
+            if (destinationX.toInt() - maxRange <= player.armyPosition.x && destinationX.toInt() + maxRange >= player.armyPosition.x && destinationY.toInt() - maxRange <= player.armyPosition.y && destinationY.toInt() + maxRange >= player.armyPosition.y) {
                 save(
                     Player(
                         armyPosition = ArmyPosition(
-                            x = destinationX.toInt(),
-                            y = destinationY.toInt()
+                            x = destinationX.toInt(), y = destinationY.toInt()
                         ),
                         armyPositionChanged = true,
                         armySize = player.armySize,

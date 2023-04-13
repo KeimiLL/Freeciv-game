@@ -17,8 +17,6 @@ class TurnViewModel(
     private val gameRepository: GameRepository
 ) :
     ViewModel() {
-    /*Todo sparwzdanie booleanów w bazie, kto zakończył turę, a kto nie
-    *  dodanie propów dla innych userów z bazy i przklejenie ich do widoku*/
 
     private val _endOfTurn = "End your turn"
     private val _alreadyPassed = "Wait for others.."
@@ -33,7 +31,6 @@ class TurnViewModel(
     private var isPlayer3onWar = false
 
 
-    //Todo funkcja czytająca ich stan i dająca dobre dane
     var user1State by mutableStateOf(_otherPlayerDuringTurn)
     var user2State by mutableStateOf(_otherPlayerDuringTurn)
     var user3State by mutableStateOf(_otherPlayerDuringTurn)

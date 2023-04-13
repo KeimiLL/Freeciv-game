@@ -1,7 +1,7 @@
 package com.mobilne.civ2077.ui.auth
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -47,7 +47,9 @@ fun SignupScreen(
     val signupFlow = authViewModel?.signupFlow?.collectAsState()
 
     ConstraintLayout(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
     ) {
         val (refHeader, refName, refEmail, refPassword, refButtonSignup, refTextSignup, refLoader) = createRefs()
         val spacing = MaterialTheme.spacing
@@ -133,15 +135,17 @@ fun SignupScreen(
         )
 
         Row(
-            modifier = Modifier.fillMaxWidth().constrainAs(refButtonSignup) {
-                top.linkTo(refPassword.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.large)
-                end.linkTo(parent.end, spacing.large)
-                width = Dimension.fillToConstraints
-            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .constrainAs(refButtonSignup) {
+                    top.linkTo(refPassword.bottom, spacing.medium)
+                    start.linkTo(parent.start, spacing.large)
+                    end.linkTo(parent.end, spacing.large)
+                    width = Dimension.fillToConstraints
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
-        ){
+        ) {
             Button(
                 onClick = {
                     authViewModel?.signup(name, email, password)
@@ -156,7 +160,7 @@ fun SignupScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.signup),
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = Color.White,
                     style = androidx.compose.material.MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
@@ -179,7 +183,7 @@ fun SignupScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.already_have_account),
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = Color.White,
                     style = androidx.compose.material.MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
