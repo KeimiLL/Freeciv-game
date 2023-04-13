@@ -39,256 +39,265 @@ fun HomeScreen(
     boardViewModel: BoardViewModel
 ) {
     val spacing = MaterialTheme.spacing
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxSize()
-            .padding(spacing.small)
             .background(MaterialTheme.colorScheme.surface),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 0.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Center,
-        ) {
+                .fillMaxHeight()
+                .padding(20.dp)
+                .weight(0.2f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
+        ){
             Text(
-                "Dark mode",
+                text = "Dark mode",
                 style = TextStyle(fontSize = 17.sp),
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.surface),
                 color = MaterialTheme.colorScheme.onSurface
-            )
+                )
             Spacer(Modifier.width(8.dp))
             Switch(
                 checked = boardViewModel.isDarkModeOn.value,
                 onCheckedChange = {
-                    boardViewModel.toggleDarkMode()
-                },
+                    boardViewModel.toggleDarkMode() },
             )
         }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = stringResource(id = R.string.welcome_back),
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(
-                text = viewModel?.currentUser?.displayName ?: "",
-                style = MaterialTheme.typography.titleLarge,
-                color = Color(0xffe86d01)
-            )
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
-            when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
-                "France" -> {
-                    Image(
-                        modifier = Modifier.width(100.dp),
-                        painter = painterResource(id = R.drawable.france),
-                        contentDescription = "Nation flag"
-                    )
-                }
-                "Spain" -> {
-                    Image(
-                        modifier = Modifier.width(100.dp),
-                        painter = painterResource(id = R.drawable.spain),
-                        contentDescription = "Nation flag"
-                    )
-                }
-                "UK" -> {
-                    Image(
-                        modifier = Modifier.width(100.dp),
-                        painter = painterResource(id = R.drawable.uk),
-                        contentDescription = "Nation flag"
-                    )
-                }
-                "USA" -> {
-                    Image(
-                        modifier = Modifier.width(100.dp),
-                        painter = painterResource(id = R.drawable.usa),
-                        contentDescription = "Nation flag"
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.height(10.dp))
         Column(
             modifier = Modifier
-                .width(500.dp)
-                .wrapContentHeight()
-                .padding(spacing.medium),
-            horizontalAlignment = Alignment.Start
-        ) {
-            // Email
+                .fillMaxHeight()
+                .padding(20.dp)
+                .weight(0.8f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ){
             Row(
-                modifier = Modifier
-                    .wrapContentHeight(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.gmail),
-                    contentDescription = "gmail",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(30.dp)
-                )
-                Spacer(modifier = Modifier.width(20.dp))
                 Text(
-                    text = viewModel?.currentUser?.email ?: "",
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(id = R.string.welcome_back),
+                    style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-            }
-
-            Row(
-                modifier = Modifier
-                    .wrapContentHeight(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.flag),
-                    contentDescription = "flag",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(30.dp)
-                )
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface
+                    text = viewModel?.currentUser?.displayName ?: "",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color(0xffe86d01)
                 )
             }
-
-            Row(
-                modifier = Modifier
-                    .wrapContentHeight(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.thunder),
-                    contentDescription = "thunder",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(30.dp)
-                )
-                Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+            Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
                 when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
                     "France" -> {
-                        Text(
-                            text = "Your army has 2 extra steps each turn",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                        Image(
+                            modifier = Modifier.width(100.dp),
+                            painter = painterResource(id = R.drawable.france),
+                            contentDescription = "Nation flag"
                         )
                     }
                     "Spain" -> {
-                        Text(
-                            text = "Each turn gives additional 100 gold",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                        Image(
+                            modifier = Modifier.width(100.dp),
+                            painter = painterResource(id = R.drawable.spain),
+                            contentDescription = "Nation flag"
                         )
                     }
                     "UK" -> {
-                        Text(
-                            text = "Each perk costs 10% less",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                        Image(
+                            modifier = Modifier.width(100.dp),
+                            painter = painterResource(id = R.drawable.uk),
+                            contentDescription = "Nation flag"
                         )
                     }
                     "USA" -> {
-                        Text(
-                            text = "Your army deals 10% more damage",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface
+                        Image(
+                            modifier = Modifier.width(100.dp),
+                            painter = painterResource(id = R.drawable.usa),
+                            contentDescription = "Nation flag"
                         )
                     }
                 }
-
             }
-        }
+            Spacer(modifier = Modifier.height(10.dp))
+            Column(
+                modifier = Modifier
+                    .width(500.dp)
+                    .wrapContentHeight()
+                    .padding(spacing.medium),
+                horizontalAlignment = Alignment.Start
+            ) {
+                // Email
+                Row(
+                    modifier = Modifier
+                        .wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.gmail),
+                        contentDescription = "gmail",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(30.dp)
+                    )
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(
+                        text = viewModel?.currentUser?.email ?: "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
 
-        Spacer(modifier = Modifier.height(15.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(
-                onClick = {
-                    viewModel?.logout()
-                    navController.navigate(ROUTE_LOGIN) {
-                        popUpTo(ROUTE_HOME) {
-                            inclusive = true
+                Row(
+                    modifier = Modifier
+                        .wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.flag),
+                        contentDescription = "flag",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(30.dp)
+                    )
+                    Spacer(modifier = Modifier.width(20.dp))
+                    Text(
+                        text = (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+
+                Row(
+                    modifier = Modifier
+                        .wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.thunder),
+                        contentDescription = "thunder",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(30.dp)
+                    )
+                    Spacer(modifier = Modifier.width(20.dp))
+                    when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
+                        "France" -> {
+                            Text(
+                                text = "Your army has 2 extra steps each turn",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                        "Spain" -> {
+                            Text(
+                                text = "Each turn gives additional 100 gold",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                        "UK" -> {
+                            Text(
+                                text = "Each perk costs 10% less",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                        "USA" -> {
+                            Text(
+                                text = "Your army deals 10% more damage",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
                         }
                     }
-                },
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(120.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
-                contentPadding = PaddingValues(12.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = ButtonDefaults.elevation(8.dp),
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.log_out),
-                    contentDescription = "logout",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(
-                    text = stringResource(id = R.string.logout),
-                    style = androidx.compose.material.MaterialTheme.typography.body2,
-                    textAlign = TextAlign.Center,
-                    color = Color(255, 255, 255),
-                    fontWeight = FontWeight.Bold
-                )
+
+                }
             }
-            Spacer(modifier = Modifier.width(150.dp))
-            Button(
-                onClick = {
-                    navController.navigate(ROUTE_BOARD) {
-                        popUpTo(ROUTE_HOME) {
-                            inclusive = true
-                        }
-                    }
-                },
-                modifier = Modifier
-                    .height(50.dp)
-                    .width(120.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
-                contentPadding = PaddingValues(12.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = ButtonDefaults.elevation(8.dp),
+
+            Spacer(modifier = Modifier.height(15.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.back),
-                    contentDescription = "back",
-                    contentScale = ContentScale.Crop,
+                Button(
+                    onClick = {
+                        viewModel?.logout()
+                        navController.navigate(ROUTE_LOGIN) {
+                            popUpTo(ROUTE_HOME) {
+                                inclusive = true
+                            }
+                        }
+                    },
                     modifier = Modifier
-                        .size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(
-                    text = "Home",
-                    style = androidx.compose.material.MaterialTheme.typography.body2,
-                    textAlign = TextAlign.Center,
-                    color = Color(255, 255, 255),
-                    fontWeight = FontWeight.Bold
-                )
+                        .height(50.dp)
+                        .width(120.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
+                    contentPadding = PaddingValues(12.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    elevation = ButtonDefaults.elevation(8.dp),
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.log_out),
+                        contentDescription = "logout",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = stringResource(id = R.string.logout),
+                        style = androidx.compose.material.MaterialTheme.typography.body2,
+                        textAlign = TextAlign.Center,
+                        color = Color(255, 255, 255),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.width(150.dp))
+                Button(
+                    onClick = {
+                        navController.navigate(ROUTE_BOARD) {
+                            popUpTo(ROUTE_HOME) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(120.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
+                    contentPadding = PaddingValues(12.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    elevation = ButtonDefaults.elevation(8.dp),
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.back),
+                        contentDescription = "back",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = "Home",
+                        style = androidx.compose.material.MaterialTheme.typography.body2,
+                        textAlign = TextAlign.Center,
+                        color = Color(255, 255, 255),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
+        Column(modifier = Modifier.weight(0.2f)){ }
     }
 }

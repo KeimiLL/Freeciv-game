@@ -309,7 +309,7 @@ fun ButtonXYItem(
                             text = "Size:",
                             style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.onBackground
+                            color = Color(255, 255, 255)
                         )
                         Text(
                             text = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).armySize.toString() + " k",
