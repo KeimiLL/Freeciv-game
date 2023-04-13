@@ -23,6 +23,7 @@ fun Map() {
             modifier = Modifier
                 .fillMaxHeight()
                 .wrapContentWidth()
+                .background(Color.White)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.map),

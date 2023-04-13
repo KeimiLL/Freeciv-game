@@ -1,7 +1,6 @@
 package com.mobilne.civ2077.ui.board.views.tree
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -13,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -22,12 +20,12 @@ import com.mobilne.civ2077.R
 
 @Composable
 fun Tree(viewModel: TreeViewModel) {
-    // Todo czytanie z bazy zamiast funkcji, które czytają stan początkowy
     viewModel.initState()
     Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
         Box(
             modifier = Modifier
-                .fillMaxSize().padding(10.dp)
+                .fillMaxSize()
+                .padding(10.dp)
         ) {
             Column(
                 verticalArrangement = Arrangement.SpaceEvenly,
@@ -143,7 +141,7 @@ fun EconomyItem(
             text = "lvl $id",
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
-            color = Color(255, 255, 255)
+            color = Color.Black
         )
     }
 }
@@ -168,7 +166,7 @@ fun ArmyItem(
             text = "lvl $id",
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
-            color = Color(255, 255, 255)
+            color = Color.Black
         )
     }
 }
@@ -208,14 +206,8 @@ fun InfoBar(
                 text = "Buy for " + viewModel.goldToPay,
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color(255, 255, 255)
+                color = Color.Black
             )
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun PreviewTree() {
-//    Tree(TreeViewModel(player = Player(), id=0, gameRepository = hiltViewModel()))
-//}

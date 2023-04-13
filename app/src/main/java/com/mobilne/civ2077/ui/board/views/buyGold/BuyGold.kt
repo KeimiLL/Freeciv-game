@@ -2,15 +2,14 @@ package com.mobilne.civ2077.ui.board.views.buyGold
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,14 +28,12 @@ import com.mobilne.civ2077.ui.theme.AppTheme
 fun BuyGold(viewModel: BuyGoldViewModel) {
     Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
                 BuyGoldHeader()
 
                 BuyGold(
@@ -50,7 +47,7 @@ fun BuyGold(viewModel: BuyGoldViewModel) {
                     text = "Total: €\u200E ${viewModel.euroToPay}",
                     style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center,
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
 
                 Row(
@@ -58,13 +55,12 @@ fun BuyGold(viewModel: BuyGoldViewModel) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButtonSample()
-//                ExitButtons()
                 }
-
             }
         }
     }
 }
+
 
 @Composable
 fun RadioButtonSample() {
@@ -79,19 +75,14 @@ fun RadioButtonSample() {
         radioOptions.forEach { text ->
             Row(
                 Modifier
-                    .selectable(
-                        selected = (text == selectedOption),
-                        onClick = {
-                            onOptionSelected(text)
-                        }
-                    )
+                    .selectable(selected = (text == selectedOption), onClick = {
+                        onOptionSelected(text)
+                    })
                     .padding(horizontal = 10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                RadioButton(
-                    selected = (text == selectedOption),
-                    onClick = { onOptionSelected(text) }
-                )
+                RadioButton(selected = (text == selectedOption),
+                    onClick = { onOptionSelected(text) })
                 Text(
                     text = text,
                     style = MaterialTheme.typography.bodyMedium,
@@ -103,8 +94,7 @@ fun RadioButtonSample() {
                             painter = painterResource(id = R.drawable.paypal),
                             contentDescription = "Paypal",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(30.dp)
+                            modifier = Modifier.size(30.dp)
                         )
                     }
                     "Bank transfer" -> {
@@ -112,8 +102,7 @@ fun RadioButtonSample() {
                             painter = painterResource(id = R.drawable.banktransfer),
                             contentDescription = "Bank transfer",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(30.dp)
+                            modifier = Modifier.size(30.dp)
                         )
                     }
                     "Credit card" -> {
@@ -121,8 +110,7 @@ fun RadioButtonSample() {
                             painter = painterResource(id = R.drawable.creditcard),
                             contentDescription = "Credit card",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(30.dp)
+                            modifier = Modifier.size(30.dp)
                         )
                     }
                 }
@@ -131,25 +119,24 @@ fun RadioButtonSample() {
     }
 }
 
+
 @Composable
-fun BuyGoldHeader(modifier: Modifier = Modifier,) {
+fun BuyGoldHeader() {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
     ) {
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "Buy Gold",
             style = MaterialTheme.typography.titleLarge,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.width(10.dp))
         Image(
             painter = painterResource(id = R.drawable.gold_icon),
             contentDescription = "Gold",
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(40.dp)
+            modifier = Modifier.size(40.dp)
         )
     }
 }
@@ -176,40 +163,25 @@ fun BuyGold(
                 onValueChange = onValueChanged,
                 keyboardOptions = keyboardOptions,
                 modifier = Modifier
-                    .height(50.dp).padding(horizontal = 0.dp, vertical = 0.dp),
+                    .height(50.dp)
+                    .padding(horizontal = 0.dp, vertical = 0.dp),
                 textStyle = TextStyle(fontSize = 15.sp),
             )
         }
-        Button(
-            modifier = Modifier
-                .height(50.dp)
-                .width(120.dp),
+        Button(modifier = Modifier
+            .height(50.dp)
+            .width(120.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
             contentPadding = PaddingValues(12.dp),
             shape = RoundedCornerShape(20.dp),
             elevation = ButtonDefaults.elevation(8.dp),
-            onClick = {}
-        ) {
+            onClick = {}) {
             Text(
                 text = "Buy",
                 style = androidx.compose.material.MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color(255, 255, 255))
-        }
-    }
-
-}
-
-
-@Composable
-fun ExitButtons() {
-    Row(
-        modifier = Modifier.fillMaxWidth(0.7f),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        Button(onClick = {}) {
-            Text("Cancel")
+                color = Color.Black
+            )
         }
     }
 }

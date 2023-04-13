@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,19 +23,16 @@ import com.mobilne.civ2077.R
 fun Turn(viewModel: TurnViewModel) {
     Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-
             viewModel.usersState()
 
             TurnHeader()
 
             PlayersState(viewModel)
 
-//        Divider()
             Spacer(modifier = Modifier.height(15.dp))
             Button(
                 modifier = Modifier
@@ -52,10 +49,9 @@ fun Turn(viewModel: TurnViewModel) {
                     text = viewModel.buttonText,
                     style = androidx.compose.material.MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
-                    color = Color(255, 255, 255)
+                    color = Color.Black
                 )
             }
-
         }
     }
 }
@@ -66,20 +62,18 @@ fun TurnHeader() {
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = "Players state",
-            style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.width(width = 10.dp))
         Image(
             painter = painterResource(id = R.drawable.stage),
             contentDescription = "Stage",
             contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(50.dp)
+            modifier = Modifier.size(50.dp)
         )
     }
-
 }
 
 @Composable
@@ -88,7 +82,7 @@ fun PlayersState(
 ) {
     Column(
         modifier = Modifier
-            .background(Color(0xFFffffff))
+            .background(MaterialTheme.colorScheme.surface)
             .wrapContentHeight()
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -96,33 +90,23 @@ fun PlayersState(
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = viewModel.user1 + viewModel.user1State, //Todo nazwa gracza
-            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = viewModel.user2 + viewModel.user2State, //Todo nazwa gracza
-            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
             text = viewModel.user3 + viewModel.user3State, //Todo nazwa gracza
-            style = androidx.compose.material3.MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
-            color = Color.Black
+            color = MaterialTheme.colorScheme.onBackground
         )
-
     }
 }
-
-
-//@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
-//@Composable
-//fun TurnPreview() {
-//    AppTheme {
-//        Turn(viewModel = TurnViewModel())
-//    }
-//}

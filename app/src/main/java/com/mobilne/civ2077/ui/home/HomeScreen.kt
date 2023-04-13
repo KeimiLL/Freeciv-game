@@ -4,16 +4,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -40,7 +43,7 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(spacing.small)
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.surface),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -55,7 +58,7 @@ fun HomeScreen(
                 "Dark mode",
                 style = TextStyle(fontSize = 17.sp),
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background),
+                    .background(MaterialTheme.colorScheme.surface),
                 color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(Modifier.width(8.dp))
@@ -245,11 +248,13 @@ fun HomeScreen(
                         .size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(10.dp))
-                Text(text = stringResource(id = R.string.logout),
+                Text(
+                    text = stringResource(id = R.string.logout),
                     style = androidx.compose.material.MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
                     color = Color(255, 255, 255),
-                    fontWeight = FontWeight.Bold)
+                    fontWeight = FontWeight.Bold
+                )
             }
             Spacer(modifier = Modifier.width(150.dp))
             Button(

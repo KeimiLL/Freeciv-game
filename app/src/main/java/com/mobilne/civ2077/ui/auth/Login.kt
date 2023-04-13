@@ -5,12 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -48,7 +48,7 @@ fun LoginScreen(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
+            .background(color = MaterialTheme.colorScheme.surface)
     ) {
 
         val (refHeader, refEmail, refPassword, refButtonLogin, refTextSignup, refLoader) = createRefs()
@@ -63,7 +63,7 @@ fun LoginScreen(
                     width = Dimension.fillToConstraints
                 }
                 .wrapContentSize()
-                .background(color = MaterialTheme.colorScheme.background)
+                .background(color = MaterialTheme.colorScheme.surface)
         ) {
             AuthHeader(boardViewModel)
         }
@@ -119,12 +119,14 @@ fun LoginScreen(
             )
         )
         Row(
-            modifier = Modifier.fillMaxWidth().constrainAs(refButtonLogin) {
-                top.linkTo(refPassword.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.large)
-                end.linkTo(parent.end, spacing.large)
-                width = Dimension.fillToConstraints
-            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .constrainAs(refButtonLogin) {
+                    top.linkTo(refPassword.bottom, spacing.medium)
+                    start.linkTo(parent.start, spacing.large)
+                    end.linkTo(parent.end, spacing.large)
+                    width = Dimension.fillToConstraints
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
@@ -142,7 +144,7 @@ fun LoginScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.login),
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = Color.White,
                     style = androidx.compose.material.MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold
@@ -165,7 +167,7 @@ fun LoginScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.dont_have_account),
-                    color = MaterialTheme.colorScheme.onSecondary,
+                    color = Color.White,
                     style = androidx.compose.material.MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold

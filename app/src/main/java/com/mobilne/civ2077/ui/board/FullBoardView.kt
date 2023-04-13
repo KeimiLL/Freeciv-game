@@ -3,17 +3,15 @@ package com.mobilne.civ2077.ui.board
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.Icon
-import androidx.compose.ui.draw.clip
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -40,7 +38,7 @@ fun FullBoardView(
 ) {
     Box(
         modifier = Modifier
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(8.dp)
     ) {
         Row(
@@ -78,7 +76,7 @@ fun FullBoardView(
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
                         text = "Home",
-                        style = MaterialTheme.typography.body2,
+                        style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center,
                         color = Color(255, 255, 255),
                         fontWeight = FontWeight.Bold
@@ -220,7 +218,7 @@ fun ButtonItem(
         Spacer(modifier = Modifier.width(10.dp))
         Text(
             text = txt,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             color = Color(255, 255, 255),
             fontWeight = FontWeight.Bold
@@ -270,7 +268,7 @@ fun ButtonXYItem(
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = txt,
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = Color(255, 255, 255),
                     fontWeight = FontWeight.Bold
@@ -295,7 +293,7 @@ fun ButtonXYItem(
             ) {
                 Text(
                     text = "X: $x, Y: $y",
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = Color(255, 255, 255)
                 )
@@ -309,13 +307,13 @@ fun ButtonXYItem(
                     ) {
                         Text(
                             text = "Size:",
-                            style = MaterialTheme.typography.body2,
+                            style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
-                            color = Color(255, 255, 255)
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                         Text(
                             text = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).armySize.toString() + " k",
-                            style = MaterialTheme.typography.body2,
+                            style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
                             color = Color(255, 255, 255)
                         )
