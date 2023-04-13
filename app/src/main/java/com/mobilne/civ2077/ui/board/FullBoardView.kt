@@ -1,18 +1,27 @@
 package com.mobilne.civ2077.ui.board
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Icon
+import androidx.compose.ui.draw.clip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.mobilne.civ2077.R
 import com.mobilne.civ2077.navigation.ROUTE_HOME
 import com.mobilne.civ2077.ui.board.views.army.Army
 import com.mobilne.civ2077.ui.board.views.army.ArmyViewModel
@@ -31,13 +40,10 @@ fun FullBoardView(
 ) {
     Box(
         modifier = Modifier
-            .background(Color(0xFFc5ddf6))
-            .fillMaxSize()
+            .background(Color.White)
             .padding(8.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -46,7 +52,8 @@ fun FullBoardView(
                     .fillMaxHeight()
                     .weight(1f)
                     .padding(5.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
                     onClick = {
@@ -54,16 +61,27 @@ fun FullBoardView(
                         }
                     },
                     modifier = Modifier
-                        .height(80.dp)
-                        .width(120.dp),
+                        .height(60.dp)
+                        .width(130.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
-                    contentPadding = PaddingValues(16.dp),
+                    contentPadding = PaddingValues(12.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    elevation = ButtonDefaults.elevation(8.dp)
                 ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.home),
+                        contentDescription = "home",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
                     Text(
                         text = "Home",
                         style = MaterialTheme.typography.body2,
                         textAlign = TextAlign.Center,
-                        color = Color(255, 255, 255)
+                        color = Color(255, 255, 255),
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -74,14 +92,14 @@ fun FullBoardView(
 
                 ButtonItem("Turn: ${boardViewModel.turn.value.number}", boardViewModel)
 
-                ButtonItem("War Summary", boardViewModel)
+                ButtonItem("War Log", boardViewModel)
             }
 
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth()
-                    .weight(4f)
+                    .weight(3.5f)
                     .padding(5.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
 
@@ -116,7 +134,7 @@ fun FullBoardView(
                             turn = boardViewModel.turn.value
                         )
                     )
-                else if (boardViewModel.currentView.contains("War Summary"))
+                else if (boardViewModel.currentView.contains("War Log"))
                     EndOfTurn(boardViewModel = boardViewModel)
                 else
                     Map()
@@ -127,7 +145,8 @@ fun FullBoardView(
                     .fillMaxHeight()
                     .weight(1f)
                     .padding(5.dp),
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ButtonItem("Tech Tree", boardViewModel)
 
@@ -157,17 +176,54 @@ fun ButtonItem(
 ) {
     Button(
         modifier = Modifier
-            .height(80.dp)
-            .width(120.dp),
+            .height(60.dp)
+            .width(130.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(12.dp),
         onClick = { boardViewModel.changeView(txt) },
+        shape = RoundedCornerShape(20.dp),
+        elevation = ButtonDefaults.elevation(8.dp)
     ) {
+        if (txt.contains("Gold", ignoreCase = true)) {
+            Image(
+                painter = painterResource(id = R.drawable.coin),
+                contentDescription = "coin",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+        } else if (txt.contains("Turn", ignoreCase = true)) {
+            Image(
+                painter = painterResource(id = R.drawable.phase),
+                contentDescription = "phase",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+        } else if (txt.contains("War Log", ignoreCase = true)) {
+            Image(
+                painter = painterResource(id = R.drawable.sum),
+                contentDescription = "sum",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+        } else if (txt.contains("Tech", ignoreCase = true)) {
+            Image(
+                painter = painterResource(id = R.drawable.tech),
+                contentDescription = "tech",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+        }
+        Spacer(modifier = Modifier.width(10.dp))
         Text(
             text = txt,
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center,
-            color = Color(255, 255, 255)
+            color = Color(255, 255, 255),
+            fontWeight = FontWeight.Bold
         )
     }
 }
@@ -186,27 +242,52 @@ fun ButtonXYItem(
         Row {
             Button(
                 modifier = Modifier
-                    .height(80.dp)
-                    .width(120.dp),
+                    .height(60.dp)
+                    .width(130.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff004f88)),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(12.dp),
                 onClick = { boardViewModel.changeView(txt) },
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.elevation(8.dp)
             ) {
+                if (txt.contains("Army", ignoreCase = true)) {
+                    Image(
+                        painter = painterResource(id = R.drawable.soldier),
+                        contentDescription = "soldier",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(20.dp)
+                    )
+                } else if (txt.contains("Map", ignoreCase = true)) {
+                    Image(
+                        painter = painterResource(id = R.drawable.map_icon),
+                        contentDescription = "map_icon",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(20.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = txt,
                     style = MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
-                    color = Color(255, 255, 255)
+                    color = Color(255, 255, 255),
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
+        Spacer(modifier = Modifier.height(10.dp))
 
         Row(
             modifier = Modifier
-                .background(Color(0xff266330))
-                .width(120.dp),
+                .background(Color(0xff266330), shape = RoundedCornerShape(15.dp))
+                .width(130.dp)
+                .clip(shape = RoundedCornerShape(15.dp))
+                .padding(5.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
+
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -222,7 +303,7 @@ fun ButtonXYItem(
                     Row(
                         modifier = Modifier
                             .background(Color(0xff266330))
-                            .width(120.dp),
+                            .width(130.dp),
                         horizontalArrangement = Arrangement.SpaceAround,
                         verticalAlignment = Alignment.CenterVertically
                     ) {

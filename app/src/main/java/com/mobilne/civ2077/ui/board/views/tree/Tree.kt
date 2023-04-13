@@ -3,9 +3,11 @@ package com.mobilne.civ2077.ui.board.views.tree
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,99 +24,100 @@ import com.mobilne.civ2077.R
 fun Tree(viewModel: TreeViewModel) {
     // Todo czytanie z bazy zamiast funkcji, które czytają stan początkowy
     viewModel.initState()
-    Box(
-        modifier = Modifier
-            .background(Color(0xFFffffff))
-            .fillMaxSize()
-    ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
+    Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize().padding(10.dp)
         ) {
-
             Column(
-                modifier = Modifier
-                    .weight(2.5f),
+                verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
+
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(0.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
+                        .weight(2.5f),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        modifier = Modifier.padding(vertical = 0.dp),
-                        text = "Economy",
-                        color = Color.Blue,
-                        style = MaterialTheme.typography.h4,
-                    )
-                    Spacer(modifier = Modifier.width(width = 10.dp))
-                    Image(
-                        painter = painterResource(id = R.drawable.economy),
-                        contentDescription = "Economy",
-                        contentScale = ContentScale.Crop,
+                    Row(
                         modifier = Modifier
-                            .size(40.dp)
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    EconomyItem(1, viewModel)
-                    EconomyItem(2, viewModel)
-                    EconomyItem(3, viewModel)
-                    EconomyItem(4, viewModel)
-                }
-            }
-            Column(
-                modifier = Modifier
-                    .weight(2.5f)
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(0.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = Modifier.padding(vertical = 0.dp),
-                        text = "Army",
-                        color = Color.Red,
-                        style = MaterialTheme.typography.h4,
-                    )
-                    Spacer(modifier = Modifier.width(width = 10.dp))
-                    Image(
-                        painter = painterResource(id = R.drawable.army),
-                        contentDescription = "Army",
-                        contentScale = ContentScale.Crop,
+                            .fillMaxWidth()
+                            .padding(0.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(vertical = 0.dp),
+                            text = "Economy",
+                            color = Color(0xff849900),
+                            style = androidx.compose.material3.MaterialTheme.typography.titleLarge,
+                        )
+                        Spacer(modifier = Modifier.width(width = 10.dp))
+                        Image(
+                            painter = painterResource(id = R.drawable.economy),
+                            contentDescription = "Economy",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(40.dp)
+                        )
+                    }
+                    Row(
                         modifier = Modifier
-                            .size(40.dp)
-                    )
+                            .fillMaxWidth()
+                            .padding(5.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        EconomyItem(1, viewModel)
+                        EconomyItem(2, viewModel)
+                        EconomyItem(3, viewModel)
+                        EconomyItem(4, viewModel)
+                    }
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(2.5f)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(0.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(vertical = 0.dp),
+                            text = "Army",
+                            color = Color(0xff8e5f00),
+                            style = androidx.compose.material3.MaterialTheme.typography.titleLarge,
+                        )
+                        Spacer(modifier = Modifier.width(width = 10.dp))
+                        Image(
+                            painter = painterResource(id = R.drawable.army),
+                            contentDescription = "Army",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(40.dp)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(5.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        ArmyItem(1, viewModel)
+                        ArmyItem(2, viewModel)
+                        ArmyItem(3, viewModel)
+                        ArmyItem(4, viewModel)
+                    }
                 }
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(5.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                        .weight(1f),
+                    verticalAlignment = Alignment.Bottom
                 ) {
-                    ArmyItem(1, viewModel)
-                    ArmyItem(2, viewModel)
-                    ArmyItem(3, viewModel)
-                    ArmyItem(4, viewModel)
+                    InfoBar(viewModel)
                 }
-            }
-            Row(
-                modifier = Modifier
-                    .weight(1f),
-                verticalAlignment = Alignment.Bottom
-            ) {
-                InfoBar(viewModel)
             }
         }
     }
@@ -129,8 +132,10 @@ fun EconomyItem(
         modifier = Modifier
             .height(80.dp)
             .width(80.dp),
-        shape = RectangleShape,
-        contentPadding = PaddingValues(16.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff849900)),
+        contentPadding = PaddingValues(12.dp),
+        shape = RoundedCornerShape(20.dp),
+        elevation = ButtonDefaults.elevation(8.dp),
         enabled = viewModel.economyPerksButtonsState[id - 1],
         onClick = { viewModel.changeForEconomyPerk() },
     ) {
@@ -152,8 +157,10 @@ fun ArmyItem(
         modifier = Modifier
             .height(80.dp)
             .width(80.dp),
-        shape = RectangleShape,
-        contentPadding = PaddingValues(16.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff8e5f00)),
+        contentPadding = PaddingValues(12.dp),
+        shape = RoundedCornerShape(20.dp),
+        elevation = ButtonDefaults.elevation(8.dp),
         enabled = viewModel.armyPerksButtonsState[id - 1],
         onClick = { viewModel.changeForArmyPerk() },
     ) {
@@ -188,9 +195,10 @@ fun InfoBar(
                 .height(50.dp)
                 .width(150.dp)
                 .weight(3f),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff507d00)),
-            shape = RectangleShape,
-            contentPadding = PaddingValues(16.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            contentPadding = PaddingValues(12.dp),
+            shape = RoundedCornerShape(20.dp),
+            elevation = ButtonDefaults.elevation(8.dp),
             enabled = viewModel.buyButtonState,
             onClick = {
                 viewModel.buy()

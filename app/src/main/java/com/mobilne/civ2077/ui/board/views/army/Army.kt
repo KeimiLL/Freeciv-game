@@ -3,53 +3,62 @@ package com.mobilne.civ2077.ui.board.views.army
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mobilne.civ2077.R
 
 @Composable
 fun Army(viewModel: ArmyViewModel) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        //BuyArmy
-        viewModel.changeMaxRange()
-        BuyArmyHeader()
-        BuyArmy(
-            valueGoldToPay = viewModel.goldToPay,
-            valueUnits = viewModel.unitsCount,
-            onValueChanged = { viewModel.onUnitsChanged(it) },
-            viewModel = viewModel,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
+    Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            //BuyArmy
+            Spacer(modifier = Modifier.height(20.dp))
+            viewModel.changeMaxRange()
+            BuyArmyHeader()
+            BuyArmy(
+                valueGoldToPay = viewModel.goldToPay,
+                valueUnits = viewModel.unitsCount,
+                onValueChanged = { viewModel.onUnitsChanged(it) },
+                viewModel = viewModel,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                )
             )
-        )
-        //Send Army
-        SendArmyHeader(
-            step = viewModel.maxRange
-        )
-        Coordinates(
-            valueX = viewModel.destinationX,
-            onValueXChanged = { viewModel.onXChange(it) },
-            valueY = viewModel.destinationY,
-            onValueYChanged = { viewModel.onYChange(it) },
-            viewModel = viewModel,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
+            Spacer(modifier = Modifier.height(20.dp))
+            //Send Army
+            SendArmyHeader(
+                step = viewModel.maxRange
             )
-        )
+            Coordinates(
+                valueX = viewModel.destinationX,
+                onValueXChanged = { viewModel.onXChange(it) },
+                valueY = viewModel.destinationY,
+                onValueYChanged = { viewModel.onYChange(it) },
+                viewModel = viewModel,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                )
+            )
+        }
     }
 }
 
@@ -59,7 +68,7 @@ fun BuyArmyHeader() {
         Text(
             modifier = Modifier.padding(vertical = 5.dp),
             text = "Buy Units",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             color = Color.Black
         )
@@ -90,16 +99,32 @@ fun BuyArmy(
     ) {
         Column {
             OutlinedTextField(
-                modifier = Modifier.padding(vertical = 10.dp),
                 value = valueUnits,
                 onValueChange = onValueChanged,
-                keyboardOptions = keyboardOptions
+                keyboardOptions = keyboardOptions,
+                modifier = Modifier
+                    .height(50.dp)
+                    .padding(horizontal = 0.dp, vertical = 0.dp),
+                textStyle = TextStyle(fontSize = 15.sp),
             )
+
         }
         Button(
+            modifier = Modifier
+                .height(50.dp)
+                .width(120.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            contentPadding = PaddingValues(12.dp),
+            shape = RoundedCornerShape(20.dp),
+            elevation = ButtonDefaults.elevation(8.dp),
             onClick = { viewModel.buy() },
+
         ) {
-            Text("Buy for $valueGoldToPay")
+            Text(
+                text = "Buy for $valueGoldToPay",
+                style = androidx.compose.material.MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
+                color = Color(255, 255, 255))
         }
     }
 }
@@ -116,7 +141,7 @@ fun SendArmyHeader(
             Text(
                 modifier = Modifier.padding(vertical = 3.dp),
                 text = "Move Army",
-                style = MaterialTheme.typography.headlineMedium,
+                style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 color = Color.Black
             )
@@ -156,19 +181,36 @@ fun Coordinates(
     ) {
         Column {
             OutlinedTextField(
-                modifier = Modifier.padding(vertical = 5.dp),
+                modifier = Modifier
+                    .height(50.dp),
+                textStyle = TextStyle(fontSize = 15.sp),
                 value = valueX,
                 onValueChange = onValueXChanged,
                 keyboardOptions = keyboardOptions
             )
+            Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
-                modifier = Modifier.padding(vertical = 5.dp),
+                modifier = Modifier
+                    .height(50.dp),
+                textStyle = TextStyle(fontSize = 15.sp),
 
                 value = valueY, onValueChange = onValueYChanged, keyboardOptions = keyboardOptions
             )
         }
-        Button(onClick = { viewModel.send() }) {
-            Text("Send")
+        Button(
+            modifier = Modifier
+                .height(50.dp)
+                .width(120.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            contentPadding = PaddingValues(12.dp),
+            shape = RoundedCornerShape(20.dp),
+            elevation = ButtonDefaults.elevation(8.dp),
+            onClick = { viewModel.send() }) {
+            Text(
+                text = "Send",
+                style = androidx.compose.material.MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
+                color = Color(255, 255, 255))
         }
     }
 }

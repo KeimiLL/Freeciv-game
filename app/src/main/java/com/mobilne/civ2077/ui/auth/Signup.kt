@@ -2,20 +2,25 @@ package com.mobilne.civ2077.ui.auth
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
@@ -127,41 +132,60 @@ fun SignupScreen(
             )
         )
 
-        Button(
-            onClick = {
-                authViewModel?.signup(name, email, password)
-            },
-            modifier = Modifier.constrainAs(refButtonSignup) {
-                top.linkTo(refPassword.bottom, spacing.large)
-                start.linkTo(parent.start, spacing.extraLarge)
-                end.linkTo(parent.end, spacing.extraLarge)
+        Row(
+            modifier = Modifier.fillMaxWidth().constrainAs(refButtonSignup) {
+                top.linkTo(refPassword.bottom, spacing.medium)
+                start.linkTo(parent.start, spacing.large)
+                end.linkTo(parent.end, spacing.large)
                 width = Dimension.fillToConstraints
+            },
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ){
+            Button(
+                onClick = {
+                    authViewModel?.signup(name, email, password)
+                },
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(250.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
+                contentPadding = PaddingValues(5.dp),
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.elevation(8.dp),
+            ) {
+                Text(
+                    text = stringResource(id = R.string.signup),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    style = androidx.compose.material.MaterialTheme.typography.subtitle1,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold
+                )
             }
-        ) {
-            Text(
-                text = stringResource(id = R.string.signup),
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-
-
-        Text(
-            modifier = Modifier
-                .constrainAs(refTextSignup) {
-                    top.linkTo(refButtonSignup.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.extraLarge)
-                    end.linkTo(parent.end, spacing.extraLarge)
-                }
-                .clickable {
+            Spacer(modifier = Modifier.width(100.dp))
+            Button(
+                onClick = {
                     navController.navigate(ROUTE_LOGIN) {
                         popUpTo(ROUTE_SIGNUP) { inclusive = true }
                     }
                 },
-            text = stringResource(id = R.string.already_have_account),
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(250.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
+                contentPadding = PaddingValues(5.dp),
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.elevation(8.dp),
+            ) {
+                Text(
+                    text = stringResource(id = R.string.already_have_account),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    style = androidx.compose.material.MaterialTheme.typography.subtitle1,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
 
         signupFlow?.value?.let {
             when (it) {

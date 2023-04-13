@@ -5,57 +5,63 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.theme.AppTheme
 
 @Composable
 fun BuyGold(viewModel: BuyGoldViewModel) {
-    Box(
-        modifier = Modifier
-            .background(Color(0xFFffffff))
-            .fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+    Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
         ) {
-
-            BuyGoldHeader()
-
-            BuyGold(
-                value = viewModel.goldToBuy,
-                onValueChanged = { viewModel.onTextChanged(it) },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number,
-                )
-            )
-            Text(
-                text = "Total: €\u200E ${viewModel.euroToPay}",
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-            )
-
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                RadioButtonSample()
-//                ExitButtons()
-            }
 
+                BuyGoldHeader()
+
+                BuyGold(
+                    value = viewModel.goldToBuy,
+                    onValueChanged = { viewModel.onTextChanged(it) },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Number,
+                    )
+                )
+                Text(
+                    text = "Total: €\u200E ${viewModel.euroToPay}",
+                    style = MaterialTheme.typography.titleLarge,
+                    textAlign = TextAlign.Center,
+                    color = Color.Black,
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButtonSample()
+//                ExitButtons()
+                }
+
+            }
         }
     }
 }
@@ -126,14 +132,26 @@ fun RadioButtonSample() {
 }
 
 @Composable
-fun BuyGoldHeader() {
-    Text(
-        modifier = Modifier.padding(vertical = 10.dp),
-        text = "Buy Gold",
-        style = MaterialTheme.typography.headlineMedium,
-        textAlign = TextAlign.Center,
-        color = Color.Black
-    )
+fun BuyGoldHeader(modifier: Modifier = Modifier,) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            modifier = Modifier.padding(vertical = 10.dp),
+            text = "Buy Gold",
+            style = MaterialTheme.typography.titleLarge,
+            color = Color.Black
+        )
+        Spacer(modifier = Modifier.width(10.dp))
+        Image(
+            painter = painterResource(id = R.drawable.gold_icon),
+            contentDescription = "Gold",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(40.dp)
+        )
+    }
 }
 
 
@@ -152,21 +170,31 @@ fun BuyGold(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.gold),
-            contentDescription = "Gold"
-        )
         Column {
             OutlinedTextField(
                 value = value,
                 onValueChange = onValueChanged,
-                keyboardOptions = keyboardOptions
+                keyboardOptions = keyboardOptions,
+                modifier = Modifier
+                    .height(50.dp).padding(horizontal = 0.dp, vertical = 0.dp),
+                textStyle = TextStyle(fontSize = 15.sp),
             )
         }
         Button(
+            modifier = Modifier
+                .height(50.dp)
+                .width(120.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            contentPadding = PaddingValues(12.dp),
+            shape = RoundedCornerShape(20.dp),
+            elevation = ButtonDefaults.elevation(8.dp),
             onClick = {}
         ) {
-            Text("Buy")
+            Text(
+                text = "Buy",
+                style = androidx.compose.material.MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
+                color = Color(255, 255, 255))
         }
     }
 
