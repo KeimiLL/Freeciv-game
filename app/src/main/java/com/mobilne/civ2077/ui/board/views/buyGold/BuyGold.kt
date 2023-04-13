@@ -30,7 +30,6 @@ fun BuyGold(viewModel: BuyGoldViewModel) {
     Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
         Box(
             modifier = Modifier
-
                 .fillMaxSize()
         ) {
             Column(

@@ -23,36 +23,33 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
 
     Column(
         modifier = Modifier
-            .wrapContentSize()
+            .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.background)
-            .padding(top = spacing.medium),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(top = 5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
             Text(
-                modifier = Modifier.weight(0.8f),
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.displayMedium,
+                style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )
 
             Row(
-                modifier = Modifier.weight(0.2f),
-                horizontalArrangement = Arrangement.SpaceAround,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     "Dark mode",
-                    style = TextStyle(fontSize = 24.sp),
+                    style = TextStyle(fontSize = 20.sp),
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background),
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Spacer(Modifier.width(2.dp))
+                Spacer(Modifier.width(8.dp))
                 Switch(
                     checked = boardViewModel.isDarkModeOn.value,
                     onCheckedChange = {
@@ -60,6 +57,5 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
                     },
                 )
             }
-        }
     }
 }
