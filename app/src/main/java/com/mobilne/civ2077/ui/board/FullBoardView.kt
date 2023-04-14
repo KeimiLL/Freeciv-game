@@ -111,7 +111,7 @@ fun FullBoardView(
                             gameRepository = boardViewModel.gameRepository
                         )
                     )
-                else if (boardViewModel.currentView.contains("Tech Tree"))
+                else if (boardViewModel.currentView.contains("Tech"))
                     Tree(
                         viewModel = TreeViewModel(
                             player = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value),
@@ -146,7 +146,7 @@ fun FullBoardView(
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                ButtonItem("Tech Tree", boardViewModel)
+                ButtonItem("Tech", boardViewModel)
 
                 ButtonXYItem(
                     "Army",
@@ -309,7 +309,7 @@ fun ButtonXYItem(
                             text = "Size:",
                             style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
-                            color = MaterialTheme.colorScheme.onBackground
+                            color = Color(255, 255, 255)
                         )
                         Text(
                             text = boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).armySize.toString() + " k",

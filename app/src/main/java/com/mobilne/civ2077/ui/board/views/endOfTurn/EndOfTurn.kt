@@ -51,7 +51,7 @@ fun EndOfTurn(boardViewModel: BoardViewModel) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.gold),
+                    painter = painterResource(id = R.drawable.gold_icon),
                     contentDescription = "Gold",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

@@ -21,8 +21,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.data.Resource
@@ -30,7 +28,6 @@ import com.mobilne.civ2077.navigation.ROUTE_LOGIN
 import com.mobilne.civ2077.navigation.ROUTE_NATIONS
 import com.mobilne.civ2077.navigation.ROUTE_SIGNUP
 import com.mobilne.civ2077.ui.board.BoardViewModel
-import com.mobilne.civ2077.ui.theme.spacing
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,151 +43,132 @@ fun SignupScreen(
 
     val signupFlow = authViewModel?.signupFlow?.collectAsState()
 
-    ConstraintLayout(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
+            .background(color = MaterialTheme.colorScheme.surface)
+            .padding(15.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val (refHeader, refName, refEmail, refPassword, refButtonSignup, refTextSignup, refLoader) = createRefs()
-        val spacing = MaterialTheme.spacing
+        AuthHeader(boardViewModel)
 
-        Box(
-            modifier = Modifier
-                .constrainAs(refHeader) {
-                    top.linkTo(parent.top, spacing.medium)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    width = Dimension.fillToConstraints
-                }
-                .wrapContentSize()
-        ) {
-            AuthHeader(boardViewModel)
-        }
+        Surface(modifier = Modifier,shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
 
-        TextField(
-            value = name,
-            onValueChange = {
-                name = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.name))
-            },
-            modifier = Modifier.constrainAs(refName) {
-                top.linkTo(refHeader.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.large)
-                end.linkTo(parent.end, spacing.large)
-                width = Dimension.fillToConstraints
-            },
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
-            )
-        )
-
-        TextField(
-            value = email,
-            onValueChange = {
-                email = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.email))
-            },
-            modifier = Modifier.constrainAs(refEmail) {
-                top.linkTo(refName.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.large)
-                end.linkTo(parent.end, spacing.large)
-                width = Dimension.fillToConstraints
-            },
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
-            )
-        )
-
-        TextField(
-            value = password,
-            onValueChange = {
-                password = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.password))
-            },
-            modifier = Modifier.constrainAs(refPassword) {
-                top.linkTo(refEmail.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.large)
-                end.linkTo(parent.end, spacing.large)
-                width = Dimension.fillToConstraints
-            },
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done
-            )
-        )
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(refButtonSignup) {
-                    top.linkTo(refPassword.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-                    width = Dimension.fillToConstraints
-                },
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(
-                onClick = {
-                    authViewModel?.signup(name, email, password)
-                },
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(250.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
-                contentPadding = PaddingValues(5.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = ButtonDefaults.elevation(8.dp),
-            ) {
-                Text(
-                    text = stringResource(id = R.string.signup),
-                    color = Color.White,
-                    style = androidx.compose.material.MaterialTheme.typography.subtitle1,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
+            Column(modifier = Modifier.padding(15.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                TextField(
+                    value = name,
+                    onValueChange = {
+                        name = it
+                    },
+                    label = {
+                        Text(text = stringResource(id = R.string.name))
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    )
                 )
-            }
-            Spacer(modifier = Modifier.width(100.dp))
-            Button(
-                onClick = {
-                    navController.navigate(ROUTE_LOGIN) {
-                        popUpTo(ROUTE_SIGNUP) { inclusive = true }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                TextField(
+                    value = email,
+                    onValueChange = {
+                        email = it
+                    },
+                    label = {
+                        Text(text = stringResource(id = R.string.email))
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                TextField(
+                    value = password,
+                    onValueChange = {
+                        password = it
+                    },
+                    label = {
+                        Text(text = stringResource(id = R.string.password))
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    visualTransformation = PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+
+                Row(
+                    modifier = Modifier,
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Button(
+                        onClick = {
+                            authViewModel?.signup(name, email, password)
+                        },
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(120.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
+                        contentPadding = PaddingValues(5.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = ButtonDefaults.elevation(8.dp),
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.signup),
+                            color = Color.White,
+                            style = androidx.compose.material.MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
-                },
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(250.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
-                contentPadding = PaddingValues(5.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = ButtonDefaults.elevation(8.dp),
-            ) {
-                Text(
-                    text = stringResource(id = R.string.already_have_account),
-                    color = Color.White,
-                    style = androidx.compose.material.MaterialTheme.typography.subtitle1,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
-                )
+                    Spacer(modifier = Modifier.width(40.dp))
+                    Button(
+                        onClick = {
+                            navController.navigate(ROUTE_LOGIN) {
+                                popUpTo(ROUTE_SIGNUP) { inclusive = true }
+                            }
+                        },
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(220.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
+                        contentPadding = PaddingValues(5.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = ButtonDefaults.elevation(8.dp),
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.already_have_account),
+                            color = Color.White,
+                            style = androidx.compose.material.MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
             }
         }
-
+    }
         signupFlow?.value?.let {
             when (it) {
                 is Resource.Failure -> {
@@ -198,12 +176,7 @@ fun SignupScreen(
                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
                 }
                 Resource.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    })
+                    CircularProgressIndicator(modifier = Modifier)
                 }
                 is Resource.Success -> {
                     LaunchedEffect(Unit) {
@@ -216,4 +189,3 @@ fun SignupScreen(
         }
 
     }
-}
