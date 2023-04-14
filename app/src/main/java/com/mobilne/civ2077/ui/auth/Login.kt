@@ -45,135 +45,119 @@ fun LoginScreen(
 
     val loginFlow = authViewModel?.loginFlow?.collectAsState()
 
-    ConstraintLayout(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.surface)
+            .padding(15.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        AuthHeader(boardViewModel)
 
-        val (refHeader, refEmail, refPassword, refButtonLogin, refTextSignup, refLoader) = createRefs()
-        val spacing = MaterialTheme.spacing
+        Surface(modifier = Modifier,shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+            Column(modifier = Modifier.padding(15.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                TextField(
+                    value = email,
+                    onValueChange = {
+                        email = it
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.email),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next
+                    )
+                )
 
-        Box(
-            modifier = Modifier
-                .constrainAs(refHeader) {
-                    top.linkTo(parent.top, spacing.medium)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    width = Dimension.fillToConstraints
-                }
-                .wrapContentSize()
-                .background(color = MaterialTheme.colorScheme.surface)
-        ) {
-            AuthHeader(boardViewModel)
-        }
+                Spacer(modifier = Modifier.height(10.dp))
 
-        TextField(
-            value = email,
-            onValueChange = {
-                email = it
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.email),
-                    color = MaterialTheme.colorScheme.onSurface
+                TextField(
+                    value = password,
+                    onValueChange = {
+                        password = it
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.password),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6f),
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.None,
+                        autoCorrect = false,
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    )
                 )
-            },
-            modifier = Modifier
-                .constrainAs(refEmail) {
-                    top.linkTo(refHeader.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-//                    width = Dimension.fillToConstraints
-                }.fillMaxWidth(0.6f),
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
-            )
-        )
-        TextField(
-            value = password,
-            onValueChange = {
-                password = it
-            },
-            label = {
-                Text(
-                    text = stringResource(id = R.string.password),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            },
-            modifier = Modifier
-                .constrainAs(refPassword) {
-                    top.linkTo(refEmail.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-//                    width = Dimension.fillToConstraints
-                }.fillMaxWidth(0.6f),
-            keyboardOptions = KeyboardOptions(
-                capitalization = KeyboardCapitalization.None,
-                autoCorrect = false,
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done
-            )
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(refButtonLogin) {
-                    top.linkTo(refPassword.bottom, spacing.medium)
-                    start.linkTo(parent.start, spacing.large)
-                    end.linkTo(parent.end, spacing.large)
-//                    width = Dimension.fillToConstraints
-                }.fillMaxWidth(0.6f),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Button(
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(150.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
-                contentPadding = PaddingValues(5.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = ButtonDefaults.elevation(8.dp),
-                onClick = {
-                    authViewModel?.login(email, password)
-                },
-            ) {
-                Text(
-                    text = stringResource(id = R.string.login),
-                    color = Color.White,
-                    style = androidx.compose.material.MaterialTheme.typography.subtitle1,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            Spacer(modifier = Modifier.width(40.dp))
-            Button(
-                modifier = Modifier
-                    .height(60.dp)
-                    .width(250.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
-                contentPadding = PaddingValues(5.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = ButtonDefaults.elevation(8.dp),
-                onClick = {
-                    navController.navigate(ROUTE_SIGNUP) {
-                        popUpTo(ROUTE_LOGIN) { inclusive = true }
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Row(
+                    modifier = Modifier,
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(120.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
+                        contentPadding = PaddingValues(5.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = ButtonDefaults.elevation(8.dp),
+                        onClick = {
+                            authViewModel?.login(email, password)
+                        },
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.login),
+                            color = Color.White,
+                            style = androidx.compose.material.MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
-                },
-            ) {
-                Text(
-                    text = stringResource(id = R.string.dont_have_account),
-                    color = Color.White,
-                    style = androidx.compose.material.MaterialTheme.typography.subtitle1,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
-                )
+
+                    Spacer(modifier = Modifier.width(40.dp))
+
+                    Button(
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(220.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
+                        contentPadding = PaddingValues(5.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = ButtonDefaults.elevation(8.dp),
+                        onClick = {
+                            navController.navigate(ROUTE_SIGNUP) {
+                                popUpTo(ROUTE_LOGIN) { inclusive = true }
+                            }
+                        },
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.dont_have_account),
+                            color = Color.White,
+                            style = androidx.compose.material.MaterialTheme.typography.body2,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
             }
         }
+
+    }
         loginFlow?.value?.let {
             when (it) {
                 is Resource.Failure -> {
@@ -181,20 +165,10 @@ fun LoginScreen(
                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
                 }
                 Resource.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    })
+                    CircularProgressIndicator()
                 }
                 is Resource.Success -> {
-                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader) {
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    })
+                    CircularProgressIndicator()
                     LaunchedEffect(Unit) {
                         delay(1000L)
                         boardViewModel.checkAddingPlayer()
@@ -213,4 +187,4 @@ fun LoginScreen(
             }
         }
     }
-}
+//}
