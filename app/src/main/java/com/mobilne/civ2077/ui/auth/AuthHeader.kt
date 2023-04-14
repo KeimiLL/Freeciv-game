@@ -38,7 +38,7 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
         ){
             Text(
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.displayMedium,
+                style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -53,7 +53,7 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
         ){
             Text(
                 "Dark mode",
-                style = TextStyle(fontSize = 20.sp),
+                style = TextStyle(fontSize = 15.sp),
                 color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(Modifier.width(8.dp))
