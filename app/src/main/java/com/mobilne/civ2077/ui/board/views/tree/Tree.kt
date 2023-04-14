@@ -47,7 +47,7 @@ fun Tree(viewModel: TreeViewModel) {
                         Text(
                             modifier = Modifier.padding(vertical = 0.dp),
                             text = "Economy",
-                            color = Color(0xff849900),
+                            color = Color(0xff8887E3),
                             style = androidx.compose.material3.MaterialTheme.typography.titleLarge,
                         )
                         Spacer(modifier = Modifier.width(width = 10.dp))
@@ -85,7 +85,7 @@ fun Tree(viewModel: TreeViewModel) {
                         Text(
                             modifier = Modifier.padding(vertical = 0.dp),
                             text = "Army",
-                            color = Color(0xff8e5f00),
+                            color = Color(0xff85ce37),
                             style = androidx.compose.material3.MaterialTheme.typography.titleLarge,
                         )
                         Spacer(modifier = Modifier.width(width = 10.dp))
