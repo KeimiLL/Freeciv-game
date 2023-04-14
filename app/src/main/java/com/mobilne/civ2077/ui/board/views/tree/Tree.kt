@@ -130,19 +130,46 @@ fun EconomyItem(
         modifier = Modifier
             .height(80.dp)
             .width(80.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff849900)),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffA9A8EB)),
         contentPadding = PaddingValues(12.dp),
         shape = RoundedCornerShape(20.dp),
         elevation = ButtonDefaults.elevation(8.dp),
         enabled = viewModel.economyPerksButtonsState[id - 1],
         onClick = { viewModel.changeForEconomyPerk() },
     ) {
-        Text(
-            text = "lvl $id",
-            style = MaterialTheme.typography.body2,
-            textAlign = TextAlign.Center,
-            color = Color.Black
-        )
+        if (id == 1) {
+            Image(
+                painter = painterResource(id = R.drawable.eco1),
+                contentDescription = "eco1",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        } else if (id == 2) {
+            Image(
+                painter = painterResource(id = R.drawable.eco2),
+                contentDescription = "eco2",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        } else if (id == 3) {
+            Image(
+                painter = painterResource(id = R.drawable.eco3),
+                contentDescription = "eco3",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        } else if (id == 4) {
+            Image(
+                painter = painterResource(id = R.drawable.eco4),
+                contentDescription = "eco4",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        }
     }
 }
 
@@ -155,19 +182,46 @@ fun ArmyItem(
         modifier = Modifier
             .height(80.dp)
             .width(80.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff8e5f00)),
-        contentPadding = PaddingValues(12.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbce491)),
+        contentPadding = PaddingValues(4.dp),
         shape = RoundedCornerShape(20.dp),
         elevation = ButtonDefaults.elevation(8.dp),
         enabled = viewModel.armyPerksButtonsState[id - 1],
         onClick = { viewModel.changeForArmyPerk() },
     ) {
-        Text(
-            text = "lvl $id",
-            style = MaterialTheme.typography.body2,
-            textAlign = TextAlign.Center,
-            color = Color.Black
-        )
+        if (id == 1) {
+            Image(
+                painter = painterResource(id = R.drawable.army1),
+                contentDescription = "army1",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        } else if (id == 2) {
+            Image(
+                painter = painterResource(id = R.drawable.army2),
+                contentDescription = "army2",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        } else if (id == 3) {
+            Image(
+                painter = painterResource(id = R.drawable.army3),
+                contentDescription = "army3",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        } else if (id == 4) {
+            Image(
+                painter = painterResource(id = R.drawable.army4),
+                contentDescription = "army4",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(55.dp)
+            )
+        }
     }
 }
 
@@ -193,7 +247,7 @@ fun InfoBar(
                 .height(50.dp)
                 .width(150.dp)
                 .weight(3f),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffa9891c)),
             contentPadding = PaddingValues(12.dp),
             shape = RoundedCornerShape(20.dp),
             elevation = ButtonDefaults.elevation(8.dp),
@@ -206,7 +260,7 @@ fun InfoBar(
                 text = "Buy for " + viewModel.goldToPay,
                 style = MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color.Black
+                color = Color.White
             )
         }
     }
