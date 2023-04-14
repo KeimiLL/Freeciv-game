@@ -102,7 +102,6 @@ fun FullBoardView(
                 horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
-                //boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.toString().toInt()))
                 if (boardViewModel.currentView.contains("Army"))
                     Army(
                         viewModel = ArmyViewModel(

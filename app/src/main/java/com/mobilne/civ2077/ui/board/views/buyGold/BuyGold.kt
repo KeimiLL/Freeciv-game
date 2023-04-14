@@ -28,11 +28,12 @@ import com.mobilne.civ2077.ui.theme.AppTheme
 fun BuyGold(viewModel: BuyGoldViewModel) {
     Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(15.dp)
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 BuyGoldHeader()
 

@@ -68,236 +68,249 @@ fun HomeScreen(
                     boardViewModel.toggleDarkMode() },
             )
         }
+
+
         Column(
             modifier = Modifier
-                .fillMaxHeight()
-                .padding(20.dp)
                 .weight(0.8f),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-        ){
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+        ) {
+            Surface(
+                modifier = Modifier,
+                shadowElevation = 4.dp,
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Text(
-                    text = stringResource(id = R.string.welcome_back),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Spacer(modifier = Modifier.width(10.dp))
-                Text(
-                    text = viewModel?.currentUser?.displayName ?: "",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color(0xffe86d01)
-                )
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
-                when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
-                    "France" -> {
-                        Image(
-                            modifier = Modifier.width(100.dp),
-                            painter = painterResource(id = R.drawable.france),
-                            contentDescription = "Nation flag"
-                        )
-                    }
-                    "Spain" -> {
-                        Image(
-                            modifier = Modifier.width(100.dp),
-                            painter = painterResource(id = R.drawable.spain),
-                            contentDescription = "Nation flag"
-                        )
-                    }
-                    "UK" -> {
-                        Image(
-                            modifier = Modifier.width(100.dp),
-                            painter = painterResource(id = R.drawable.uk),
-                            contentDescription = "Nation flag"
-                        )
-                    }
-                    "USA" -> {
-                        Image(
-                            modifier = Modifier.width(100.dp),
-                            painter = painterResource(id = R.drawable.usa),
-                            contentDescription = "Nation flag"
-                        )
-                    }
-                }
-            }
-            Spacer(modifier = Modifier.height(10.dp))
-            Column(
-                modifier = Modifier
-                    .width(500.dp)
-                    .wrapContentHeight()
-                    .padding(spacing.medium),
-                horizontalAlignment = Alignment.Start
-            ) {
-                // Email
-                Row(
-                    modifier = Modifier
-                        .wrapContentHeight(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                Column(
+                    modifier = Modifier.padding(15.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.gmail),
-                        contentDescription = "gmail",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(30.dp)
-                    )
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Text(
-                        text = viewModel?.currentUser?.email ?: "",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-
-                Row(
-                    modifier = Modifier
-                        .wrapContentHeight(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.flag),
-                        contentDescription = "flag",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(30.dp)
-                    )
-                    Spacer(modifier = Modifier.width(20.dp))
-                    Text(
-                        text = (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-
-                Row(
-                    modifier = Modifier
-                        .wrapContentHeight(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.thunder),
-                        contentDescription = "thunder",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(30.dp)
-                    )
-                    Spacer(modifier = Modifier.width(20.dp))
-                    when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
-                        "France" -> {
-                            Text(
-                                text = "Your army has 2 extra steps each turn",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                        "Spain" -> {
-                            Text(
-                                text = "Each turn gives additional 100 gold",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                        "UK" -> {
-                            Text(
-                                text = "Each perk costs 10% less",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
-                        "USA" -> {
-                            Text(
-                                text = "Your army deals 10% more damage",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.welcome_back),
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = viewModel?.currentUser?.displayName ?: "",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = Color(0xffe86d01)
+                        )
                     }
-
-                }
-            }
-
-            Spacer(modifier = Modifier.height(15.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Button(
-                    onClick = {
-                        viewModel?.logout()
-                        navController.navigate(ROUTE_LOGIN) {
-                            popUpTo(ROUTE_HOME) {
-                                inclusive = true
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
+                        when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
+                            "France" -> {
+                                Image(
+                                    modifier = Modifier.width(100.dp),
+                                    painter = painterResource(id = R.drawable.france),
+                                    contentDescription = "Nation flag"
+                                )
+                            }
+                            "Spain" -> {
+                                Image(
+                                    modifier = Modifier.width(100.dp),
+                                    painter = painterResource(id = R.drawable.spain),
+                                    contentDescription = "Nation flag"
+                                )
+                            }
+                            "UK" -> {
+                                Image(
+                                    modifier = Modifier.width(100.dp),
+                                    painter = painterResource(id = R.drawable.uk),
+                                    contentDescription = "Nation flag"
+                                )
+                            }
+                            "USA" -> {
+                                Image(
+                                    modifier = Modifier.width(100.dp),
+                                    painter = painterResource(id = R.drawable.usa),
+                                    contentDescription = "Nation flag"
+                                )
                             }
                         }
-                    },
-                    modifier = Modifier
-                        .height(50.dp)
-                        .width(120.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
-                    contentPadding = PaddingValues(12.dp),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = ButtonDefaults.elevation(8.dp),
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.log_out),
-                        contentDescription = "logout",
-                        contentScale = ContentScale.Crop,
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Column(
                         modifier = Modifier
-                            .size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(
-                        text = stringResource(id = R.string.logout),
-                        style = androidx.compose.material.MaterialTheme.typography.body2,
-                        textAlign = TextAlign.Center,
-                        color = Color(255, 255, 255),
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                Spacer(modifier = Modifier.width(150.dp))
-                Button(
-                    onClick = {
-                        navController.navigate(ROUTE_BOARD) {
-                            popUpTo(ROUTE_HOME) {
-                                inclusive = true
-                            }
+                            .width(500.dp)
+                            .wrapContentHeight()
+                            .padding(spacing.medium),
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        // Email
+                        Row(
+                            modifier = Modifier
+                                .wrapContentHeight(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.gmail),
+                                contentDescription = "gmail",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(30.dp)
+                            )
+                            Spacer(modifier = Modifier.width(20.dp))
+                            Text(
+                                text = viewModel?.currentUser?.email ?: "",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
                         }
-                    },
-                    modifier = Modifier
-                        .height(50.dp)
-                        .width(120.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
-                    contentPadding = PaddingValues(12.dp),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = ButtonDefaults.elevation(8.dp),
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.back),
-                        contentDescription = "back",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
-                    Text(
-                        text = "Home",
-                        style = androidx.compose.material.MaterialTheme.typography.body2,
-                        textAlign = TextAlign.Center,
-                        color = Color(255, 255, 255),
-                        fontWeight = FontWeight.Bold
-                    )
+
+                        Row(
+                            modifier = Modifier
+                                .wrapContentHeight(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.flag),
+                                contentDescription = "flag",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(30.dp)
+                            )
+                            Spacer(modifier = Modifier.width(20.dp))
+                            Text(
+                                text = (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .wrapContentHeight(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.thunder),
+                                contentDescription = "thunder",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(30.dp)
+                            )
+                            Spacer(modifier = Modifier.width(20.dp))
+                            when (boardViewModel.getPlayerByIndex(boardViewModel.currentPlayerIndex.value).nation) {
+                                "France" -> {
+                                    Text(
+                                        text = "Your army has 2 extra steps each turn",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                                "Spain" -> {
+                                    Text(
+                                        text = "Each turn gives additional 100 gold",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                                "UK" -> {
+                                    Text(
+                                        text = "Each perk costs 10% less",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                                "USA" -> {
+                                    Text(
+                                        text = "Your army deals 10% more damage",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            }
+
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Button(
+                            onClick = {
+                                viewModel?.logout()
+                                navController.navigate(ROUTE_LOGIN) {
+                                    popUpTo(ROUTE_HOME) {
+                                        inclusive = true
+                                    }
+                                }
+                            },
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(120.dp),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff67385A)),
+                            contentPadding = PaddingValues(12.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            elevation = ButtonDefaults.elevation(8.dp),
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.log_out),
+                                contentDescription = "logout",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Text(
+                                text = stringResource(id = R.string.logout),
+                                style = androidx.compose.material.MaterialTheme.typography.body2,
+                                textAlign = TextAlign.Center,
+                                color = Color(255, 255, 255),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(150.dp))
+                        Button(
+                            onClick = {
+                                navController.navigate(ROUTE_BOARD) {
+                                    popUpTo(ROUTE_HOME) {
+                                        inclusive = true
+                                    }
+                                }
+                            },
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(120.dp),
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff386745)),
+                            contentPadding = PaddingValues(12.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            elevation = ButtonDefaults.elevation(8.dp),
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.back),
+                                contentDescription = "back",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Text(
+                                text = "Home",
+                                style = androidx.compose.material.MaterialTheme.typography.body2,
+                                textAlign = TextAlign.Center,
+                                color = Color(255, 255, 255),
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
                 }
             }
         }
-        Column(modifier = Modifier.weight(0.2f)){ }
+            Column(modifier = Modifier.weight(0.2f)) { }
+
     }
 }
