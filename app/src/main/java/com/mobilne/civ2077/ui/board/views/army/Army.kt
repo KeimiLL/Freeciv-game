@@ -113,7 +113,7 @@ fun BuyArmy(
             modifier = Modifier
                 .height(50.dp)
                 .width(120.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffa9891c)),
             contentPadding = PaddingValues(12.dp),
             shape = RoundedCornerShape(20.dp),
             elevation = ButtonDefaults.elevation(8.dp),
@@ -124,7 +124,7 @@ fun BuyArmy(
                 text = "Buy for $valueGoldToPay",
                 style = androidx.compose.material.MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color.Black
+                color = Color.White
             )
         }
     }
@@ -199,7 +199,7 @@ fun Coordinates(
         Button(modifier = Modifier
             .height(50.dp)
             .width(120.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffa9891c)),
             contentPadding = PaddingValues(12.dp),
             shape = RoundedCornerShape(20.dp),
             elevation = ButtonDefaults.elevation(8.dp),
@@ -208,7 +208,7 @@ fun Coordinates(
                 text = "Send",
                 style = androidx.compose.material.MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color.Black
+                color = Color.White
             )
         }
     }

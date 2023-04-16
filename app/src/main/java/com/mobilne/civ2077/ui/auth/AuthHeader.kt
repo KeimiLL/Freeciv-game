@@ -15,11 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mobilne.civ2077.R
 import com.mobilne.civ2077.ui.board.BoardViewModel
-import com.mobilne.civ2077.ui.theme.spacing
 
 @Composable
 fun AuthHeader(boardViewModel: BoardViewModel) {
-    val spacing = MaterialTheme.spacing
 
     Row(
         modifier = Modifier
@@ -40,7 +38,7 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
         ){
             Text(
                 text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.displayMedium,
+                style = MaterialTheme.typography.displaySmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -55,7 +53,7 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
         ){
             Text(
                 "Dark mode",
-                style = TextStyle(fontSize = 20.sp),
+                style = TextStyle(fontSize = 15.sp),
                 color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(Modifier.width(8.dp))
@@ -67,42 +65,4 @@ fun AuthHeader(boardViewModel: BoardViewModel) {
             )
         }
     }
-//
-//    Column(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .background(color = MaterialTheme.colorScheme.surface)
-//            .padding(top = 5.dp),
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Center
-//    ) {
-//        Text(
-//            modifier = Modifier.fillMaxWidth(),
-//            text = stringResource(id = R.string.app_name),
-//            style = MaterialTheme.typography.headlineLarge,
-//            textAlign = TextAlign.Center,
-//            color = MaterialTheme.colorScheme.onSurface
-//        )
-//
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 20.dp),
-//            horizontalArrangement = Arrangement.End,
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            Text(
-//                "Dark mode",
-//                style = TextStyle(fontSize = 20.sp),
-//                color = MaterialTheme.colorScheme.onBackground
-//            )
-//            Spacer(Modifier.width(8.dp))
-//            Switch(
-//                checked = boardViewModel.isDarkModeOn.value,
-//                onCheckedChange = {
-//                    boardViewModel.toggleDarkMode()
-//                },
-//            )
-//        }
-//    }
 }

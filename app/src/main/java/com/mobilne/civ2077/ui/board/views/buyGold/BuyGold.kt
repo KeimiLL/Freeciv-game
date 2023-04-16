@@ -28,11 +28,12 @@ import com.mobilne.civ2077.ui.theme.AppTheme
 fun BuyGold(viewModel: BuyGoldViewModel) {
     Surface(shadowElevation = 4.dp, shape = RoundedCornerShape(16.dp)) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(15.dp)
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 BuyGoldHeader()
 
@@ -171,7 +172,7 @@ fun BuyGold(
         Button(modifier = Modifier
             .height(50.dp)
             .width(120.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffa9891c)),
             contentPadding = PaddingValues(12.dp),
             shape = RoundedCornerShape(20.dp),
             elevation = ButtonDefaults.elevation(8.dp),
@@ -180,7 +181,7 @@ fun BuyGold(
                 text = "Buy",
                 style = androidx.compose.material.MaterialTheme.typography.body2,
                 textAlign = TextAlign.Center,
-                color = Color.Black
+                color = Color.White
             )
         }
     }

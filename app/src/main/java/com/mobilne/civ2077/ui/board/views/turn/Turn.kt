@@ -38,7 +38,7 @@ fun Turn(viewModel: TurnViewModel) {
                 modifier = Modifier
                     .height(50.dp)
                     .width(150.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffbe9d1d)),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffa9891c)),
                 contentPadding = PaddingValues(12.dp),
                 shape = RoundedCornerShape(20.dp),
                 elevation = ButtonDefaults.elevation(8.dp),
@@ -49,7 +49,7 @@ fun Turn(viewModel: TurnViewModel) {
                     text = viewModel.buttonText,
                     style = androidx.compose.material.MaterialTheme.typography.body2,
                     textAlign = TextAlign.Center,
-                    color = Color.Black
+                    color = Color.White
                 )
             }
         }
