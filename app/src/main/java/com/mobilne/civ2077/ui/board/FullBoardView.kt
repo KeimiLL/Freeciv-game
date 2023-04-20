@@ -301,11 +301,11 @@ fun ButtonXYItem(
                         modifier = Modifier
                             .background(Color(0xff266330))
                             .width(130.dp),
-                        horizontalArrangement = Arrangement.SpaceAround,
+                        horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Size:",
+                            text = "Size: ",
                             style = MaterialTheme.typography.bodyMedium,
                             textAlign = TextAlign.Center,
                             color = Color(255, 255, 255)

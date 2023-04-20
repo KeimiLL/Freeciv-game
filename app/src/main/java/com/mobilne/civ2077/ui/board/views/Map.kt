@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
@@ -24,9 +25,10 @@ fun Map() {
                 .fillMaxHeight()
                 .wrapContentWidth()
                 .background(Color.White)
+                .padding(bottom = 7.dp, end = 7.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.map),
+                painter = painterResource(id = R.drawable.mapnew),
                 contentDescription = "Map"
             )
         }
